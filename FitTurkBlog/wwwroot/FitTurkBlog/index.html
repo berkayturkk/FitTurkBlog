@@ -1,0 +1,916 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Weblog a Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+
+    <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="css/single.css">
+    <link href="css/style.css" rel='stylesheet' type='text/css' />
+    <link href="css/style-starter.css" rel='stylesheet' type='text/css' />
+    <link href="css/fontawesome-all.css" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800"
+          rel="stylesheet">
+</head>
+<body>
+    <!--header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg stroke">
+                <h1>
+                    <a class="navbar-brand" href="index.html">
+                        <span class="lnr lnr-bicycle"></span> FITTURKBLOG
+                    </a>
+                </h1>
+                <!-- if logo is image enable this
+                <a class="navbar-brand" href="#index.html">
+                    <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+                </a> -->
+                <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse"
+                        data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="index.html">ANASAYFA <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item @@about__active">
+                            <a class="nav-link" href="about.html">HAKKIMIZDA</a>
+                        </li>
+                        <li class="nav-item @@classes__active">
+                            <a class="nav-link" href="blogs.html">BLOG YAZILARI</a>
+                        </li>
+                        <li class="nav-item @@contact__active">
+                            <a class="nav-link" href="contact.html">İLETİŞİM</a>
+                        </li>
+                        <li class="nav-item @@contact__active">
+                            <a class="nav-link" href="login.html">GİRİŞ YAP</a>
+                        </li>
+
+                        <!--/search-right-->
+                        <div class="search-right">
+                            <a href="#search" title="search"><span class="fa fa-search" aria-hidden="true"></span></a>
+                            <!-- search popup -->
+                            <div id="search" class="pop-overlay">
+                                <div class="popup">
+
+                                    <form action="#" method="GET" class="search-box">
+                                        <input type="search" placeholder="Enter Keyword" name="search" required="required"
+                                               autofocus="">
+                                        <button type="submit" class="btn"><span class="fa fa-search" aria-hidden="true"></span></button>
+                                    </form>
+
+                                </div>
+                                <a class="close" href="#close">×</a>
+                            </div>
+                            <!-- /search popup -->
+                        </div>
+                        <!--//search-right-->
+                    </ul>
+                </div>
+                <!-- toggle switch for light and dark theme -->
+                <div class="mobile-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+            </nav>
+        </div>
+    </header>
+    <!--/header-->
+    <!-- main-slider -->
+    <section class="w3l-main-slider position-relative" id="home">
+        <div class="companies20-content">
+            <div class="owl-one owl-carousel owl-theme">
+                <div class="item">
+                    <li>
+                        <div class="slider-info banner-view bg bg2">
+                            <div class="banner-info">
+                                <div class="container">
+                                    <div class="banner-info-bg">
+                                        <h5>SENDE BİZİ TANIYIP</h5>
+                                        <a class="btn btn-style btn-primary mt-md-5 mt-4" href="about.html">HAKKIMIZDA</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+                <div class="item">
+                    <li>
+                        <div class="slider-info  banner-view banner-top1 bg bg2">
+                            <div class="banner-info">
+                                <div class="container">
+                                    <div class="banner-info-bg">
+                                        <h5>SAĞLIKLI PAYLAŞIMLAR YAPABİLİRSİN</h5>
+                                        <a class="btn btn-style btn-primary mt-md-5 mt-4" href="blogs.html">BLOG YAZILARI</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+                <div class="item">
+                    <li>
+                        <div class="slider-info banner-view banner-top2 bg bg2">
+                            <div class="banner-info">
+                                <div class="container">
+                                    <div class="banner-info-bg">
+                                        <h5>BİZİMLE İLETİŞİM KUR</h5>
+                                        <a class="btn btn-style btn-primary mt-md-5 mt-4" href="contact.html">İLETİŞİM</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+                <div class="item">
+                    <li>
+                        <div class="slider-info banner-view banner-top3 bg bg2">
+                            <div class="banner-info">
+                                <div class="container">
+                                    <div class="banner-info-bg">
+                                        <h5>SENDE ARAMIZA KATIL</h5>
+                                        <a class="btn btn-style btn-primary mt-md-5 mt-4" href="login.html">GİRİŞ YAP</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- //banner-slider-->
+
+    <section class="w3l-portfolio-8 py-5" id="gallery">
+        <div class="portfolio-main py-lg-5 py-md-4">
+            <div class="container">
+                <div class="row galler-top mt-lg-5 mt-4">
+                    <div class="col-md-2 col-5 protfolio-item hover14 align-self">
+                        <a href="images/g4.jpg" data-lightbox="example-set" data-title="lorem ipsum dolor sit amet">
+                            <figure>
+                                <img src="images/g4.jpg" alt="product" class="img-fluid radius-image">
+                            </figure>
+                        </a>
+                        <a href="images/g5.jpg" data-lightbox="example-set" data-title="lorem ipsum dolor sit amet">
+                            <figure>
+                                <img src="
+                            images/g5.jpg" alt="product" class="img-fluid radius-image">
+                            </figure>
+                        </a>
+                        <a href="
+                    images/g7.jpg" data-lightbox="example-set" data-title="lorem ipsum dolor sit amet">
+                            <figure>
+                                <img src="
+                            images/g7.jpg" alt="product" class="img-fluid radius-image">
+                            </figure>
+                        </a>
+                        <a href="
+                    images/g9.jpg" data-lightbox="example-set" data-title="lorem ipsum dolor sit amet">
+                            <figure>
+                                <img src="
+                            images/g9.jpg" alt="product" class="img-fluid radius-image">
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="col-md-4 col-7 protfolio-item hover14">
+                        <a href="
+                    images/g8.jpg" data-lightbox="example-set" class="mb-4"
+                           data-title="lorem ipsum dolor sit amet">
+                            <figure>
+                                <img src="
+                            images/g8.jpg" alt="product" class="img-fluid radius-image">
+                            </figure>
+                        </a>
+                        <a href="
+                    images/g6.jpg" data-lightbox="example-set" data-title="lorem ipsum dolor sit amet">
+                            <figure>
+                                <img src="
+                            images/g6.jpg" alt="product" class="img-fluid radius-image">
+                            </figure>
+                        </a>
+                        <a href="
+                    images/g3.jpg" data-lightbox="example-set" data-title="lorem ipsum dolor sit amet">
+                            <figure>
+                                <img src="
+                            images/g3.jpg" alt="product" class="img-fluid radius-image">
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="col-md-6 protfolio-item hover14 mt-md-0 mt-4">
+                        <div class="px-md-4">
+                            <h3 class="title-big mb-4">FITTURKBLOG SİTEMİZE HOŞGELDİNİZ</h3>
+                            <p class="mb-md-5 mb-4">
+                                Bu platformda antreman, beslenme, gıda takviyeleri gibi konularda araştırmalarınızı, bilgilerinizi, deneyimlerinizi paylaşabilirsiniz ...
+                            </p>
+                        </div>
+                        <div class="row gallery-bottom">
+                            <div class="col-6">
+                                <a href="
+                            images/g1.jpg" data-lightbox="example-set" class="mb-4"
+                                   data-title="lorem ipsum dolor sit amet">
+                                    <figure>
+                                        <img src="
+                                    images/g1.jpg" alt="product" class="img-fluid radius-image">
+                                    </figure>
+                                </a>
+                                <a href="
+                            images/g4.jpg" data-lightbox="example-set"
+                                   data-title="lorem ipsum dolor sit amet">
+                                    <figure>
+                                        <img src="
+                                    images/g4.jpg" alt="product" class="img-fluid radius-image">
+                                    </figure>
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <a href="
+                            images/g2.jpg" data-lightbox="example-set"
+                                   data-title="lorem ipsum dolor sit amet">
+                                    <figure>
+                                        <img src="
+                                    images/g2.jpg" alt="product" class="img-fluid radius-image">
+                                    </figure>
+                                </a>
+                                <a href="
+                            images/g7.jpg" data-lightbox="example-set"
+                                   data-title="lorem ipsum dolor sit amet">
+                                    <figure>
+                                        <img src="
+                                    images/g7.jpg" alt="product" class="img-fluid radius-image">
+                                    </figure>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="w3l-blog-block py-5">
+        <div class="container py-lg-5 py-md-4">
+            <div class="heading text-center mx-auto">
+                <h5 class="title-small text-center mb-2">BLOG YAZILARI</h5>
+                <h3 class="title-big title-big-center mb-md-5 mb-4">EN YENİ BLOG YAZILARI</h3>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 item">
+                    <div class="card">
+                        <div class="card-header p-0 position-relative">
+                            <a href="#blog-single">
+                                <img class="card-img-bottom d-block" src="
+                            images/blog1.jpg" alt="Card image cap">
+                            </a>
+                            <ul class="location-top">
+                                <li class="new">Fitness</li>
+                            </ul>
+                            <div class="blog-info-middle">
+                                <ul>
+                                    <li class="mx-2">
+                                        <a href="#">
+                                            <i class="far fa-thumbs-up"></i> 201 Likes
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="far fa-comment"></i> 15 Comments
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-body blog-details">
+                            <a href="#blog-single" class="blog-desc">The heavy weight of olympics: power lifting for the pros</a>
+                            <p>
+                                Lorem ipsum dolor sit amet ipsum elit. Qui eligendi
+                                vitae sit isque male suada.
+                            </p>
+                            <div class="author align-items-center mt-3 mb-1">
+                                <div class="img-circle">
+                                    <img src="
+                                images/a1.jpg" class="mr-3 img-fluid" alt="...">
+                                </div>
+                                <div class="author-info">
+                                    <a href="#author">Maxwell ker</a> <br> <span class="meta-value">08.06.2022 </span>
+                                </div>
+                                <div class="container">
+                                    <div class="banner-info-bg">
+                                        <a class="btn btn-style btn-primary mt-md-5 mt-4" href="#">Devamını Oku</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 item mt-md-0 mt-5">
+                    <div class="card">
+                        <div class="card-header p-0 position-relative">
+                            <a href="#blog-single">
+                                <img class="card-img-bottom d-block" src="
+                            images/blog2.jpg" alt="Card image cap">
+                            </a>
+                            <ul class="location-top">
+                                <li class="tip">Fitness</li>
+                            </ul>
+                            <div class="blog-info-middle">
+                                <ul>
+                                    <li class="mx-2">
+                                        <a href="#">
+                                            <i class="far fa-thumbs-up"></i> 201 Likes
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="far fa-comment"></i> 15 Comments
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-body blog-details">
+                            <a href="#blog-single" class="blog-desc">
+                                If my last day of CrossFit were Tomorrow
+                            </a>
+                            <p>
+                                Lorem ipsum dolor sit amet ipsum elit. Qui eligendi
+                                vitae sit isque male suada.
+                            </p>
+                            <div class="author align-items-center mt-3 mb-1">
+                                <div class="img-circle">
+                                    <img src="
+                                    images/a2.jpg" class="mr-3 img-fluid" alt="...">
+                                </div>
+                                <div class="author-info">
+                                    <a href="#author">Maxwell ker</a> <br> <span class="meta-value">08.06.2022 </span>
+                                </div>
+                                <div class="container">
+                                    <div class="banner-info-bg">
+                                        <a class="btn btn-style btn-primary mt-md-5 mt-4" href="#">Devamını Oku</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 item mt-lg-0 mt-5">
+                    <div class="card">
+                        <div class="card-header p-0 position-relative">
+                            <a href="#blog-single">
+                                <img class="card-img-bottom d-block" src="
+                            images/blog4.jpg" alt="Card image cap">
+                            </a>
+                            <ul class="location-top">
+                                <li class="design">Fitness</li>
+                            </ul>
+                            <div class="blog-info-middle">
+                                <ul>
+                                    <li class="mx-2">
+                                        <a href="#">
+                                            <i class="far fa-thumbs-up"></i> 201 Likes
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="far fa-comment"></i> 15 Comments
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-body blog-details">
+                            <a href="#blog-single" class="blog-desc">
+                                Keeping your Fitness Goals on Track at Work
+                            </a>
+                            <p>
+                                Lorem ipsum dolor sit amet ipsum elit. Qui eligendi
+                                vitae sit isque male suada.
+                            </p>
+                            <div class="author align-items-center mt-3 mb-1">
+                                <div class="img-circle">
+                                    <img src="
+                                    images/a3.jpg" class="mr-3 img-fluid" alt="...">
+                                </div>
+                                <div class="author-info">
+                                    <a href="#author">Maxwell ker</a> <br> <span class="meta-value">08.06.2022 </span>
+                                </div>
+                                <div class="container">
+                                    <div class="banner-info-bg">
+                                        <a class="btn btn-style btn-primary mt-md-5 mt-4" href="#">Devamını Oku</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="w3l-grid-slider" id="instaposts">
+        <div class="grid-slider">
+            <div class="">
+                <!--  Demos -->
+                <div id="demos">
+                    <div class="owl-carousel owl-carousel-posts owl-theme grid-col-4">
+                        <div class="item">
+                            <a href="#instagram">
+                                <div class="gallery-grid">
+                                    <div class="content">
+                                        <div class="content-overlay"></div>
+                                        <img src="
+                                    images/g2.jpg" class="image-two img-responsive">
+                                        <div class="content-details fadeIn-bottom">
+                                            <span class="fa fa-instagram"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#instagram">
+                                <div class="gallery-grid">
+                                    <div class="content">
+                                        <div class="content-overlay"></div>
+                                        <img src="
+                                    images/g4.jpg" class="image-two img-responsive">
+                                        <div class="content-details fadeIn-bottom">
+                                            <span class="fa fa-instagram"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#instagram">
+                                <div class="gallery-grid">
+                                    <div class="content">
+                                        <div class="content-overlay"></div>
+                                        <img src="
+                                    images/g9.jpg" class="image-two img-responsive">
+                                        <div class="content-details fadeIn-bottom">
+                                            <span class="fa fa-instagram"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#instagram">
+                                <div class="gallery-grid">
+                                    <div class="content">
+                                        <div class="content-overlay"></div>
+                                        <img src="
+                                    images/g10.jpg" class="image-two img-responsive">
+                                        <div class="content-details fadeIn-bottom">
+                                            <span class="fa fa-instagram"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#instagram">
+                                <div class="gallery-grid">
+                                    <div class="content">
+                                        <div class="content-overlay"></div>
+                                        <img src="
+                                    images/g11.jpg" class="image-two img-responsive">
+                                        <div class="content-details fadeIn-bottom">
+                                            <span class="fa fa-instagram"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#instagram">
+                                <div class="gallery-grid">
+                                    <div class="content">
+                                        <div class="content-overlay"></div>
+                                        <img src="
+                                    images/g2.jpg" class="image-two img-responsive">
+                                        <div class="content-details fadeIn-bottom">
+                                            <span class="fa fa-instagram"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#instagram">
+                                <div class="gallery-grid">
+                                    <div class="content">
+                                        <div class="content-overlay"></div>
+                                        <img src="
+                                    images/g4.jpg" class="image-two img-responsive">
+                                        <div class="content-details fadeIn-bottom">
+                                            <span class="fa fa-instagram"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#instagram">
+                                <div class="gallery-grid">
+                                    <div class="content">
+                                        <div class="content-overlay"></div>
+                                        <img src="
+                                    images/g9.jpg" class="image-two img-responsive">
+                                        <div class="content-details fadeIn-bottom">
+                                            <span class="fa fa-instagram"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </a>
+                        </div>
+                        <div class="item">
+                            <a href="#instagram">
+                                <div class="gallery-grid">
+                                    <div class="content">
+                                        <div class="content-overlay"></div>
+                                        <img src="
+                                    images/g10.jpg" class="image-two img-responsive">
+                                        <div class="content-details fadeIn-bottom">
+                                            <span class="fa fa-instagram"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /slider -->
+
+    </section>
+    <!--footer-->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 footer-grid-agileits-w3ls text-left">
+                    <h3>About US</h3>
+                    <p>Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. lacinia eget consectetur sed, convallis at tellus..</p>
+                    <div class="container">
+                        <div class="banner-info-bg">
+                            <a class="btn btn-style btn-primary mt-md-5 mt-4" href="#">Devamını Oku</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 footer-grid-agileits-w3ls text-left">
+
+                    <div class="tech-btm">
+                        <h3>Latest Posts</h3>
+                        <div class="blog-grids row mb-3">
+                            <div class="col-md-5 blog-grid-left">
+                                <a href="single.html">
+                                    <img src="images/blog1.jpg" class="img-fluid" alt="">
+                                </a>
+                            </div>
+                            <div class="col-md-7 blog-grid-right">
+
+                                <h5>
+                                    <a href="single.html">Pellentesque dui, non felis. Maecenas male non felis </a>
+                                </h5>
+                                <div class="sub-meta">
+                                    <span>
+                                        <i class="far fa-clock"></i> 20 Jan, 2018
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="blog-grids row mb-3">
+                            <div class="col-md-5 blog-grid-left">
+                                <a href="single.html">
+                                    <img src="images/blog2.jpg" class="img-fluid" alt="">
+                                </a>
+                            </div>
+                            <div class="col-md-7 blog-grid-right">
+
+                                <h5>
+                                    <a href="single.html">Pellentesque dui, non felis. Maecenas male non felis </a>
+                                </h5>
+                                <div class="sub-meta">
+                                    <span>
+                                        <i class="far fa-clock"></i> 20 Jan, 2018
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="blog-grids row mb-3">
+                            <div class="col-md-5 blog-grid-left">
+                                <a href="single.html">
+                                    <img src="images/blog4.jpg" class="img-fluid" alt="">
+                                </a>
+                            </div>
+                            <div class="col-md-7 blog-grid-right">
+
+                                <h5>
+                                    <a href="single.html">Pellentesque dui, non felis. Maecenas male non felis </a>
+                                </h5>
+                                <div class="sub-meta">
+                                    <span>
+                                        <i class="far fa-clock"></i> 20 Jan, 2018
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- subscribe -->
+                <div class="col-lg-4 subscribe-main footer-grid-agileits-w3ls text-left">
+                    <h2>Signup to our newsletter</h2>
+                    <div class="subscribe-main text-left">
+                        <div class="subscribe-form">
+                            <form action="#" method="post" class="subscribe_form">
+                                <input class="form-control" type="email" placeholder="Enter your email..." required="">
+                                <br>
+                                <button class="btn-primary btn btn-style">Abone Ol</button>
+                            </form>
+                            <div class="clearfix"> </div>
+                        </div>
+                        <p>We respect your privacy.No spam ever!</p>
+                    </div>
+                    <!-- //subscribe -->
+                </div>
+            </div>
+            <!-- footer -->
+            <div class="footer-cpy text-center">
+                <div class="footer-social">
+                    <div class="copyrighttop">
+                        <ul>
+                            <li class="mx-3">
+                                <a class="facebook" href="#">
+                                    <i class="fab fa-facebook-f"></i>
+                                    <span>Facebook</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="facebook" href="#">
+                                    <i class="fab fa-twitter"></i>
+                                    <span>Twitter</span>
+                                </a>
+                            </li>
+                            <li class="mx-3">
+                                <a class="facebook" href="#">
+                                    <i class="fab fa-google-plus-g"></i>
+                                    <span>Google+</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="facebook" href="#">
+                                    <i class="fab fa-pinterest-p"></i>
+                                    <span>Pinterest</span>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="w3layouts-agile-copyrightbottom">
+                    <p>
+                        © 2018 Weblog. All Rights Reserved | Design by
+                        <a href="http://w3layouts.com/">W3layouts</a>
+                    </p>
+
+                </div>
+            </div>
+
+            <!-- //footer -->
+        </div>
+    </footer>
+    <!---->
+
+
+    <script src="
+ js/jquery-3.3.1.min.js"></script>
+
+    <script src="
+ js/theme-change.js"></script><!-- theme switch js (light and dark)-->
+    <!-- libhtbox -->
+    <script src="
+ js/lightbox-plus-jquery.min.js"></script>
+
+    <script src="
+ js/owl.carousel.js"></script>
+    <!-- script for banner slider-->
+    <script>
+        $(document).ready(function () {
+            $('.owl-one').owlCarousel({
+                loop: true,
+                margin: 0,
+                nav: false,
+                responsiveClass: true,
+                autoplay: false,
+                autoplayTimeout: 5000,
+                autoplaySpeed: 1000,
+                autoplayHoverPause: false,
+                responsive: {
+                    0: {
+                        items: 1,
+                        nav: false
+                    },
+                    480: {
+                        items: 1,
+                        nav: false
+                    },
+                    667: {
+                        items: 1,
+                        nav: true
+                    },
+                    1000: {
+                        items: 1,
+                        nav: true
+                    }
+                }
+            })
+        })
+    </script>
+    <!-- //script -->
+    <!-- script for tesimonials carousel slider -->
+    <script>
+        $(document).ready(function () {
+            $(".owl-two").owlCarousel({
+                loop: true,
+                margin: 20,
+                nav: false,
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 1,
+                        nav: false
+                    },
+                    768: {
+                        items: 2,
+                        nav: false
+                    },
+                    1000: {
+                        items: 3,
+                        nav: false,
+                        loop: false
+                    }
+                }
+            })
+        })
+    </script>
+    <!-- //script for tesimonials carousel slider -->
+
+    <script>
+        $(document).ready(function () {
+            $('.owl-carousel-posts').owlCarousel({
+                loop: true,
+                margin: 0,
+                responsiveClass: true,
+                autoplay: true,
+                autoplayTimeout: 2000,
+                autoplaySpeed: 1000,
+                autoplayHoverPause: true,
+                responsive: {
+                    0: {
+                        items: 2,
+                        nav: false
+                    },
+                    480: {
+                        items: 3,
+                        nav: true,
+                        margin: 0
+                    },
+                    736: {
+                        items: 4,
+                        nav: true,
+                        margin: 0
+                    },
+                    1000: {
+                        items: 5,
+                        nav: true,
+                        margin: 0
+                    }
+                }
+            })
+        })
+    </script>
+    <!-- /slider -->
+    <!-- script for teams1-->
+    <script>
+        $(document).ready(function () {
+            $('.owl-carousel').owlCarousel({
+                loop: true,
+                margin: 0,
+                responsiveClass: true,
+                responsive: {
+                    0: {
+                        items: 1,
+                        nav: true
+                    },
+                    400: {
+                        items: 2,
+                        nav: true,
+                        margin: 20
+                    },
+                    1000: {
+                        items: 4,
+                        nav: true,
+                        loop: true,
+                        margin: 25
+                    }
+                }
+            })
+        })
+    </script>
+    <!-- //script for teams1-->
+    <!-- stats number counter-->
+    <script src="
+ js/jquery.waypoints.min.js"></script>
+    <script src="
+ js/jquery.countup.js"></script>
+    <script>
+        $('.counter').countUp();
+    </script>
+    <!-- //stats number counter -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+        $(function () {
+            $('.navbar-toggler').click(function () {
+                $('body').toggleClass('noscroll');
+            })
+        });
+    </script>
+    <!-- disable body scroll which navbar is in active -->
+    <!--/MENU-JS-->
+    <script>
+        $(window).on("scroll", function () {
+            var scroll = $(window).scrollTop();
+
+            if (scroll >= 80) {
+                $("#site-header").addClass("nav-fixed");
+            } else {
+                $("#site-header").removeClass("nav-fixed");
+            }
+        });
+
+        //Main navigation Active Class Add Remove
+        $(".navbar-toggler").on("click", function () {
+            $("header").toggleClass("active");
+        });
+        $(document).on("ready", function () {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+            $(window).on("resize", function () {
+                if ($(window).width() > 991) {
+                    $("header").removeClass("active");
+                }
+            });
+        });
+    </script>
+    <!--//MENU-JS-->
+
+    <script src="
+ js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

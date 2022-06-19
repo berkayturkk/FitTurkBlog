@@ -1,0 +1,133 @@
+﻿@model IEnumerable<FitTurkBlog.Entities.Concrete.Blog>
+
+
+@{
+    ViewData["Title"] = "BlogReadAll";
+    Layout = "~/Views/Shared/Layouts/UserLayout.cshtml";
+}
+
+<section class="w3l-breadcrumb">
+    <div class="breadcrumb-bg breadcrumb-bg-classes py-5">
+        <div class="container py-lg-5 py-md-3">
+            <h3 class="title-big text-center">BLOG YAZILARI</h3>
+            <p class="mt-3">SAĞLIKLI PAYLAŞIM PLATFORMU</p>
+        </div>
+    </div>
+</section>
+<!--//banner-->
+<section class="banner-bottom">
+    <!--/blog-->
+    <div class="container">
+        <div class="row">
+            <!--left-->
+            <div class="col-lg-8 left-blog-info-w3layouts-agileits text-left">
+                @foreach (var item in Model)
+                {
+                    <div class="blog-grid-top">
+                        <div class="b-grid-top">
+                            <div class="blog_info_left_grid">
+                                <a href="single.html">
+                                    <img src="@item.BlogImage" class="img-fluid" alt="">
+                                </a>
+                            </div>
+                            <div class="blog-info-middle">
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            <i class="far fa-calendar-alt"></i>@(((DateTime)item.BlogCreateDate).ToString(" dd-MMM-yyyy"))
+                                        </a>
+                                    </li>
+                                    <li class="mx-2">
+                                        <a href="#">
+                                            <i class="far fa-thumbs-up"></i> 0 Beğeni
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="far fa-comment"></i> 0 Yorum
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h3>
+                            <a href="single.html">@item.BlogTitle</a>
+                        </h3>
+                        <p>@item.BlogContent</p>
+                        <div class="container">
+                            <div class="banner-info-bg">
+                                <a class="btn btn-style btn-primary mt-md-5 mt-4" href="/Blog/Index/">Blog Listesi</a>
+                            </div>
+                        </div>
+                        <div class="media mt-3">
+                            <a class="d-flex pr-3" href="#">
+                                <img src="~/FitTurkBlog/images/a3.jpg" alt="" class="img-fluid" />
+                            </a>
+                            <div class="media-body">
+                                <h5 class="mt-0">Richard Spark</h5>
+                                <p>
+                                    Lorem Ipsum convallis diam consequat magna vulputate malesuada. id dignissim sapien velit id felis ac cursus eros.
+                                    Cras a ornare elit.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                @await Component.InvokeAsync("CommentListByBlog",new {id = ViewBag.i})
+                @*@await Html.PartialAsync("~/Views/Comment/CommentListByBlog.cshtml")*@
+                @await Html.PartialAsync("~/Views/Comment/PartialAddComment.cshtml")
+
+            </div>
+
+            <!--//left-->
+            <!--right-->
+            <aside class="col-lg-4 agileits-w3ls-right-blog-con text-right">
+                <div class="right-blog-info text-left">
+                    <div class="tech-btm">
+                        <img src="~/FitTurkBlog/images/banner1.jpg" class="img-fluid" alt="">
+                    </div>
+                    <h3>Bültenimize Abone Olun</h3>
+                    <br />
+                    @await Html.PartialAsync("~/Views/NewsLetter/SubscribeMail.cshtml")
+
+                    @await Component.InvokeAsync("CategoryList")
+
+                    @await Component.InvokeAsync("WriterLastBlog")
+
+                    <div class="single-gd tech-btm">
+                        <h4>Son Eklenen Yazı</h4>
+                        <div class="blog-grids">
+                            <div class="blog-grid-left">
+                                <a href="single.html">
+                                    <img src="~/FitTurkBlog/images/g7.jpg" class="img-fluid" alt="">
+                                </a>
+                            </div>
+                            <div class="blog-grid-right">
+
+                                <h5>
+                                    <a href="single.html">Pellentesque dui, non felis. Maecenas male</a>
+                                </h5>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>
+                    </div>
+                </div>
+
+            </aside>
+            <!--//right-->
+        </div>
+    </div>
+</section>
+<!--//main-->
+
+
+
+
+
+
+                            
+                    
+                    
