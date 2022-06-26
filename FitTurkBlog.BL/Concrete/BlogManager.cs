@@ -23,6 +23,11 @@ namespace FitTurkBlog.BL.Concrete
             return _blogDAL.GetListWithCategory();
         }
 
+        public List<Blog> GetListWithCategoryByWriterBm(int id)
+        {
+            return _blogDAL.GetListWithCategoryByWriter(id);
+        }
+
         public List<Blog> GetBlogListByWriter(int id)
         {
             return _blogDAL.GetListAll(x => x.WriterID == id);
@@ -52,7 +57,7 @@ namespace FitTurkBlog.BL.Concrete
 
         public void Update(Blog t)
         {
-            throw new NotImplementedException();
+            _blogDAL.Update(t);
         }
 
         public List<Blog> GetList()
@@ -60,9 +65,9 @@ namespace FitTurkBlog.BL.Concrete
             throw new NotImplementedException();
         }
 
-        public Blog GetById(int id)
+        public Blog TGetById(int id)
         {
-            throw new NotImplementedException();
+            return _blogDAL.GetById(id);
         }
     }
 }

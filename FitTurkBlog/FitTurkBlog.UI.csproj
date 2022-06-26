@@ -26,4 +26,8 @@
     <ProjectReference Include="..\FitTurkBlog.Entities\FitTurkBlog.Entities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\WriterImageFiles\" />
+  </ItemGroup>
+
 </Project>

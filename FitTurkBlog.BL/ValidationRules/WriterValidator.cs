@@ -18,8 +18,6 @@ namespace FitTurkBlog.BL.ValidationRules
             RuleFor(x => x.WriterMail).NotEmpty().WithMessage("E-posta adresi alanı boş geçilemez !");
             RuleFor(x => x.WriterMail).EmailAddress().WithMessage("E-posta adresi uygun formda değil !");
             RuleFor(x => x.WriterPassword).NotEmpty().WithMessage("Şifre alanı boş geçilemez!");
-            RuleFor(x => x.WriterConfirmPassword).NotEmpty().WithMessage("Şifre alanı boş geçilemez!");
-            RuleFor(x => x.WriterConfirmPassword).Equal(x => x.WriterPassword).WithMessage("Şifre onay alanı şifre alanı ile uyuşmuyor !");
         }
     }
 }

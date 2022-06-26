@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FitTurkBlog.DAL.Migrations
 {
-    public partial class mig1 : Migration
+    public partial class mig_add_tables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -27,6 +27,21 @@ namespace FitTurkBlog.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "BlogRaytings",
+                columns: table => new
+                {
+                    BlogRaytingID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BlogID = table.Column<int>(type: "int", nullable: false),
+                    BlogTotalScore = table.Column<int>(type: "int", nullable: false),
+                    BlogRaytingCount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BlogRaytings", x => x.BlogRaytingID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
                 {
@@ -47,6 +62,7 @@ namespace FitTurkBlog.DAL.Migrations
                 {
                     ContactID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    ContactAdress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ContactUserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ContactMail = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ContactPhone = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -58,6 +74,37 @@ namespace FitTurkBlog.DAL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Contacts", x => x.ContactID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "NewsLetters",
+                columns: table => new
+                {
+                    MailID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Mail = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MailStatus = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NewsLetters", x => x.MailID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Notifications",
+                columns: table => new
+                {
+                    NotificationID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NotificationType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NotificationTypeSymbol = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NotificationDetails = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NotificationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NotificationStatus = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notifications", x => x.NotificationID);
                 });
 
             migrationBuilder.CreateTable(
@@ -120,6 +167,7 @@ namespace FitTurkBlog.DAL.Migrations
                     CommentTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CommentContent = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CommentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    BlogScore = table.Column<int>(type: "int", nullable: false),
                     CommentStatus = table.Column<bool>(type: "bit", nullable: false),
                     BlogID = table.Column<int>(type: "int", nullable: false)
                 },
@@ -156,10 +204,19 @@ namespace FitTurkBlog.DAL.Migrations
                 name: "Abouts");
 
             migrationBuilder.DropTable(
+                name: "BlogRaytings");
+
+            migrationBuilder.DropTable(
                 name: "Comments");
 
             migrationBuilder.DropTable(
                 name: "Contacts");
+
+            migrationBuilder.DropTable(
+                name: "NewsLetters");
+
+            migrationBuilder.DropTable(
+                name: "Notifications");
 
             migrationBuilder.DropTable(
                 name: "Blogs");

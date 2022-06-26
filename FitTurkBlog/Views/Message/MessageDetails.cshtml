@@ -1,0 +1,24 @@
+﻿@model FitTurkBlog.Entities.Concrete.Message2
+
+@{
+    ViewData["Title"] = "MessageDetails";
+    Layout = "~/Views/Shared/Layouts/WriterLayout.cshtml";
+}
+
+<h1>Mesaj Detay Sayfası</h1>
+<br />
+<br />
+@Html.Label("Mesaj ID")
+@Html.TextBoxFor(x => x.MessageID, new{ @class = "form-control",@disabled="disabled"})
+<br />
+@Html.Label("Mesajı Gönderen")
+@Html.TextBoxFor(x => x.MessageSenderID, new{ @class = "form-control",@disabled="disabled"})
+<br />
+@Html.Label("Mesaj Konusu")
+@Html.TextBoxFor(x => x.MessageSubject, new{ @class = "form-control",@disabled="disabled"})
+<br />
+@Html.Label("Mesaj İçeriği")
+@Html.TextBoxFor(x => x.MessageDetails, new{ @class = "form-control",@disabled="disabled"})
+<br />
+<br />
+<a href="/Message/InBox/" class="btn btn-success">Mesajlara Dön</a>

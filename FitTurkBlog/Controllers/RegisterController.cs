@@ -3,6 +3,7 @@ using FitTurkBlog.BL.ValidationRules;
 using FitTurkBlog.DAL.EntityFramework;
 using FitTurkBlog.Entities.Concrete;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FitTurkBlog.UI.Controllers
@@ -11,14 +12,15 @@ namespace FitTurkBlog.UI.Controllers
     {
         WriterManager writerManager = new WriterManager(new EFWriterRepository());
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
-
         public IActionResult Index(Writer writer)
         {
             WriterValidator writerValidationRules = new WriterValidator();
@@ -28,7 +30,7 @@ namespace FitTurkBlog.UI.Controllers
                 writer.WriterStatus = true;
                 writer.WriterAbout = "Deneme Test";
                 writer.WriterImage = "~/FitTurkBlog/images/a1.jpg";
-                writerManager.WriterAdd(writer);
+                writerManager.Add(writer);
                 return RedirectToAction("Index", "Blog");
             }
             else

@@ -2,13 +2,13 @@
 
 namespace FitTurkBlog.DAL.Migrations
 {
-    public partial class mig_Contact_Table : Migration
+    public partial class mig_notification_add_color : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "ContactAdress",
-                table: "Contacts",
+                name: "NotificationTypeSymbolColor",
+                table: "Notifications",
                 type: "nvarchar(max)",
                 nullable: true);
         }
@@ -16,8 +16,8 @@ namespace FitTurkBlog.DAL.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "ContactAdress",
-                table: "Contacts");
+                name: "NotificationTypeSymbolColor",
+                table: "Notifications");
         }
     }
 }

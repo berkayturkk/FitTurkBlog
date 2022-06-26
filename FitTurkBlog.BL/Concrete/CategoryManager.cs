@@ -28,7 +28,7 @@ namespace FitTurkBlog.BL.Concrete
             _categoryDAL.Delete(t); 
         }
 
-        public Category GetById(int id)
+        public Category TGetById(int id)
         {
             return _categoryDAL.GetById(id);
         }

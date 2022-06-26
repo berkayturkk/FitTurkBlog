@@ -1,5 +1,6 @@
 ﻿using FitTurkBlog.BL.Concrete;
 using FitTurkBlog.BL.ValidationRules;
+using FitTurkBlog.DAL.Context;
 using FitTurkBlog.DAL.EntityFramework;
 using FitTurkBlog.Entities.Concrete;
 using FluentValidation.Results;
@@ -16,6 +17,8 @@ namespace FitTurkBlog.UI.Controllers
     public class BlogController : Controller
     {
         BlogManager _blogManager = new BlogManager(new EFBlogRepository());
+        CategoryManager categoryManager = new CategoryManager(new EFCategoryRepository());
+        SqlDbContext sqlDbContext = new SqlDbContext();
         public IActionResult Index()
         {
             var values = _blogManager.GetBlogListWithCategory();
@@ -30,14 +33,15 @@ namespace FitTurkBlog.UI.Controllers
 
         public IActionResult BlogListByWriter()
         {
-            var values = _blogManager.GetBlogListByWriter(1);
+            var userMail = User.Identity.Name;
+            var writerID = sqlDbContext.Writers.Where(x => x.WriterMail == userMail).Select(y => y.WriterID).FirstOrDefault();
+            var values = _blogManager.GetListWithCategoryByWriterBm(writerID);
             return View(values);
         }
 
         [HttpGet]
         public IActionResult BlogAdd()
-        {
-            CategoryManager categoryManager = new CategoryManager(new EFCategoryRepository());
+        { 
             List<SelectListItem> categoryValue = (from x in categoryManager.GetList()
                                                   select new SelectListItem
                                                   {
@@ -51,13 +55,15 @@ namespace FitTurkBlog.UI.Controllers
         [HttpPost]
         public IActionResult BlogAdd(Blog blog)
         {
+            var userMail = User.Identity.Name;
+            var writerID = sqlDbContext.Writers.Where(x => x.WriterMail == userMail).Select(y => y.WriterID).FirstOrDefault();
             BlogValidator blogValidationRules = new BlogValidator();
             ValidationResult results = blogValidationRules.Validate(blog);
             if (results.IsValid)
             {
                 blog.BlogStatus = true;
                 blog.BlogCreateDate = DateTime.Parse(DateTime.Now.ToShortDateString());
-                blog.WriterID = 1;
+                blog.WriterID = writerID;
                 _blogManager.Add(blog);
                 return RedirectToAction("BlogListByWriter", "Blog");
             }
@@ -69,6 +75,39 @@ namespace FitTurkBlog.UI.Controllers
                 }
             }
             return View();
+        }
+
+        public IActionResult DeleteBlog(int id)
+        {
+            var blogValue = _blogManager.TGetById(id);
+            _blogManager.Delete(blogValue);
+            return RedirectToAction("BlogListByWriter");
+        }
+
+        [HttpGet]
+        public IActionResult EditBlog(int id)
+        {
+            var blogValue = _blogManager.TGetById(id);
+            List<SelectListItem> categoryValue = (from x in categoryManager.GetList()
+                                                  select new SelectListItem
+                                                  {
+                                                      Text = x.CategoryName,
+                                                      Value = x.CategoryID.ToString()
+                                                  }).ToList();
+            ViewBag.cv = categoryValue;
+            return View(blogValue);
+        }
+
+        [HttpPost]
+        public IActionResult EditBlog(Blog blog)
+        {
+            var userMail = User.Identity.Name;
+            var writerID = sqlDbContext.Writers.Where(x => x.WriterMail == userMail).Select(y => y.WriterID).FirstOrDefault();
+            blog.WriterID = writerID;
+            blog.BlogCreateDate = DateTime.Parse(DateTime.Now.ToShortDateString());
+            blog.BlogStatus = true;
+            _blogManager.Update(blog);
+            return RedirectToAction("BlogListByWriter");
         }
 
 

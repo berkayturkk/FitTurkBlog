@@ -21,5 +21,13 @@ namespace FitTurkBlog.DAL.EntityFramework
                 return sqlDbContext.Blogs.Include(x => x.Category).ToList();
             }
         }
+
+        public List<Blog> GetListWithCategoryByWriter(int id)
+        {
+            using (var sqlDbContext = new SqlDbContext())
+            {
+                return sqlDbContext.Blogs.Include(x => x.Category).Where(x => x.WriterID == id).ToList();
+            }
+        }
     }
 }
