@@ -62,7 +62,7 @@ namespace FitTurkBlog.BL.Concrete
 
         public List<Blog> GetList()
         {
-            throw new NotImplementedException();
+            return _blogDAL.ListAll();
         }
 
         public Blog TGetById(int id)

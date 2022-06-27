@@ -52,6 +52,39 @@ namespace FitTurkBlog.DAL.Migrations
                     b.ToTable("Abouts");
                 });
 
+            modelBuilder.Entity("FitTurkBlog.Entities.Concrete.Admin", b =>
+                {
+                    b.Property<int>("AdminID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AdminImage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AdminName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AdminPassword")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AdminRole")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AdminShortDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("AdminStatus")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("AdminUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AdminID");
+
+                    b.ToTable("Admins");
+                });
+
             modelBuilder.Entity("FitTurkBlog.Entities.Concrete.Blog", b =>
                 {
                     b.Property<int>("BlogID")

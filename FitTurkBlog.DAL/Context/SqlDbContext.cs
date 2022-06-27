@@ -41,6 +41,7 @@ namespace FitTurkBlog.DAL.Context
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Message2> Messages2 { get; set; }
+        public DbSet<Admin> Admins { get; set; }
 
 
     }
