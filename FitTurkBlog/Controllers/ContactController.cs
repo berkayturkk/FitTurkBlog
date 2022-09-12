@@ -3,9 +3,11 @@ using FitTurkBlog.BL.Concrete;
 using FitTurkBlog.DAL.EntityFramework;
 using FitTurkBlog.Entities.Concrete;
 using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FitTurkBlog.UI.Controllers
 {
+    [AllowAnonymous]
     public class ContactController : Controller
     {
         ContactManager contactManager = new ContactManager(new EFContactRepository());

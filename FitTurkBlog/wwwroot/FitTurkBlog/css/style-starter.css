@@ -1567,9 +1567,11 @@ textarea.form-control {
   padding-left: 1.25rem; }
 
 .form-check-input {
-  position: absolute;
-  margin-top: 0.3rem;
-  margin-left: -1.25rem; }
+    scale: 1.2;
+    position: absolute;
+    margin-top: 0.4rem;
+    margin-left: -1.25rem;
+}
   .form-check-input[disabled] ~ .form-check-label,
   .form-check-input:disabled ~ .form-check-label {
     color: #6c757d; }
@@ -5705,7 +5707,7 @@ button.bg-dark:focus {
 
 .mb-2,
 .my-2 {
-  margin-bottom: 0.5rem !important; }
+  margin-bottom: 1.5rem !important; }
 
 .ml-2,
 .mx-2 {
@@ -7311,7 +7313,6 @@ input,
 select,
 label,
 li, span {
-  -webkit-appearance: none;
   outline: none;
   font-family: 'Poppins', sans-serif; }
 

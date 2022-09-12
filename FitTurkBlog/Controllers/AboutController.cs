@@ -1,11 +1,14 @@
 ﻿using FitTurkBlog.BL.Concrete;
 using FitTurkBlog.DAL.EntityFramework;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FitTurkBlog.UI.Controllers
 {
+    [AllowAnonymous]
     public class AboutController : Controller
     {
+
         AboutManager aboutManager = new AboutManager(new EFAboutRepository());
         public IActionResult Index()
         {
