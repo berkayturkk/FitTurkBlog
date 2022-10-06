@@ -83,12 +83,29 @@ namespace FitTurkBlog.UI.Controllers
         public async Task<IActionResult> WriterEditProfile(UserUpdateViewModel upUser)
         {
             var values = await _userManager.FindByNameAsync(User.Identity.Name);
-            values.NameSurname = upUser.UpNameSurname;
-            values.Email = upUser.UpMail;
-            values.ImageUrl = upUser.UpImageUrl;
-            values.About = upUser.UpAbout;
-            var result = await _userManager.UpdateAsync(values);
-            return RedirectToAction("Index", "Dashboard");
+
+            if (ModelState.IsValid)
+            {
+                values.NameSurname = upUser.UpNameSurname;
+                values.Email = upUser.UpMail;
+                values.ImageUrl = upUser.UpImageUrl;
+                values.About = upUser.UpAbout;
+                var result = await _userManager.UpdateAsync(values);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("WriterEditProfile", "Writer");
+                }
+                else
+                {
+                    foreach (var item in result.Errors)
+                    {
+                        ModelState.AddModelError("", item.Description);
+                    }
+                }
+            }
+
+            return View();
         }
 
         [AllowAnonymous]
@@ -134,11 +151,27 @@ namespace FitTurkBlog.UI.Controllers
 
         [HttpPost]
         public async Task<IActionResult> WriterEditUserName(UpdateUserNameViewModel upUserSetting)
-        {
+        {            
             var values = await _userManager.FindByNameAsync(User.Identity.Name);
-            values.UserName = upUserSetting.UpUserName;
-            var result = await _userManager.UpdateAsync(values);
-            return RedirectToAction("Index", "LoginUser");
+
+            if (ModelState.IsValid)
+            {
+                values.UserName = upUserSetting.UpUserName;
+                var result = await _userManager.UpdateAsync(values);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "LoginUser");
+                }
+                else
+                {
+                    foreach (var item in result.Errors)
+                    {
+                        ModelState.AddModelError("", item.Description);
+                    }
+                }
+            }
+
+            return View();
         }
 
         [HttpGet]
@@ -152,20 +185,25 @@ namespace FitTurkBlog.UI.Controllers
         {
             var values = await _userManager.FindByNameAsync(User.Identity.Name);
 
-            if (upUserSetting.NewPassword == upUserSetting.NewConfirmPassword)
+            if (ModelState.IsValid)
             {
                 values.PasswordHash = _userManager.PasswordHasher.HashPassword(values, upUserSetting.NewPassword);
                 var result = await _userManager.UpdateAsync(values);
-                return RedirectToAction("Index", "LoginUser");
-            }
-            else
-            {
-                return RedirectToAction("WriterEditPassword", "Writer");
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "LoginUser");
+                }
+                else
+                {
+                    foreach (var item in result.Errors)
+                    {
+                        ModelState.AddModelError("", item.Description);
+                    }
+                }
             }
 
+            return View();
 
         }
-
-
     }
 }

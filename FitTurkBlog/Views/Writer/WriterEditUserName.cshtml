@@ -20,6 +20,15 @@
                     <label for="exampleInputName1">Kullanıcı Adı</label>
                     <input type="text" asp-for="@Model.UpUserName" class="form-control">
                 </div>
+
+                <span asp-validation-for="@Model.UpUserName" class="text-danger"></span>
+
+                <div class="text-danger" style="font-size:14px;" asp-validation-summary="ModelOnly"></div>
+                
+                <br />
+                <br />
+                <br />
+
                 <button type="submit" class="btn btn-gradient-primary mr-2">Güncelle</button>
                 <button class="btn btn-light" asp-action ="Index" asp-controller="Dashboard">İptal</button>
             </form>
