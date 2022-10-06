@@ -1,0 +1,29 @@
+﻿@model FitTurkBlog.UI.Models.UpdateUserNameViewModel
+@{
+    ViewData["Title"] = "WriterEditUserName";
+    Layout = "~/Views/Shared/Layouts/WriterLayout.cshtml";
+}
+
+<div class="col-12 grid-margin stretch-card">
+    <a class="btn btn-info" href="/Writer/WriterEditUserName/" style="margin-right:15px">Kullanıcı Adı Güncelle</a>
+    <a class="btn btn-danger" href="/Writer/WriterEditPassword/" style="margin-right:15px">Şifre Güncelle</a>
+    <br />
+</div>
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Yazar Kullanıcı Ayarları</h4>
+            <br />
+            <br />
+            <form class="forms-sample" method="post">
+                <div class="form-group">
+                    <label for="exampleInputName1">Kullanıcı Adı</label>
+                    <input type="text" asp-for="@Model.UpUserName" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-gradient-primary mr-2">Güncelle</button>
+                <button class="btn btn-light" asp-action ="Index" asp-controller="Dashboard">İptal</button>
+            </form>
+        </div>
+    </div>
+</div>
+

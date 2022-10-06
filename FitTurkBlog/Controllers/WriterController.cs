@@ -69,12 +69,6 @@ namespace FitTurkBlog.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> WriterEditProfile()
         {
-            //var userName = User.Identity.Name;
-            //SqlDbContext sqlDbContext = new SqlDbContext();
-            //var userMail = sqlDbContext.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
-            //var ID = sqlDbContext.Users.Where(x => x.Email == userMail).Select(y => y.Id).FirstOrDefault();
-            //var Values = userManager.TGetById(ID);
-            //return View(Values);
             UserUpdateViewModel userModel = new UserUpdateViewModel();
             var values = await _userManager.FindByNameAsync(User.Identity.Name);
             userModel.UpNameSurname = values.NameSurname;
@@ -88,22 +82,6 @@ namespace FitTurkBlog.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> WriterEditProfile(UserUpdateViewModel upUser)
         {
-            //WriterValidator writerValidator = new WriterValidator();
-            //ValidationResult validationResult = writerValidator.Validate(writer);
-            //if(validationResult.IsValid)
-            //{
-            //    writerManager.Update(writer);
-            //    return RedirectToAction("WriterEditProfile", "Writer");
-            //}
-            //else
-            //{
-            //    foreach (var item in validationResult.Errors)
-            //    {
-            //        ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
-            //    }
-            //}
-            //return View();
-
             var values = await _userManager.FindByNameAsync(User.Identity.Name);
             values.NameSurname = upUser.UpNameSurname;
             values.Email = upUser.UpMail;
@@ -123,10 +101,10 @@ namespace FitTurkBlog.UI.Controllers
         [AllowAnonymous]
         [HttpPost]
 
-        public IActionResult WriterAdd (AddProfileImage addProfileImage)
+        public IActionResult WriterAdd(AddProfileImage addProfileImage)
         {
             Writer writer = new Writer();
-            if(addProfileImage.WriterImage != null)
+            if (addProfileImage.WriterImage != null)
             {
                 var extension = Path.GetExtension(addProfileImage.WriterImage.FileName);
                 var newimagename = Guid.NewGuid() + extension;
@@ -142,6 +120,50 @@ namespace FitTurkBlog.UI.Controllers
             writer.WriterAbout = addProfileImage.WriterAbout;
             writerManager.Add(writer);
             return RedirectToAction("WriterEditProfile", "Writer");
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> WriterEditUserName()
+        {
+            UpdateUserNameViewModel userSettingModel = new UpdateUserNameViewModel();
+            var values = await _userManager.FindByNameAsync(User.Identity.Name);
+            userSettingModel.UpUserName = values.UserName;
+            return View(userSettingModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> WriterEditUserName(UpdateUserNameViewModel upUserSetting)
+        {
+            var values = await _userManager.FindByNameAsync(User.Identity.Name);
+            values.UserName = upUserSetting.UpUserName;
+            var result = await _userManager.UpdateAsync(values);
+            return RedirectToAction("Index", "LoginUser");
+        }
+
+        [HttpGet]
+        public IActionResult WriterEditPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> WriterEditPassword(UpdatePasswordViewModel upUserSetting)
+        {
+            var values = await _userManager.FindByNameAsync(User.Identity.Name);
+
+            if (upUserSetting.NewPassword == upUserSetting.NewConfirmPassword)
+            {
+                values.PasswordHash = _userManager.PasswordHasher.HashPassword(values, upUserSetting.NewPassword);
+                var result = await _userManager.UpdateAsync(values);
+                return RedirectToAction("Index", "LoginUser");
+            }
+            else
+            {
+                return RedirectToAction("WriterEditPassword", "Writer");
+            }
+
+
         }
 
 
