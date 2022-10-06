@@ -21,10 +21,11 @@ namespace FitTurkBlog.UI.Controllers
         BlogManager _blogManager = new BlogManager(new EFBlogRepository());
         CategoryManager categoryManager = new CategoryManager(new EFCategoryRepository());
         SqlDbContext sqlDbContext = new SqlDbContext();
+
+        // Bu metot ile ToPagedList ile sayfalama, OrderByDescending ile Bloglari yeniden eskiye gore BlogID lerine gore siralama islemleri yaptim.
         public IActionResult Index(int page=1)
         {
-            //var values = _blogManager.GetBlogListWithCategory();
-            var values = _blogManager.GetBlogListWithCategory().ToPagedList(page, 6);
+            var values = _blogManager.GetBlogListWithCategory().OrderByDescending(x => x.BlogID).ToPagedList(page, 6);
             return View(values);
         }
         public IActionResult BlogReadAll(int id)

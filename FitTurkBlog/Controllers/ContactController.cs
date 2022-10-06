@@ -23,10 +23,8 @@ namespace FitTurkBlog.UI.Controllers
         {
             contact.ContactDate = DateTime.Parse(DateTime.Now.ToShortDateString());
             contact.ContactStatus = true;
-            contact.ContactAdress = "ÜMRANİYE, İSTANBUL, TÜRKİYE";
-            contact.ContactPhone = "+90 216 412 7884";
             contactManager.ContactAdd(contact);
-            return RedirectToAction("Index", "Blog");
+            return RedirectToAction("Index", "Contact");
         }
     }
 }

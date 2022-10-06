@@ -1,4 +1,6 @@
-﻿@{
+﻿@model FitTurkBlog.Entities.Concrete.Writer
+
+@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/Layouts/UserLayout.cshtml";
 }
@@ -11,7 +13,7 @@
         </div>
     </div>
 </section>
-<!--/main-->
+@*<!--/main-->
 <section class="main-content-w3layouts-agileits">
     <div class="container">
         <h3 class="tittle"></h3>
@@ -36,5 +38,43 @@
             </div>
         </div>
     </div>
+</section>
+<!--//main-->*@
+<!--/main-->
+<section class="main-content-w3layouts-agileits">
+    <div class="container">
+        <div class="row inner-sec">
+            <div class="login p-5 bg-light mx-auto mw-100">
+                @using (Html.BeginForm("Index", "Login", FormMethod.Post))
+                {
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label for="validationCustom01">E-Posta Adresi</label>
+                            @Html.TextBoxFor(x => x.WriterMail,new {@class="form-control"})
+                            @Html.ValidationMessageFor(x => x.WriterMail,"",new {@class = "text-danger"})
+                            @*<input type="email" class="form-control" id="validationDefault01" placeholder="" name="WriterMail" required="">*@
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="exampleInputPassword1 mb-3">Şifre</label>
+                            @Html.PasswordFor(x => x.WriterPassword,new {@class="form-control"})
+                            @Html.ValidationMessageFor(x => x.WriterPassword,"",new {@class = "text-danger"})
+                            @*<input type="password" class="form-control" id="validationDefault01" placeholder="" name="WriterPassword" required="">*@
+                        </div>
+                    </div>
+
+                    <div class="form-check mb-2">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Beni Hatırla</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary submit mb-4">Giriş Yap</button>
+                    <p><a href="/Register/Index/"> Hesabınız yok mu?</a></p>
+                }
+            </div>
+        </div>
+    </div>
+    <br />
+
 </section>
 <!--//main-->

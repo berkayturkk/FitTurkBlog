@@ -1,3 +1,5 @@
+using FitTurkBlog.DAL.Context;
+using FitTurkBlog.Entities.Concrete;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -26,6 +28,17 @@ namespace FitTurkBlog
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<SqlDbContext>();
+
+            services.AddIdentity<AppUser, AppRole>(x =>
+            {
+                x.Password.RequireUppercase = false;
+                x.Password.RequireLowercase = false;
+                x.Password.RequireNonAlphanumeric = false;
+            })
+                
+                .AddEntityFrameworkStores<SqlDbContext>();
+
             services.AddControllersWithViews();
 
             services.AddSession();

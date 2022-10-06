@@ -1,0 +1,64 @@
+﻿@using FitTurkBlog.Entities.Concrete
+@model List<Blog>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-4 col-md-6 item">
+            <div class="card">
+                <div class="card-header p-0 position-relative">
+                    <a href="#blog-single">
+                        <img class="card-img-bottom d-block" src="@item.BlogImage" alt="Card image cap">
+                    </a>
+                    <ul class="location-top">
+                        <li class="new">@item.Category.CategoryName</li>
+                    </ul>
+                    <div class="blog-info-middle">
+                        <ul>
+                            <li class="mx-2">
+                                <a href="#"><i class="far fa-thumbs-up"></i> 201 Likes</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="far fa-comment"></i> 15 Comments</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body blog-details">
+                    <a href="/Blog/BlogReadAll/@item.BlogID/" class="blog-desc">@item.BlogTitle</a>
+                    @if (@item.BlogTitle.Length <= 29)
+                    {
+                        <p>@item.BlogContent.Substring(0,@item.BlogContent.Substring(0,200).LastIndexOf(" "))...</p>
+                    }
+                    else @if (@item.BlogTitle.Length < 32 && @item.BlogTitle.Length > 29)
+                    {
+                        <p>@item.BlogContent.Substring(0,@item.BlogContent.Substring(0,175).LastIndexOf(" "))...</p>
+                    }
+                    else @if (@item.BlogTitle.Length >= 32 && @item.BlogTitle.Length < 35)
+                    {
+                        <p>@item.BlogContent.Substring(0,@item.BlogContent.Substring(0,175).LastIndexOf(" "))...</p>
+                    }
+                    else
+                    {
+                        <p>@item.BlogContent.Substring(0,@item.BlogContent.Substring(0,150).LastIndexOf(" "))...</p>
+                    }
+                    <div class="author align-items-center mt-3 mb-1">
+                        <div class="img-circle">
+                            <img src="~/FitTurkBlog/images/team2.jpg" class="mr-3 img-fluid" alt="...">
+                        </div>
+                        <div class="author-info">
+                            <a href="#author">Berkay TÜRK</a> <br> <span class="meta-value">@(((DateTime)item.BlogCreateDate).ToString("dd-MMM-yyyy"))</span>
+                        </div>
+                        <div class="container">
+                            <div class="banner-info-bg">
+                                <a class="btn btn-style btn-primary mt-md-5 mt-4" href="/Blog/BlogReadAll/@item.BlogID/">Devamını Oku</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </div>
+    }
+</div>

@@ -10,7 +10,8 @@ namespace FitTurkBlog.UI.View_Components.Blog
 
         public IViewComponentResult Invoke()
         {
-            var values = blogManager.GetBlogListWithCategory();
+
+            var values = blogManager.BlogGetLast10Blog();
             return View(values);
         }
     }

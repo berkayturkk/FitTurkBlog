@@ -9,10 +9,10 @@
             <div class="col-md-5 blog-grid-left">
                 <a href="/Blog/BlogReadAll/@item.BlogID">
                     <img src="@item.BlogImage" class="img-fluid" alt="">
+                    <br />
                 </a>
             </div>
             <div class="col-md-7 blog-grid-right">
-
                 <h5>
                     <a href="/Blog/BlogReadAll/@item.BlogID">@item.BlogTitle </a>
                 </h5>
@@ -21,7 +21,6 @@
                         <i class="far fa-clock"></i> @(((DateTime)item.BlogCreateDate).ToString("dd-MMM-yyyy"))
                     </span>
                 </div>
-                <br />
             </div>
         }
 

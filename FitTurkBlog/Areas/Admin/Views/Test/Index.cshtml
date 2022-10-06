@@ -1,0 +1,32 @@
+﻿@*@using FitTurkBlog.Entities.Concrete
+@model List<Writer>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/Layouts/AdminLayout.cshtml";
+}
+
+<h1>Yazar İşlemleri</h1>
+
+<table>
+    <tr>
+        <th>Yazar ID</th>
+        <th>Yazar Resmi</th>
+        <th>Yazar Adı</th>
+        <th>Yazar Detay</th>
+        <th>Yazar Sil</th>
+        <th>Yazar Güncelle</th>
+    </tr>
+    <tr>
+        @foreach (var item in Model)
+        {
+            <td>@item.WriterID</td>
+            <td>@item.WriterImage</td>
+            <td>@item.WriterName</td>
+            <td><a href="#" class="btn btn-outline-info">Yazar Detay</a></td>
+            <td><a href="#" class="btn btn-outline-danger">Yazar Sil</a></td>
+            <td><a href="#" class="btn btn-outline-warning">Yazar Güncelle</a></td>
+        }
+    </tr>
+</table>
+*@

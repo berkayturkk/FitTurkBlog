@@ -12,10 +12,8 @@ namespace FitTurkBlog.Entities.Concrete
     {
         [Key]
         public int ContactID { get; set; }
-        public string ContactAdress { get; set; }
         public string ContactUserName { get; set; }
         public string ContactMail { get; set; }
-        public string ContactPhone { get; set; }
         public string ContactSubject { get; set; }
         public string ContactMessage { get; set; }
         public DateTime ContactDate { get; set; }

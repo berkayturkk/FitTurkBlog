@@ -1,9 +1,13 @@
-﻿using FitTurkBlog.UI.Areas.Admin.Models;
+﻿using FitTurkBlog.DAL.Context;
+using FitTurkBlog.Entities.Concrete;
+using FitTurkBlog.UI.Areas.Admin.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace FitTurkBlog.UI.Areas.Admin.Controllers
 {
@@ -43,7 +47,7 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
             writers.Remove(writer);
             return Json(writers);
         }
-        public IActionResult UpdateWriter (WriterClass w)
+        public IActionResult UpdateWriter(WriterClass w)
         {
             var writer = writers.FirstOrDefault(x => x.Id == w.Id);
             writer.Name = w.Name;

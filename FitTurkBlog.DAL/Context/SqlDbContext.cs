@@ -1,4 +1,5 @@
 ﻿using FitTurkBlog.Entities.Concrete;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FitTurkBlog.DAL.Context
 {
-    public class SqlDbContext : DbContext
+    public class SqlDbContext : IdentityDbContext<AppUser,AppRole,int>
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -28,6 +29,8 @@ namespace FitTurkBlog.DAL.Context
                 .WithMany(y => y.WriterReceiver)
                 .HasForeignKey(z => z.MessageReceiverID)
                 .OnDelete(DeleteBehavior.ClientSetNull);
+
+            base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<About> Abouts { get; set; }

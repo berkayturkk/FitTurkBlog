@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32516.85
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitTurkBlog.UI", "FitTurkBlog\FitTurkBlog.UI.csproj", "{7EE7099B-3F37-4AEC-AF2C-B26C06BC5F44}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitTurkBlog.UI", "FitTurkBlog\FitTurkBlog.UI.csproj", "{7EE7099B-3F37-4AEC-AF2C-B26C06BC5F44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitTurkBlog.Entities", "FitTurkBlog.Entities\FitTurkBlog.Entities.csproj", "{3F43ECBF-1DC4-43BC-ABAC-5410A692DA21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitTurkBlog.Entities", "FitTurkBlog.Entities\FitTurkBlog.Entities.csproj", "{3F43ECBF-1DC4-43BC-ABAC-5410A692DA21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitTurkBlog.DAL", "FitTurkBlog.DAL\FitTurkBlog.DAL.csproj", "{4EC0EDBA-1B53-4FF6-A80B-C4CD48A74541}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitTurkBlog.DAL", "FitTurkBlog.DAL\FitTurkBlog.DAL.csproj", "{4EC0EDBA-1B53-4FF6-A80B-C4CD48A74541}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitTurkBlog.BL", "FitTurkBlog.BL\FitTurkBlog.BL.csproj", "{C7DE3620-7C10-4FCD-9921-4A44DD83EA7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitTurkBlog.BL", "FitTurkBlog.BL\FitTurkBlog.BL.csproj", "{C7DE3620-7C10-4FCD-9921-4A44DD83EA7B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

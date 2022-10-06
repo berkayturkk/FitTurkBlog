@@ -6,17 +6,26 @@ using FitTurkBlog.Entities.Concrete;
 using FitTurkBlog.UI.Models;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace FitTurkBlog.UI.Controllers
 {
     public class WriterController : Controller
     {
+        private readonly UserManager<AppUser> _userManager;
 
         WriterManager writerManager = new WriterManager(new EFWriterRepository());
+        UserManager userManager = new UserManager(new EFUserRepository());
+
+        public WriterController(UserManager<AppUser> userManager)
+        {
+            _userManager = userManager;
+        }
 
         [Authorize]
         public IActionResult Index()
@@ -58,33 +67,50 @@ namespace FitTurkBlog.UI.Controllers
         }
 
         [HttpGet]
-        public IActionResult WriterEditProfile()
+        public async Task<IActionResult> WriterEditProfile()
         {
-            var userMail = User.Identity.Name;
-            SqlDbContext sqlDbContext = new SqlDbContext();
-            var writerID = sqlDbContext.Writers.Where(x => x.WriterMail == userMail).Select(y => y.WriterID).FirstOrDefault();
-            var writerValues = writerManager.TGetById(writerID);
-            return View(writerValues);
+            //var userName = User.Identity.Name;
+            //SqlDbContext sqlDbContext = new SqlDbContext();
+            //var userMail = sqlDbContext.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
+            //var ID = sqlDbContext.Users.Where(x => x.Email == userMail).Select(y => y.Id).FirstOrDefault();
+            //var Values = userManager.TGetById(ID);
+            //return View(Values);
+            UserUpdateViewModel userModel = new UserUpdateViewModel();
+            var values = await _userManager.FindByNameAsync(User.Identity.Name);
+            userModel.UpNameSurname = values.NameSurname;
+            userModel.UpMail = values.Email;
+            userModel.UpImageUrl = values.ImageUrl;
+            userModel.UpAbout = values.About;
+
+            return View(userModel);
         }
 
         [HttpPost]
-        public IActionResult WriterEditProfile(Writer writer)
+        public async Task<IActionResult> WriterEditProfile(UserUpdateViewModel upUser)
         {
-            WriterValidator writerValidator = new WriterValidator();
-            ValidationResult validationResult = writerValidator.Validate(writer);
-            if(validationResult.IsValid)
-            {
-                writerManager.Update(writer);
-                return RedirectToAction("WriterEditProfile", "Writer");
-            }
-            else
-            {
-                foreach (var item in validationResult.Errors)
-                {
-                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
-                }
-            }
-            return View();
+            //WriterValidator writerValidator = new WriterValidator();
+            //ValidationResult validationResult = writerValidator.Validate(writer);
+            //if(validationResult.IsValid)
+            //{
+            //    writerManager.Update(writer);
+            //    return RedirectToAction("WriterEditProfile", "Writer");
+            //}
+            //else
+            //{
+            //    foreach (var item in validationResult.Errors)
+            //    {
+            //        ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+            //    }
+            //}
+            //return View();
+
+            var values = await _userManager.FindByNameAsync(User.Identity.Name);
+            values.NameSurname = upUser.UpNameSurname;
+            values.Email = upUser.UpMail;
+            values.ImageUrl = upUser.UpImageUrl;
+            values.About = upUser.UpAbout;
+            var result = await _userManager.UpdateAsync(values);
+            return RedirectToAction("Index", "Dashboard");
         }
 
         [AllowAnonymous]

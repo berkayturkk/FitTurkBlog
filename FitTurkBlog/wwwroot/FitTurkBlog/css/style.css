@@ -183,11 +183,11 @@ ul.social_list1 li a:hover{
 	background: #1da1f2;
 }
 
-.dribble3 {
-	background: #ea4c89;
+.youtube3 {
+	background: #E62117;
 }
-.pin {
-	background: #BD081C;
+.instagram {
+	background: #DD2A7B;
 }
 /*-- top-bar_sub_w3layouts --*/
 
@@ -797,11 +797,11 @@ ul.blog-icons i {
 .widget_social li a.facebook {
     background: #3b5998;
 }
-.widget_social li a.dribble {
-	background: #ea4c89;
+.widget_social li a.youtube {
+	background: #E62117;
 }
-.widget_social li a.pin {
-	background: #BD081C;
+.widget_social li a.instagram {
+	background: #DD2A7B;
 }
 .widget_social li a i {
     font-size: 18px;
