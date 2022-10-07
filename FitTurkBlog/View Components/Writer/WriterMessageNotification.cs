@@ -1,16 +1,21 @@
 ﻿using FitTurkBlog.BL.Concrete;
+using FitTurkBlog.DAL.Context;
 using FitTurkBlog.DAL.EntityFramework;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace FitTurkBlog.UI.View_Components.Writer
 {
     public class WriterMessageNotification : ViewComponent
     {
-        Message2Manager message2Manager = new Message2Manager(new EFMessage2Repository());
+        Message2Manager _message2Manager = new Message2Manager(new EFMessage2Repository());
+        SqlDbContext _sqlDbContext = new SqlDbContext();
         public IViewComponentResult Invoke()
         {
-            int id = 1;
-            var values = message2Manager.GetInBoxListByWriter(id);
+            var userName = User.Identity.Name;
+            var userMail = _sqlDbContext.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
+            var writerID = _sqlDbContext.Users.Where(x => x.Email == userMail).Select(y => y.Id).FirstOrDefault(); ;
+            var values = _message2Manager.GetInBoxListByWriter(writerID);
             return View(values);
         }
     }

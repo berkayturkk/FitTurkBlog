@@ -30,7 +30,12 @@ namespace FitTurkBlog.BL.Concrete
 
         public List<Message2> GetInBoxListByWriter(int id)
         {
-            return _message2DAL.GetListWithMessageByWriter(id);
+            return _message2DAL.GetListInBoxWithMessageByWriter(id);
+        }
+
+        public List<Message2> GetSendBoxListByWriter(int id)
+        {
+            return _message2DAL.GetListSendBoxWithMessageByWriter(id);
         }
 
         public List<Message2> GetList()
@@ -47,5 +52,6 @@ namespace FitTurkBlog.BL.Concrete
         {
             throw new NotImplementedException();
         }
+
     }
 }

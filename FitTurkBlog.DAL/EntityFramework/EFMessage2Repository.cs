@@ -13,12 +13,23 @@ namespace FitTurkBlog.DAL.EntityFramework
 {
     public class EFMessage2Repository : GenericRepository<Message2>, IMessage2DAL
     {
-        public List<Message2> GetListWithMessageByWriter(int id)
+
+        public List<Message2> GetListInBoxWithMessageByWriter(int id)
         {
             using (var sqlDbContext = new SqlDbContext())
             {
                 return sqlDbContext.Messages2.Include(x => x.MessageSenderUser).Where(x => x.MessageReceiverID == id).ToList();
             }
         }
+
+        public List<Message2> GetListSendBoxWithMessageByWriter(int id)
+        {
+            using (var sqlDbContext = new SqlDbContext())
+            {
+                return sqlDbContext.Messages2.Include(x => x.MessageReceiverUser).Where(x => x.MessageSenderID == id).ToList();
+            }
+        }
+
+
     }
 }

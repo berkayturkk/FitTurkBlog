@@ -9,6 +9,8 @@ namespace FitTurkBlog.DAL.Abstract
 {
     public interface IMessage2DAL : IGenericDAL<Message2>
     {
-        List<Message2> GetListWithMessageByWriter(int id);
+        List<Message2> GetListInBoxWithMessageByWriter(int id);
+        List<Message2> GetListSendBoxWithMessageByWriter(int id);
+
     }
 }

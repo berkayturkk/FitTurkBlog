@@ -1,18 +1,17 @@
 ﻿@using FitTurkBlog.Entities.Concrete
 @model List<Message2>
-
 @{
-    ViewData["Title"] = "InBox";
+    ViewData["Title"] = "SendBox";
     Layout = "~/Views/Shared/Layouts/WriterLayout.cshtml";
 }
 
-<h1>Gelen Kutusu</h1>
+<h1>Giden Kutusu</h1>
 <h3>@ViewBag.w</h3>
 <table class="table table-bordered">
     <tr>
         <th>#</th>
         <th>Konu</th>
-        <th>Gönderen</th>
+        <th>Alıcı</th>
         <th>Tarih</th>
         <th>Mesajı Aç</th>
         <th>Mesajı Sil</th>
@@ -22,7 +21,7 @@
         <tr>
             <td>@item.MessageID</td>
             <td>@item.MessageSubject</td>
-            <td>@item.MessageSenderUser.WriterName</td>
+            <td>@item.MessageReceiverUser.WriterName</td>
             <td>@(((DateTime)item.MessageDate).ToString("dd-MMM-yyyy"))</td>
             <td><a href="/Message/MessageDetails/@item.MessageID" class="btn btn-secondary">Mesajı Aç</a></td>
             <td><a href="/Message/DeleteMessage/@item.MessageID" onclick="return confirm('Mesajı silmek istediğine emin misin?');" class="btn btn-danger">Mesajı Sil</a></td>
@@ -31,5 +30,4 @@
 </table>
 <br />
 <a href="/Message/SendMessage/" class="btn btn-dark">Yeni Mesaj Oluştur</a>
-
 

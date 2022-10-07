@@ -10,5 +10,7 @@ namespace FitTurkBlog.BL.Abstract
     public interface IMessage2Service : IGenericService<Message2>
     {
         List<Message2> GetInBoxListByWriter(int id);
+        List<Message2> GetSendBoxListByWriter(int id);
+
     }
 }
