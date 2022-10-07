@@ -37,8 +37,9 @@ namespace FitTurkBlog.UI.Controllers
 
         public IActionResult BlogListByWriter()
         {
-            var userMail = User.Identity.Name;
-            var writerID = sqlDbContext.Writers.Where(x => x.WriterMail == userMail).Select(y => y.WriterID).FirstOrDefault();
+            var userName = User.Identity.Name;
+            var userMail = sqlDbContext.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
+            var writerID = sqlDbContext.Users.Where(x => x.Email == userMail).Select(y => y.Id).FirstOrDefault();
             var values = _blogManager.GetListWithCategoryByWriterBm(writerID);
             return View(values);
         }

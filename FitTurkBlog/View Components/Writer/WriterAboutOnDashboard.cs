@@ -20,11 +20,8 @@ namespace FitTurkBlog.UI.View_Components.Writer
         {
             var userName = User.Identity.Name;
             ViewBag.v = userName;
-            //var userMail = sqlDbContext.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
             var userMail = sqlDbContext.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
-            //var writerID = sqlDbContext.Writers.Where(x => x.WriterMail == userMail).Select(y => y.WriterID).FirstOrDefault();
             var writerID = sqlDbContext.Users.Where(x => x.Email == userMail).Select(y => y.Id).FirstOrDefault();
-            //var values = writerManager.GetWriterById(writerID);
             var values = _userManager.TGetById(writerID);
             return View(values);
         }
