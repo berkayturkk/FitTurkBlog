@@ -23,9 +23,9 @@ namespace FitTurkBlog.UI.Controllers
         SqlDbContext sqlDbContext = new SqlDbContext();
 
         // Bu metot ile ToPagedList ile sayfalama, OrderByDescending ile Bloglari yeniden eskiye gore BlogID lerine gore siralama islemleri yaptim.
-        public IActionResult Index(int page=1)
+        public IActionResult Index(int page = 1)
         {
-            var values = _blogManager.GetBlogListWithCategory().OrderByDescending(x => x.BlogID).ToPagedList(page, 6);
+            var values = _blogManager.GetBlogListWithCategory().Where(x => x.BlogStatus == true).OrderByDescending(x => x.BlogID).ToPagedList(page, 6);
             return View(values);
         }
         public IActionResult BlogReadAll(int id)
@@ -46,27 +46,42 @@ namespace FitTurkBlog.UI.Controllers
 
         [HttpGet]
         public IActionResult BlogAdd()
-        { 
+        {
             List<SelectListItem> categoryValue = (from x in categoryManager.GetList()
                                                   select new SelectListItem
                                                   {
                                                       Text = x.CategoryName,
                                                       Value = x.CategoryID.ToString()
                                                   }).ToList();
+            List<SelectListItem> statusValue = new List<SelectListItem>()
+            {
+                new SelectListItem
+                {
+                    Text = "True",
+                    Value = "true"
+                },
+                new SelectListItem
+                {
+                    Text = "False",
+                    Value = "false"
+                }
+
+            }.ToList();
             ViewBag.cv = categoryValue;
+            ViewBag.sv = statusValue;
             return View();
         }
 
         [HttpPost]
         public IActionResult BlogAdd(Blog blog)
         {
-            var userMail = User.Identity.Name;
-            var writerID = sqlDbContext.Writers.Where(x => x.WriterMail == userMail).Select(y => y.WriterID).FirstOrDefault();
+            var userName = User.Identity.Name;
+            var userMail = sqlDbContext.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
+            var writerID = sqlDbContext.Users.Where(x => x.Email == userMail).Select(y => y.Id).FirstOrDefault();
             BlogValidator blogValidationRules = new BlogValidator();
             ValidationResult results = blogValidationRules.Validate(blog);
             if (results.IsValid)
             {
-                blog.BlogStatus = true;
                 blog.BlogCreateDate = DateTime.Parse(DateTime.Now.ToShortDateString());
                 blog.WriterID = writerID;
                 _blogManager.Add(blog);
@@ -99,20 +114,48 @@ namespace FitTurkBlog.UI.Controllers
                                                       Text = x.CategoryName,
                                                       Value = x.CategoryID.ToString()
                                                   }).ToList();
+            List<SelectListItem> statusValue = new List<SelectListItem>()
+            {
+                new SelectListItem
+                {
+                    Text = "True",
+                    Value = "true"
+                },
+                new SelectListItem
+                {
+                    Text = "False",
+                    Value = "false"
+                }
+
+            }.ToList();
             ViewBag.cv = categoryValue;
+            ViewBag.sv = statusValue;
             return View(blogValue);
         }
 
         [HttpPost]
         public IActionResult EditBlog(Blog blog)
         {
-            var userMail = User.Identity.Name;
-            var writerID = sqlDbContext.Writers.Where(x => x.WriterMail == userMail).Select(y => y.WriterID).FirstOrDefault();
-            blog.WriterID = writerID;
-            blog.BlogCreateDate = DateTime.Parse(DateTime.Now.ToShortDateString());
-            blog.BlogStatus = true;
-            _blogManager.Update(blog);
-            return RedirectToAction("BlogListByWriter");
+            var userName = User.Identity.Name;
+            var userMail = sqlDbContext.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
+            var writerID = sqlDbContext.Users.Where(x => x.Email == userMail).Select(y => y.Id).FirstOrDefault();
+            BlogValidator blogValidationRules = new BlogValidator();
+            ValidationResult results = blogValidationRules.Validate(blog);
+            if (results.IsValid)
+            {
+                blog.BlogCreateDate = DateTime.Parse(DateTime.Now.ToShortDateString());
+                blog.WriterID = writerID;
+                _blogManager.Update(blog);
+                return RedirectToAction("BlogListByWriter", "Blog");
+            }
+            else
+            {
+                foreach (var item in results.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
+            }
+            return View();
         }
 
 
