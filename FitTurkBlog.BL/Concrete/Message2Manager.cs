@@ -20,12 +20,12 @@ namespace FitTurkBlog.BL.Concrete
 
         public void Add(Message2 t)
         {
-            throw new NotImplementedException();
+            _message2DAL.Add(t);
         }
 
         public void Delete(Message2 t)
         {
-            throw new NotImplementedException();
+            _message2DAL.Delete(t);
         }
 
         public List<Message2> GetInBoxListByWriter(int id)

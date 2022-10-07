@@ -23,10 +23,11 @@
             <td>@item.MessageSenderUser.WriterName</td>
             <td>@(((DateTime)item.MessageDate).ToString("dd-MMM-yyyy"))</td>
             <td><a href="/Message/MessageDetails/@item.MessageID" class="btn btn-secondary">Mesajı Aç</a></td>
+            <td><a href="/Message/DeleteMessage/@item.MessageID" onclick="return confirm('Mesajı silmek istediğine emin misin?');" class="btn btn-danger">Mesajı Sil</a></td>
         </tr>
     }
 </table>
 <br />
-<a href="/Blog/BlogAdd" class="btn btn-dark">Yeni Blog Oluştur</a>
+<a href="/Message/SendMessage/" class="btn btn-dark">Yeni Mesaj Oluştur</a>
 
 
