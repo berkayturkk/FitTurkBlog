@@ -27,7 +27,7 @@ namespace FitTurkBlog.UI.Controllers
         {
             comment.CommentDate = DateTime.Parse(DateTime.Now.ToShortDateString());
             comment.CommentStatus = true;
-            comment.BlogID = 3;
+            comment.BlogID = 21;
             commentManager.CommentAdd(comment);
             return RedirectToAction("Index", "Blog");
         }
