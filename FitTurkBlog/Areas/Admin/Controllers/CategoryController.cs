@@ -51,10 +51,42 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult EditCategory(int id)
+        {
+            var value = categoryManager.TGetById(id);
+            return View(value);
+        }
+
+        [HttpPost]
+        public IActionResult EditCategory(Category category)
+        {
+            category.CategoryStatus = true;
+            categoryManager.Update(category);
+            return RedirectToAction("Index");
+        }
+
+
         public IActionResult CategoryDelete(int id)
         {
             var value = categoryManager.TGetById(id);
             categoryManager.Delete(value);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult ChangeStatusCategory(int id)
+        {
+            var value = categoryManager.TGetById(id);
+            if (value.CategoryStatus)
+            {
+                value.CategoryStatus = false;
+            }
+            else
+            {
+                value.CategoryStatus = true;
+            }
+            categoryManager.Update(value);
+
             return RedirectToAction("Index");
         }
     }
