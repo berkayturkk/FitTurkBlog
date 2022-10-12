@@ -1,6 +1,8 @@
 ﻿using FitTurkBlog.DAL.Abstract;
+using FitTurkBlog.DAL.Context;
 using FitTurkBlog.DAL.Repositories;
 using FitTurkBlog.Entities.Concrete;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;

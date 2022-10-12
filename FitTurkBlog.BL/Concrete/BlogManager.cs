@@ -33,7 +33,6 @@ namespace FitTurkBlog.BL.Concrete
             return _blogDAL.GetListAll(x => x.WriterID == id);
         }
 
-
         public List<Blog> GetBlogByID(int id)
         {
             return _blogDAL.GetListAll(x => x.BlogID == id);
@@ -77,5 +76,6 @@ namespace FitTurkBlog.BL.Concrete
         {
             return _blogDAL.GetById(id);
         }
+
     }
 }

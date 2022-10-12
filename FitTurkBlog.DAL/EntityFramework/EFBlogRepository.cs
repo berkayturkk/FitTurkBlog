@@ -29,5 +29,6 @@ namespace FitTurkBlog.DAL.EntityFramework
                 return sqlDbContext.Blogs.Include(x => x.Category).Where(x => x.WriterID == id).ToList();
             }
         }
+
     }
 }

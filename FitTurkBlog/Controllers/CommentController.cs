@@ -10,7 +10,7 @@ namespace FitTurkBlog.UI.Controllers
     [AllowAnonymous]
     public class CommentController : Controller
     {
-        CommentManager commentManager = new CommentManager(new EFCommentRepository());
+        CommentManager _commentManager = new CommentManager(new EFCommentRepository());
         public IActionResult Index()
         {
             return View();
@@ -28,14 +28,14 @@ namespace FitTurkBlog.UI.Controllers
             comment.CommentDate = DateTime.Parse(DateTime.Now.ToShortDateString());
             comment.CommentStatus = true;
             comment.BlogID = 21;
-            commentManager.CommentAdd(comment);
+            _commentManager.CommentAdd(comment);
             return RedirectToAction("Index", "Blog");
         }
 
         public PartialViewResult CommentListByBlog(int id)
         {
 
-            var values = commentManager.CommentGetList(id);
+            var values = _commentManager.CommentGetList(id);
             return PartialView(values);
         }
 

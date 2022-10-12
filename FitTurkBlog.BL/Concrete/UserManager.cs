@@ -30,8 +30,9 @@ namespace FitTurkBlog.BL.Concrete
 
         public List<AppUser> GetList()
         {
-            throw new NotImplementedException();
+            return _userDAL.ListAll();
         }
+
 
         public AppUser TGetById(int id)
         {
@@ -41,6 +42,11 @@ namespace FitTurkBlog.BL.Concrete
         public void Update(AppUser t)
         {
             throw new NotImplementedException();
+        }
+
+        public List<AppUser> GetListAllById(int id)
+        {
+            return _userDAL.GetListAll(x => x.Id == id);
         }
     }
 }

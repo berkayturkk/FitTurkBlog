@@ -50,7 +50,8 @@ namespace FitTurkBlog.BL.Concrete
 
         public void Update(Message2 t)
         {
-            throw new NotImplementedException();
+            _message2DAL.Update(t);
+
         }
 
     }

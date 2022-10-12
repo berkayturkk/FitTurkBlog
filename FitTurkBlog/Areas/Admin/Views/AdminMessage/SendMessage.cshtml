@@ -1,0 +1,77 @@
+﻿@model FitTurkBlog.Entities.Concrete.Message2
+@{
+    ViewData["Title"] = "SendMessage";
+    Layout = "~/Views/Shared/Layouts/AdminLayout.cshtml";
+}
+
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="ibox ">
+                <div class="ibox-content mailbox-content">
+                    <div class="file-manager">
+                        <a class="btn btn-block btn-primary compose-mail" href="/Admin/AdminMessage/SendMessage/">Yeni Mesaj Oluştur</a>
+                        <div class="space-25"></div>
+                        <h5>Klasörler</h5>
+                        <ul class="folder-list m-b-md" style="padding: 0">
+                            <li><a href="/Admin/AdminMessage/Inbox/"> <i class="fa fa-inbox "></i> Gelen Mesajlar <span class="label label-warning float-right">@ViewBag.gm</span> </a></li>
+                            <li><a href="/Admin/AdminMessage/Sendbox/"> <i class="fa fa-envelope-o"></i> Giden Mesajlar</a></li>
+                            <li><a href="mailbox.html"> <i class="fa fa-certificate"></i> Önemli Mesajlar</a></li>
+                            <li><a href="mailbox.html"> <i class="fa fa-file-text-o"></i> Taslaklar <span class="label label-danger float-right">2</span></a></li>
+                            <li><a href="mailbox.html"> <i class="fa fa-trash-o"></i> Çöp Kutusu</a></li>
+                        </ul>
+                        <h5>Kategoriler</h5>
+                        <ul class="category-list" style="padding: 0">
+                            <li><a href="#"> <i class="fa fa-circle text-navy"></i> İş </a></li>
+                            <li><a href="#"> <i class="fa fa-circle text-danger"></i> Dokümanlar</a></li>
+                            <li><a href="#"> <i class="fa fa-circle text-primary"></i> Sosyal</a></li>
+                            <li><a href="#"> <i class="fa fa-circle text-info"></i> Tanıtımlar</a></li>
+                            <li><a href="#"> <i class="fa fa-circle text-warning"></i> Talepler</a></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9 animated fadeInRight">
+            <div class="mail-box-header">
+                <h2>
+                    <strong>Yeni Mesaj Oluştur</strong>
+                </h2>
+            </div>
+            <div class="mail-box">
+
+
+                <div class="mail-body">
+
+                    @using (Html.BeginForm("SendMessage", "AdminMessage", FormMethod.Post))
+                    {
+                        @Html.Label("Mesajı Alan")
+                        @Html.DropDownListFor(x => x.MessageReceiverID,(List<SelectListItem>)ViewBag.mv,new{ @class = "form-control"})
+                        <br />
+                        @Html.Label("Mesaj Konusu")
+                        @Html.TextBoxFor(x => x.MessageSubject, new{ @class = "form-control"})
+                        <br />
+                        @Html.Label("Mesaj İçeriği")
+                        @Html.TextAreaFor(x => x.MessageDetails, new{ @class = "form-control", rows= 10, columns= 20 })
+                        <br />
+                        <br />
+                        <div class="mail-body text-right tooltip-demo">
+                            <button class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Gönder"><i class="fa fa-reply"></i> Gönder</button>
+                            <a href="mailbox.html" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Taslak Klasörüne Taşı"><i class="fa fa-pencil"></i> Taslak</a>
+                            <a href="/Admin/AdminMessage/Inbox/" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="İptal Et"><i class="fa fa-times"></i> İptal Et</a>
+                        </div>
+                    }
+                </div>
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
