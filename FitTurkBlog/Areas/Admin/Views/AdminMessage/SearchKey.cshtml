@@ -1,7 +1,7 @@
 ﻿@using FitTurkBlog.Entities.Concrete
 @model List<Message2>
 @{
-    ViewData["Title"] = "GetListTrash";
+    ViewData["Title"] = "SearchKey";
     Layout = "~/Views/Shared/Layouts/AdminLayout.cshtml";
 }
 
@@ -16,7 +16,7 @@
                             <div class="space-25"></div>
                             <h5>Klasörler</h5>
                             <ul class="folder-list m-b-md" style="padding: 0">
-                                <li><a href="/Admin/AdminMessage/Inbox/"> <i class="fa fa-inbox "></i> Gelen Mesajlar <span class="label label-warning float-right">@ViewBag.gm</span> </a></li>
+                                   <li><a href="/Admin/AdminMessage/Inbox/"> <i class="fa fa-inbox "></i> Gelen Mesajlar <span class="label label-warning float-right">@ViewBag.gm</span> </a></li>
                                 <li><a href="/Admin/AdminMessage/Sendbox/"> <i class="fa fa-paper-plane"></i> Giden Mesajlar</a></li>
                                 <li><a href="/Admin/AdminMessage/GetListImportant/"> <i class="fa fa-certificate"></i> Önemli Mesajlar</a></li>
                                 <li><a href="/Admin/AdminMessage/SearchKey/"> <i class="fa fa-envelope-o"></i> Tüm Mesajlar</a></li>
@@ -36,18 +36,19 @@
                 </div>
             </div>
             <div class="col-lg-9 animated fadeInRight">
+
                 <div class="mail-box-header">
 
-                    <form asp-action="GetListTrash" asp-controller="AdminMessage" method="get" class="float-right mail-search">
+                    <form asp-action="SearchKey" asp-controller="AdminMessage" method="get" class="float-right mail-search">
                         <div class="input-group">
                             <input type="text" name="key" id="key" placeholder="Postalarda arama yapın" class="form-control form-control-sm" />
                             <div class="input-group-btn">
-                                <input type="submit" value="Ara" class="btn btn-sm btn-primary"/>
+                                <input type="submit" value="Ara" class="btn btn-sm btn-primary" />
                             </div>
                         </div>
                     </form>
                     <h2>
-                        <strong>Çöp Kutusu</strong>
+                        <strong>Tüm Mesajlar</strong>
                     </h2>
                     <div class="mail-tools tooltip-demo m-t-md">
                         <div class="btn-group float-right">
@@ -55,8 +56,7 @@
                             <button class="btn btn-white btn-sm"><i class="fa fa-arrow-right"></i></button>
 
                         </div>
-                        <a href="/Admin/AdminMessage/GetListTrash/" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left" title="Yenile"><i class="fa fa-refresh"></i> Yenile</a>
-
+                        <a href="/Admin/AdminMessage/SearchKey/" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left" title="Yenile"><i class="fa fa-refresh"></i> Yenile</a>
                     </div>
                 </div>
                 <div class="mail-box">
@@ -110,7 +110,7 @@
                                                 {
                                                     <i class="fa fa-star"></i>
                                                 }
-                                                else
+                                                else if (item.IsImportant == false)
                                                 {
                                                     <i class="fa fa-star-o"></i>
                                                 }
@@ -131,8 +131,8 @@
 
 
                 </div>
+
             </div>
         </div>
     </div>
 </div>
-

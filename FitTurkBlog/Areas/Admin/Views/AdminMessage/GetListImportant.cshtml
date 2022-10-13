@@ -17,8 +17,9 @@
                             <h5>Klasörler</h5>
                             <ul class="folder-list m-b-md" style="padding: 0">
                                 <li><a href="/Admin/AdminMessage/Inbox/"> <i class="fa fa-inbox "></i> Gelen Mesajlar <span class="label label-warning float-right">@ViewBag.gm</span> </a></li>
-                                <li><a href="/Admin/AdminMessage/Sendbox/"> <i class="fa fa-envelope-o"></i> Giden Mesajlar</a></li>
+                                <li><a href="/Admin/AdminMessage/Sendbox/"> <i class="fa fa-paper-plane"></i> Giden Mesajlar</a></li>
                                 <li><a href="/Admin/AdminMessage/GetListImportant/"> <i class="fa fa-certificate"></i> Önemli Mesajlar</a></li>
+                                <li><a href="/Admin/AdminMessage/SearchKey/"> <i class="fa fa-envelope-o"></i> Tüm Mesajlar</a></li>
                                 <li><a href="/Admin/AdminMessage/GetListTrash/"> <i class="fa fa-trash-o"></i> Çöp Kutusu</a></li>
                             </ul>
                             <h5>Kategoriler</h5>
@@ -37,13 +38,11 @@
             <div class="col-lg-9 animated fadeInRight">
                 <div class="mail-box-header">
 
-                    <form method="get" action="index.html" class="float-right mail-search">
+                     <form asp-action="GetListImportant" asp-controller="AdminMessage" method="get" class="float-right mail-search">
                         <div class="input-group">
-                            <input type="text" class="form-control form-control-sm" name="search" placeholder="E-posta ara">
+                            <input type="text" name="key" id="key" placeholder="Postalarda arama yapın" class="form-control form-control-sm" />
                             <div class="input-group-btn">
-                                <button type="submit" class="btn btn-sm btn-primary">
-                                    Ara
-                                </button>
+                                <input type="submit" value="Ara" class="btn btn-sm btn-primary"/>
                             </div>
                         </div>
                     </form>

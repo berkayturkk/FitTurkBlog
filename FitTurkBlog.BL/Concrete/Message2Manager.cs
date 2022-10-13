@@ -63,5 +63,34 @@ namespace FitTurkBlog.BL.Concrete
         {
             return _message2DAL.GetListImportantBoxWithMessageByWriter();
         }
+
+        public List<Message2> GetListAllByKey(string key)
+        {
+            return _message2DAL.GetListByKey(key);
+        }
+
+        public List<Message2> GetListAllMessage()
+        {
+            return _message2DAL.GetListAllMessage();
+        }
+
+        public List<Message2> GetInBoxListByKey(int id, string key)
+        {
+            return _message2DAL.GetListInBoxWithMessageByKey(id, key);  
+        }
+
+        public List<Message2> GetSendBoxListByKey(int id, string key)
+        {
+            return _message2DAL.GetListSendBoxWithMessageByKey(id, key);
+        }
+        public List<Message2> GetTrashBoxListByKey(string key)
+        {
+            return _message2DAL.GetListTrashBoxWithMessageByKey(key);
+        }
+
+        public List<Message2> GetImportantBoxListByKey(string key)
+        {
+            return _message2DAL.GetListImportantBoxWithMessageByKey(key);
+        }
     }
 }

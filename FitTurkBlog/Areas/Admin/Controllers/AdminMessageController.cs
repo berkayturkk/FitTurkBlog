@@ -24,26 +24,43 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
     {
         Message2Manager _message2Manager = new Message2Manager(new EFMessage2Repository());
         SqlDbContext _sqlDbContext = new SqlDbContext();
-        public IActionResult Inbox()
+        public IActionResult Inbox(string key)
         {
             var userName = User.Identity.Name;
             var userMail = _sqlDbContext.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
             var writerID = _sqlDbContext.Users.Where(x => x.Email == userMail).Select(y => y.Id).FirstOrDefault();
-            var values = _message2Manager.GetInBoxListByWriter(writerID).OrderByDescending(x => x.MessageID).ToList();
             var values2 = _message2Manager.GetInBoxListByWriter(writerID).Where(x => x.MessageStatus == true).ToList();
             ViewBag.gm = values2.Count();
-            return View(values);
+
+            if (key != null)
+            {
+                var values = _message2Manager.GetInBoxListByKey(writerID, key).OrderByDescending(x => x.MessageID).ToList();
+                return View(values);
+            }
+            else
+            {
+                var values = _message2Manager.GetInBoxListByWriter(writerID).OrderByDescending(x => x.MessageID).ToList();
+                return View(values);
+            }
         }
 
-        public IActionResult SendBox()
+        public IActionResult SendBox(string key)
         {
             var userName = User.Identity.Name;
             var userMail = _sqlDbContext.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
             var writerID = _sqlDbContext.Users.Where(x => x.Email == userMail).Select(y => y.Id).FirstOrDefault();
-            var values = _message2Manager.GetSendBoxListByWriter(writerID).OrderByDescending(x => x.MessageID).ToList();
             var values2 = _message2Manager.GetInBoxListByWriter(writerID).Where(x => x.MessageStatus == true).ToList();
             ViewBag.gm = values2.Count();
-            return View(values);
+            if (key != null)
+            {
+                var values = _message2Manager.GetSendBoxListByKey(writerID, key).OrderByDescending(x => x.MessageID).ToList();
+                return View(values);
+            }
+            else
+            {
+                var values = _message2Manager.GetSendBoxListByWriter(writerID).OrderByDescending(x => x.MessageID).ToList();
+                return View(values);
+            }
         }
 
         public async Task<List<AppUser>> GetUsersAsync()
@@ -89,6 +106,26 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
             return RedirectToAction("SendMessage", "AdminMessage");
         }
 
+        public IActionResult SearchKey(string key)
+        {
+            var userName = User.Identity.Name;
+            var userMail = _sqlDbContext.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
+            var writerID = _sqlDbContext.Users.Where(x => x.Email == userMail).Select(y => y.Id).FirstOrDefault();
+            var values2 = _message2Manager.GetInBoxListByWriter(writerID).Where(x => x.MessageStatus == true).ToList();
+            ViewBag.gm = values2.Count();
+            if (key != null)
+            {
+                var values = _message2Manager.GetListAllByKey(key).OrderByDescending(x => x.MessageID).ToList();
+                return View(values);
+            }
+            else
+            {
+                var values = _message2Manager.GetListAllMessage();
+                return View(values);
+            }
+
+        }
+
         public IActionResult InboxMessageDetail(int id)
         {
             var userName = User.Identity.Name;
@@ -107,6 +144,8 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
             var userMail = _sqlDbContext.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
             var writerID = _sqlDbContext.Users.Where(x => x.Email == userMail).Select(y => y.Id).FirstOrDefault();
             var value = _message2Manager.TGetById(id);
+            value.MessageStatus = false;
+            _message2Manager.Update(value);
             var values2 = _message2Manager.GetInBoxListByWriter(writerID).Where(x => x.MessageStatus == true).ToList();
             ViewBag.gm = values2.Count();
 
@@ -136,15 +175,23 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
             return RedirectToAction("GetListTrash", "AdminMessage");
         }
 
-        public IActionResult GetListTrash()
+        public IActionResult GetListTrash(string key)
         {
             var userName = User.Identity.Name;
             var userMail = _sqlDbContext.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
             var writerID = _sqlDbContext.Users.Where(x => x.Email == userMail).Select(y => y.Id).FirstOrDefault();
-            var values = _message2Manager.GetTrashBoxListByWriter().OrderByDescending(x => x.MessageID).ToList();
             var values2 = _message2Manager.GetInBoxListByWriter(writerID).Where(x => x.MessageStatus == true).ToList();
             ViewBag.gm = values2.Count();
-            return View(values);
+            if (key != null)
+            {
+                var values = _message2Manager.GetTrashBoxListByKey(key).OrderByDescending(x => x.MessageID).ToList();
+                return View(values);
+            }
+            else
+            {
+                var values = _message2Manager.GetTrashBoxListByWriter().OrderByDescending(x => x.MessageID).ToList();
+                return View(values);
+            }
         }
 
         public IActionResult IsImportant(int id)
@@ -174,15 +221,23 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
             return RedirectToAction("GetListImportant", "AdminMessage");
         }
 
-        public IActionResult GetListImportant()
+        public IActionResult GetListImportant(string key)
         {
             var userName = User.Identity.Name;
             var userMail = _sqlDbContext.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
             var writerID = _sqlDbContext.Users.Where(x => x.Email == userMail).Select(y => y.Id).FirstOrDefault();
-            var values = _message2Manager.GetImportantBoxListByWriter().OrderByDescending(x => x.MessageID).ToList();
             var values2 = _message2Manager.GetInBoxListByWriter(writerID).Where(x => x.MessageStatus == true).ToList();
             ViewBag.gm = values2.Count();
-            return View(values);
+            if (key != null)
+            {
+                var values = _message2Manager.GetImportantBoxListByKey(key).OrderByDescending(x => x.MessageID).ToList();
+                return View(values);
+            }
+            else
+            {
+                var values = _message2Manager.GetImportantBoxListByWriter().OrderByDescending(x => x.MessageID).ToList();
+                return View(values);
+            }
         }
 
         public IActionResult IsRead(int id)
