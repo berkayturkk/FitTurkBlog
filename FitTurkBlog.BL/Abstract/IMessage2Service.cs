@@ -11,6 +11,8 @@ namespace FitTurkBlog.BL.Abstract
     {
         List<Message2> GetInBoxListByWriter(int id);
         List<Message2> GetSendBoxListByWriter(int id);
+        List<Message2> GetTrashBoxListByWriter();
+        List<Message2> GetImportantBoxListByWriter();
 
     }
 }

@@ -78,6 +78,8 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
             message2.MessageSenderID = writerID;
             message2.MessageReceiverID = 5;
             message2.MessageStatus = true;
+            message2.IsDeleted = false;
+            message2.IsImportant = false;
             message2.MessageDate = Convert.ToDateTime(DateTime.Now);
             if (message2.MessageSubject != null && message2.MessageDetails != null)
             {
@@ -87,14 +89,16 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
             return RedirectToAction("SendMessage", "AdminMessage");
         }
 
-        public IActionResult SearchMail(string mail)
+        public IActionResult InboxMessageDetail(int id)
         {
             var userName = User.Identity.Name;
             var userMail = _sqlDbContext.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
             var writerID = _sqlDbContext.Users.Where(x => x.Email == userMail).Select(y => y.Id).FirstOrDefault();
-            var values = _message2Manager.GetInBoxListByWriter(writerID).Where(x => x.MessageStatus == true).ToList();
+            var value = _message2Manager.TGetById(id);
+            var values2 = _message2Manager.GetInBoxListByWriter(writerID).Where(x => x.MessageStatus == true).ToList();
+            ViewBag.gm = values2.Count();
 
-            return View();
+            return View(value);
         }
 
         public IActionResult MessageDetail(int id)
@@ -103,18 +107,105 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
             var userMail = _sqlDbContext.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
             var writerID = _sqlDbContext.Users.Where(x => x.Email == userMail).Select(y => y.Id).FirstOrDefault();
             var value = _message2Manager.TGetById(id);
-
-            if (value.MessageStatus == true)
-            {
-                value.MessageStatus = false;
-                _message2Manager.Update(value);
-            }
-            
-
             var values2 = _message2Manager.GetInBoxListByWriter(writerID).Where(x => x.MessageStatus == true).ToList();
             ViewBag.gm = values2.Count();
 
             return View(value);
+        }
+
+        public IActionResult MoveToTrash(int id)
+        {
+            var messageValue = _message2Manager.TGetById(id);
+            if (messageValue.IsDeleted == false)
+            {
+                if (messageValue.IsImportant == true)
+                {
+                    messageValue.IsDeleted = true;
+                    messageValue.IsImportant = false;
+                    messageValue.MessageStatus = false;
+                    _message2Manager.Update(messageValue);
+                }
+                else
+                {
+                    messageValue.IsDeleted = true;
+                    messageValue.MessageStatus = false;
+                    _message2Manager.Update(messageValue);
+                }
+
+            }
+            return RedirectToAction("GetListTrash", "AdminMessage");
+        }
+
+        public IActionResult GetListTrash()
+        {
+            var userName = User.Identity.Name;
+            var userMail = _sqlDbContext.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
+            var writerID = _sqlDbContext.Users.Where(x => x.Email == userMail).Select(y => y.Id).FirstOrDefault();
+            var values = _message2Manager.GetTrashBoxListByWriter().OrderByDescending(x => x.MessageID).ToList();
+            var values2 = _message2Manager.GetInBoxListByWriter(writerID).Where(x => x.MessageStatus == true).ToList();
+            ViewBag.gm = values2.Count();
+            return View(values);
+        }
+
+        public IActionResult IsImportant(int id)
+        {
+            var value = _message2Manager.TGetById(id);
+            if (value.IsImportant == false)
+            {
+                if (value.IsDeleted == true)
+                {
+                    value.IsImportant = true;
+                    value.MessageStatus = false;
+                    value.IsDeleted = false;
+                    _message2Manager.Update(value);
+                }
+                else
+                {
+                    value.IsImportant = true;
+                    value.MessageStatus = false;
+                    _message2Manager.Update(value);
+                }
+            }
+            else
+            {
+                value.IsImportant = false;
+                _message2Manager.Update(value);
+            }
+            return RedirectToAction("GetListImportant", "AdminMessage");
+        }
+
+        public IActionResult GetListImportant()
+        {
+            var userName = User.Identity.Name;
+            var userMail = _sqlDbContext.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
+            var writerID = _sqlDbContext.Users.Where(x => x.Email == userMail).Select(y => y.Id).FirstOrDefault();
+            var values = _message2Manager.GetImportantBoxListByWriter().OrderByDescending(x => x.MessageID).ToList();
+            var values2 = _message2Manager.GetInBoxListByWriter(writerID).Where(x => x.MessageStatus == true).ToList();
+            ViewBag.gm = values2.Count();
+            return View(values);
+        }
+
+        public IActionResult IsRead(int id)
+        {
+            var value = _message2Manager.TGetById(id);
+            if (value.MessageStatus == false)
+            {
+                value.MessageStatus = true;
+                _message2Manager.Update(value);
+            }
+            else
+            {
+                value.MessageStatus = false;
+                _message2Manager.Update(value);
+            }
+            return RedirectToAction("Inbox", "AdminMessage");
+        }
+
+        public IActionResult DeleteMessage(int id)
+        {
+            var messageValue = _message2Manager.TGetById(id);
+            _message2Manager.Delete(messageValue);
+            return RedirectToAction("Inbox", "AdminMessage");
         }
 
     }

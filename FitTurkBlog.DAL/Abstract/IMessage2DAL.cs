@@ -11,6 +11,8 @@ namespace FitTurkBlog.DAL.Abstract
     {
         List<Message2> GetListInBoxWithMessageByWriter(int id);
         List<Message2> GetListSendBoxWithMessageByWriter(int id);
+        List<Message2> GetListTrashBoxWithMessageByWriter();
+        List<Message2> GetListImportantBoxWithMessageByWriter();
 
     }
 }

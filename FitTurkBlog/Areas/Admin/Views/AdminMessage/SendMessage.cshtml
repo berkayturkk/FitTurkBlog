@@ -15,10 +15,9 @@
                         <h5>Klasörler</h5>
                         <ul class="folder-list m-b-md" style="padding: 0">
                             <li><a href="/Admin/AdminMessage/Inbox/"> <i class="fa fa-inbox "></i> Gelen Mesajlar <span class="label label-warning float-right">@ViewBag.gm</span> </a></li>
-                            <li><a href="/Admin/AdminMessage/Sendbox/"> <i class="fa fa-envelope-o"></i> Giden Mesajlar</a></li>
-                            <li><a href="mailbox.html"> <i class="fa fa-certificate"></i> Önemli Mesajlar</a></li>
-                            <li><a href="mailbox.html"> <i class="fa fa-file-text-o"></i> Taslaklar <span class="label label-danger float-right">2</span></a></li>
-                            <li><a href="mailbox.html"> <i class="fa fa-trash-o"></i> Çöp Kutusu</a></li>
+                                <li><a href="/Admin/AdminMessage/Sendbox/"> <i class="fa fa-envelope-o"></i> Giden Mesajlar</a></li>
+                                <li><a href="/Admin/AdminMessage/GetListImportant/"> <i class="fa fa-certificate"></i> Önemli Mesajlar</a></li>
+                                <li><a href="/Admin/AdminMessage/GetListTrash/"> <i class="fa fa-trash-o"></i> Çöp Kutusu</a></li>
                         </ul>
                         <h5>Kategoriler</h5>
                         <ul class="category-list" style="padding: 0">
@@ -58,7 +57,6 @@
                         <br />
                         <div class="mail-body text-right tooltip-demo">
                             <button class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Gönder"><i class="fa fa-reply"></i> Gönder</button>
-                            <a href="mailbox.html" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Taslak Klasörüne Taşı"><i class="fa fa-pencil"></i> Taslak</a>
                             <a href="/Admin/AdminMessage/Inbox/" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="İptal Et"><i class="fa fa-times"></i> İptal Et</a>
                         </div>
                     }

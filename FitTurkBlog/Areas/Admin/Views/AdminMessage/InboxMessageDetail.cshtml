@@ -1,6 +1,6 @@
 ﻿@model FitTurkBlog.Entities.Concrete.Message2
 @{
-    ViewData["Title"] = "MessageDetail";
+    ViewData["Title"] = "InboxMessageDetail";
     Layout = "~/Views/Shared/Layouts/AdminLayout.cshtml";
 }
 
@@ -38,7 +38,8 @@
                     <strong>Mesaj Detayı</strong>
                 </h2>
                 <br />
-                <a href="/Admin/AdminMessage/MessageDetail/@Model.MessageID/" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left" title="Yenile"><i class="fa fa-refresh"></i> Yenile</a>
+                <a href="/Admin/AdminMessage/InboxMessageDetail/@Model.MessageID/" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left" title="Yenile"><i class="fa fa-refresh"></i> Yenile</a>
+                <a href="/Admin/AdminMessage/IsRead/@Model.MessageID/" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Okundu Olarak İşaretle"><i class="fa fa-eye"></i> </a>
                 <a href="/Admin/AdminMessage/IsImportant/@Model.MessageID/" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Önemli Olarak İşaretle" id="btnImportant"><i class="fa fa-exclamation"></i></a>
                 <a href="/Admin/AdminMessage/MoveToTrash/@Model.MessageID/" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Çöp Kutusuna Taşı"><i class="fa fa-trash-o"></i></a>
 
@@ -71,4 +72,6 @@
         </div>
     </div>
 </div>
+
+
 

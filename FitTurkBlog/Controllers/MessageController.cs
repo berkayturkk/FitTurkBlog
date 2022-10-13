@@ -66,7 +66,7 @@ namespace FitTurkBlog.UI.Controllers
             var writerID = _sqlDbContext.Users.Where(x => x.Email == userMail).Select(y => y.Id).FirstOrDefault();
             
             message2.MessageSenderID = writerID;
-            message2.MessageReceiverID = 5;
+            message2.MessageReceiverID = 1;
             message2.MessageStatus = true;
             message2.MessageDate = Convert.ToDateTime(DateTime.Now);
             if (message2.MessageSubject != null && message2.MessageDetails != null)

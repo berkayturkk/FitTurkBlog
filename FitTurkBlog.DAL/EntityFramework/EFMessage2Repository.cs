@@ -18,7 +18,7 @@ namespace FitTurkBlog.DAL.EntityFramework
         {
             using (var sqlDbContext = new SqlDbContext())
             {
-                return sqlDbContext.Messages2.Include(x => x.MessageSenderUser).Where(x => x.MessageReceiverID == id).ToList();
+                return sqlDbContext.Messages2.Include(x => x.MessageSenderUser).Include(x => x.MessageReceiverUser).Where(x => x.MessageReceiverID == id && x.IsDeleted == false && x.IsImportant == false).ToList();
             }
         }
 
@@ -26,10 +26,25 @@ namespace FitTurkBlog.DAL.EntityFramework
         {
             using (var sqlDbContext = new SqlDbContext())
             {
-                return sqlDbContext.Messages2.Include(x => x.MessageReceiverUser).Where(x => x.MessageSenderID == id).ToList();
+                return sqlDbContext.Messages2.Include(x => x.MessageSenderUser).Include(x => x.MessageReceiverUser).Where(x => x.MessageSenderID == id && x.IsDeleted == false && x.IsImportant == false).ToList();
             }
         }
 
+        public List<Message2> GetListTrashBoxWithMessageByWriter()
+        {
+            using (var sqlDbContext = new SqlDbContext())
+            {
+                return sqlDbContext.Messages2.Include(x => x.MessageSenderUser).Include(y => y.MessageReceiverUser).Where(z => z.IsDeleted == true && z.IsImportant == false).ToList();
+            }
+        }
+        public List<Message2> GetListImportantBoxWithMessageByWriter()
+        {
+            using (var sqlDbContext = new SqlDbContext())
+            {
+                return sqlDbContext.Messages2.Include(x => x.MessageSenderUser).Include(y => y.MessageReceiverUser).Where(z => z.IsImportant == true).ToList();
+            }
+        }
 
+        
     }
 }

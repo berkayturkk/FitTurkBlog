@@ -54,5 +54,14 @@ namespace FitTurkBlog.BL.Concrete
 
         }
 
+        public List<Message2> GetTrashBoxListByWriter()
+        {
+            return _message2DAL.GetListTrashBoxWithMessageByWriter();
+        }
+
+        public List<Message2> GetImportantBoxListByWriter()
+        {
+            return _message2DAL.GetListImportantBoxWithMessageByWriter();
+        }
     }
 }
