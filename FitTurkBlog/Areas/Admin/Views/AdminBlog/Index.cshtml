@@ -1,0 +1,84 @@
+﻿@using FitTurkBlog.Entities.Concrete
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common
+@model IPagedList<Blog>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/Layouts/AdminLayout.cshtml";
+}
+
+<h1>&nbsp <strong>Bloglar</strong></h1>
+<br />
+<div id="wrapper">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-3">
+                    <div class="ibox">
+                        <div class="ibox-content product-box">
+                            <div>
+                                <img src="@item.BlogImage" style="width: 100%;" />
+                            </div>
+                            <div class="product-desc">
+                                <span class="product-price">
+                                    @item.Category.CategoryName
+                                </span>
+                                <div>
+                                    <small class="text-muted" style="float:left">@item.BlogWriter.WriterName</small>
+                                    <small class="text-muted" style="float:right">@(((DateTime)item.BlogCreateDate).ToString("dd-MMM-yyyy"))</small>
+                                </div>
+                                <br>
+                                <a href="/Blog/BlogReadAll/@item.BlogID/" class="product-name">@item.BlogTitle</a>
+                                <div class="small m-t-xs">
+                                    @if (@item.BlogTitle.Length <= 29)
+                                    {
+                                        <p>@item.BlogContent.Substring(0,@item.BlogContent.Substring(0,200).LastIndexOf(" "))...</p>
+                                    }
+                                    else @if (@item.BlogTitle.Length < 32 && @item.BlogTitle.Length > 29)
+                                    {
+                                        <p>@item.BlogContent.Substring(0,@item.BlogContent.Substring(0,175).LastIndexOf(" "))...</p>
+                                    }
+                                    else @if (@item.BlogTitle.Length >= 32 && @item.BlogTitle.Length < 35)
+                                    {
+                                        <p>@item.BlogContent.Substring(0,@item.BlogContent.Substring(0,175).LastIndexOf(" "))...</p>
+                                    }
+                                    else
+                                    {
+                                        <p>@item.BlogContent.Substring(0,@item.BlogContent.Substring(0,150).LastIndexOf(" "))...</p>
+                                    }
+                                </div>
+                                <div class="m-t text-righ">
+
+                                    <a href="/Blog/BlogReadAll/@item.BlogID/" class="btn btn-xs btn-outline btn-primary">Detay <i class="fa fa-long-arrow-right"></i> </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+        <!-- Paging -->
+
+        <div class="pull-left">
+            @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index",
+            new
+            {
+            page
+
+            }),
+            new PagedListRenderOptions
+            {
+            LiElementClasses = new string[] { "page-item" },
+            PageClasses = new string[] { "page-link" },
+            Display = PagedListDisplayMode.IfNeeded
+
+            })
+        </div>
+    </div>
+</div>
+
+
+

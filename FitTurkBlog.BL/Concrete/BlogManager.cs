@@ -23,6 +23,11 @@ namespace FitTurkBlog.BL.Concrete
             return _blogDAL.GetListWithCategory();
         }
 
+        public List<Blog> GetBlogListWithCategoryWriter()
+        {
+            return _blogDAL.GetListWithCategoryWriter();
+        }
+
         public List<Blog> GetListWithCategoryByWriterBm(int id)
         {
             return _blogDAL.GetListWithCategoryByWriter(id);

@@ -10,6 +10,7 @@ namespace FitTurkBlog.BL.Abstract
     public interface IBlogService:IGenericService<Blog>
     {
         List<Blog> GetBlogListWithCategory();
+        List<Blog> GetBlogListWithCategoryWriter();
         List<Blog> GetBlogListByWriter(int id);
 
     }

@@ -10,6 +10,7 @@ namespace FitTurkBlog.DAL.Abstract
     public interface IBlogDAL : IGenericDAL<Blog>
     {
         List<Blog> GetListWithCategory();
+        List<Blog> GetListWithCategoryWriter();
         List<Blog> GetListWithCategoryByWriter(int id);
 
     }
