@@ -5,10 +5,10 @@
             <input class="form-control" type="text" name="CommentUserName" placeholder="Ad-Soyad" required="">
             <input class="form-control" type="text" name="CommentTitle" placeholder="Yorum Başlığı" required="">
             <select class="form-control" name="BlogScore" required="" style="margin-bottom:10.8px">
-                <option disabled="disabled" selected value="0">Blog için puan veriniz</option>
+                <option disabled="disabled" selected value="0" class="form-control">Blog için puan veriniz</option>
                 @for (var i = 1; i <= 10; i++)
                 {
-                    <option value="@i">@i</option>
+                    <option value="@i" class="form-control">@i</option>
                 }
             </select>
             <textarea class="form-control" name="CommentContent" placeholder="Yorum Alanı..." required=""></textarea>

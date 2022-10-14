@@ -3,7 +3,10 @@ using FitTurkBlog.DAL.EntityFramework;
 using FitTurkBlog.Entities.Concrete;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace FitTurkBlog.UI.Controllers
 {

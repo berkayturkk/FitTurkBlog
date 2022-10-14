@@ -1,0 +1,31 @@
+﻿@model FitTurkBlog.Entities.Concrete.Comment
+@{
+    ViewData["Title"] = "CommentDetails";
+    Layout = "~/Views/Shared/Layouts/AdminLayout.cshtml";
+}
+
+<h1>Yorum Detay Sayfası</h1>
+<br />
+<br />
+@Html.Label("Yorum ID")
+@Html.TextBoxFor(x => x.CommentID, new{ @class = "form-control",@disabled="disabled"})
+<br />
+@Html.Label("Yorumu Gönderen")
+@Html.TextBoxFor(x => x.CommentUserName, new{ @class = "form-control",@disabled="disabled"})
+<br />
+@Html.Label("Blog ID")
+@Html.TextBoxFor(x => x.BlogID, new{ @class = "form-control",@disabled="disabled"})
+<br />
+@Html.Label("Yorum Başlığı")
+@Html.TextBoxFor(x => x.CommentTitle, new{ @class = "form-control",@disabled="disabled"})
+<br />
+@Html.Label("Yorum İçeriği")
+@Html.TextAreaFor(x => x.CommentContent, new{ @class = "form-control",@disabled="disabled",@row=10, @column =20})
+<br />
+@Html.Label("Blog Puan")
+@Html.TextBoxFor(x => x.BlogScore, new{ @class = "form-control",@disabled="disabled"})
+<br />
+<br />
+<a href="/Admin/AdminComment/Index/" class="btn btn-info" style="margin-right:15px">Yorumlara Dön</a>
+<a href="/Admin/AdminComment/DeleteComment/@Model.CommentID" onclick="return confirm('Yorumu silmek istediğine emin misin?');" class="btn btn-danger" style="margin-right:15px">Mesajı Sil</a>
+

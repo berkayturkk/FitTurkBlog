@@ -9,7 +9,9 @@ namespace FitTurkBlog.BL.Abstract
 {
     public interface ICommentService
     {
-        void CommentAdd(Comment comment);
+        //void CommentAdd(Comment comment);
+        //void CommentUpdate(Comment comment);
+        List<Comment> GetListAllComment();
         List<Comment> CommentGetList(int id);
 
     }

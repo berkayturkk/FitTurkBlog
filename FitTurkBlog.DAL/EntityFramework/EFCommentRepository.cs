@@ -13,5 +13,12 @@ namespace FitTurkBlog.DAL.EntityFramework
 {
     public class EFCommentRepository : GenericRepository<Comment>, ICommentDAL
     {
+        public List<Comment> GetListComment()
+        {
+            using (var sqlDbContext = new SqlDbContext())
+            {
+                return sqlDbContext.Comments.Include(x => x.Blog).ToList();
+            }
+        }
     }
 }

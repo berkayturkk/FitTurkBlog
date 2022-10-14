@@ -28,5 +28,24 @@ namespace FitTurkBlog.BL.Concrete
             return _commentDAL.GetListAll(x => x.BlogID == id);
         }
 
+        public List<Comment> GetListAllComment()
+        {
+            return _commentDAL.GetListComment();
+        }
+
+        public void Delete(Comment comment)
+        {
+            _commentDAL.Delete(comment);
+        }
+
+        public Comment GetCommentById(int id)
+        {
+            return _commentDAL.GetById(id);
+        }
+
+        public void CommentUpdate(Comment comment)
+        {
+           _commentDAL.Update(comment);
+        }
     }
 }
