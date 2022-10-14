@@ -13,5 +13,6 @@ namespace FitTurkBlog.Entities.Concrete
         public string NameSurname { get; set; }
         public string ImageUrl { get; set; }
         public string About { get; set; }
+        public bool Status { get; set; }
     }
 }
