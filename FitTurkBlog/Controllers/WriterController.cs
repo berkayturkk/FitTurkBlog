@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 
 namespace FitTurkBlog.UI.Controllers
 {
+    [Authorize(Roles = "Admin,Writer")]
     public class WriterController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
@@ -48,14 +49,19 @@ namespace FitTurkBlog.UI.Controllers
             return View();
         }
 
-        [AllowAnonymous]
+
         public IActionResult Test()
         {
             return View();
         }
 
-        [AllowAnonymous]
         public PartialViewResult WriterNavbarPartial()
+        {
+            return PartialView();
+        }
+
+        [Authorize(Roles = "Admin")]
+        public PartialViewResult GoToAdminPanel()
         {
             return PartialView();
         }

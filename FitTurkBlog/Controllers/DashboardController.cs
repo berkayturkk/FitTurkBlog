@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace FitTurkBlog.UI.Controllers
 {
+    [Authorize(Roles = "Admin,Writer")]
     public class DashboardController : Controller
     {
         BlogManager blogManager = new BlogManager(new EFBlogRepository());

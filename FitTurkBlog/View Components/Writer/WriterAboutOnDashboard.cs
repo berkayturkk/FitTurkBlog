@@ -2,6 +2,7 @@
 using FitTurkBlog.DAL.Context;
 using FitTurkBlog.DAL.EntityFramework;
 using FitTurkBlog.Entities.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace FitTurkBlog.UI.View_Components.Writer
 {
+    [Authorize(Roles = "Admin,Writer")]
     public class WriterAboutOnDashboard : ViewComponent
     {
         

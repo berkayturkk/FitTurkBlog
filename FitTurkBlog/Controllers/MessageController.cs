@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace FitTurkBlog.UI.Controllers
 {
-    [AllowAnonymous]
+    [Authorize(Roles = "Admin,Writer")]
     public class MessageController : Controller
     {
         Message2Manager _message2Manager = new Message2Manager(new EFMessage2Repository());

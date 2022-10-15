@@ -15,19 +15,23 @@ using X.PagedList;
 
 namespace FitTurkBlog.UI.Controllers
 {
-    [AllowAnonymous]
+    [Authorize(Roles = "Admin,Writer")]
     public class BlogController : Controller
     {
         BlogManager _blogManager = new BlogManager(new EFBlogRepository());
         CategoryManager categoryManager = new CategoryManager(new EFCategoryRepository());
         SqlDbContext sqlDbContext = new SqlDbContext();
 
+
+        [AllowAnonymous]
         // Bu metot ile ToPagedList ile sayfalama, OrderByDescending ile Bloglari yeniden eskiye gore BlogID lerine gore siralama islemleri yaptim.
         public IActionResult Index(int page = 1)
         {
             var values = _blogManager.GetBlogListWithCategory().Where(x => x.BlogStatus == true).OrderByDescending(x => x.BlogID).ToPagedList(page, 6);
             return View(values);
         }
+
+        [AllowAnonymous]
         public IActionResult BlogReadAll(int id)
         {
             ViewBag.i = id;

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FitTurkBlog.UI.Controllers
 {
-    [AllowAnonymous]
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         public IActionResult Index()

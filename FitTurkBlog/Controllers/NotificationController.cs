@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FitTurkBlog.UI.Controllers
 {
+    [Authorize(Roles = "Admin,Writer")]
     public class NotificationController : Controller
     {
         NotificationManager notificationManager = new NotificationManager(new EFNotificationRepository());
@@ -13,7 +14,6 @@ namespace FitTurkBlog.UI.Controllers
             return View();
         }
 
-        [AllowAnonymous]
         public IActionResult AllNotification()
         {
             var values = notificationManager.GetList();

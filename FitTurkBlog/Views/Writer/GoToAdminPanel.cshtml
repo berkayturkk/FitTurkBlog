@@ -1,0 +1,13 @@
+﻿@{
+    Layout = null;
+}
+@if (User.IsInRole("Admin"))
+{
+    <li class="nav-item">
+        <a class="nav-link" href="/Admin/Widget/Index/">
+            <span class="menu-title">Admin Paneli</span>
+            <i class="mdi mdi-account-star menu-icon"></i>
+        </a>
+    </li>
+}
+
