@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FitTurkBlog.UI.Areas.Admin.Controllers
 {
+    [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class WidgetController : Controller
     {
-        [Area("Admin")]
-        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();

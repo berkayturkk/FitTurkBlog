@@ -1,0 +1,23 @@
+﻿@using FitTurkBlog.UI.Areas.Admin.Models
+@model RoleUpdateViewModel
+@{
+    ViewData["Title"] = "EditRole";
+    Layout = "~/Views/Shared/Layouts/AdminLayout.cshtml";
+}
+
+<h1><strong>Rol Düzenleme</strong></h1>
+<br />
+<br />
+<form method="post">
+    <div class="form-group">
+        <label>Rol ID</label>
+        <input type="text" name="ID" value="@Model.ID" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Rol Adı</label>
+        <input type="text" name="Name" value="@Model.Name" class="form-control" />
+    </div>
+    <br />
+    <button class="btn btn-warning">Rolü Güncelle</button>
+</form>
+

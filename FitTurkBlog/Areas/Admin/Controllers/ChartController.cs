@@ -6,8 +6,7 @@ using System.Collections.Generic;
 namespace FitTurkBlog.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [AllowAnonymous]
-
+    [Authorize(Roles = "Admin")]
     public class ChartController : Controller
     {
         public IActionResult Index()

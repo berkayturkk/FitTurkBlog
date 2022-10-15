@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace FitTurkBlog.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [AllowAnonymous]
+    [Authorize(Roles = "Admin")]
     public class WriterController : Controller
     {
         public IActionResult Index()

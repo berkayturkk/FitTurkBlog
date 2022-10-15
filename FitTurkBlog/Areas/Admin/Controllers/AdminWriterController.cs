@@ -24,6 +24,7 @@ using System.IO;
 namespace FitTurkBlog.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminWriterController : Controller
     {
         private readonly UserManager<AppUser> _userManager;

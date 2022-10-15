@@ -2,6 +2,7 @@
 using FitTurkBlog.DAL.Context;
 using FitTurkBlog.DAL.EntityFramework;
 using FitTurkBlog.Entities.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -12,6 +13,7 @@ using X.PagedList;
 namespace FitTurkBlog.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminCommentController : Controller
     {
         CommentManager _commentManager = new CommentManager(new EFCommentRepository());

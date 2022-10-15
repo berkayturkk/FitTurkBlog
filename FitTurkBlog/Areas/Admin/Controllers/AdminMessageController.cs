@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 namespace FitTurkBlog.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [AllowAnonymous]
+    [Authorize(Roles = "Admin")]
     public class AdminMessageController : Controller
     {
         Message2Manager _message2Manager = new Message2Manager(new EFMessage2Repository());

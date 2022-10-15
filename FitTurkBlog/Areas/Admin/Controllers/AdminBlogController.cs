@@ -1,12 +1,14 @@
 ﻿using FitTurkBlog.BL.Concrete;
 using FitTurkBlog.DAL.EntityFramework;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using X.PagedList;
 
 namespace FitTurkBlog.UI.Areas.Admin.Controllers
 {
-    [Area("Admin")]  
+    [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminBlogController : Controller
     {
         BlogManager _blogManager = new BlogManager(new EFBlogRepository());

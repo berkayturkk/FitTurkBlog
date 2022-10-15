@@ -11,7 +11,7 @@ using System.Linq;
 namespace FitTurkBlog.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [AllowAnonymous]
+    [Authorize(Roles = "Admin")]
     public class BlogController : Controller
     {
         public IActionResult ExportStaticExcelBlogList()
