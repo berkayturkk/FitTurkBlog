@@ -1,0 +1,30 @@
+﻿@model FitTurkBlog.Entities.Concrete.AppUser
+@{
+    ViewData["Title"] = "WriterDetail";
+    Layout = "~/Views/Shared/Layouts/AdminLayout.cshtml";
+}
+
+<h1><strong>Yazar Detayı</strong></h1>
+<br />
+<br />
+<div class="pull-left">
+    <br />
+    <img src="@Model.ImageUrl" width="250" disabled="disabled" />
+</div>
+<div class="col-lg-9 pull-right">
+    @Html.Label("Yazar Ad-Soyad")
+    @Html.TextBoxFor(x => x.NameSurname, new{ @class = "form-control",@disabled="disabled"})
+    <br />
+    @Html.Label("Yazar Kullanıcı Adı")
+    @Html.TextBoxFor(x => x.UserName, new{ @class = "form-control",@disabled="disabled"})
+    <br />
+    @Html.Label("Yazar E-Posta Adresi")
+    @Html.TextBoxFor(x => x.Email, new{ @class = "form-control",@disabled="disabled"})
+    <br />
+    @Html.Label("Yazar Hakkında")
+    @Html.TextAreaFor(x => x.About,10,3, new{ @class = "form-control",@disabled="disabled"})
+    <br />
+</div>
+@await Component.InvokeAsync("AdminWriterBlogs",new {id = ViewBag.wi})
+
+@await Component.InvokeAsync("AdminWriterComments",new {id = ViewBag.wi})

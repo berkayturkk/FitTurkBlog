@@ -115,29 +115,29 @@ namespace FitTurkBlog.UI.Controllers
             return View();
         }
 
-        [AllowAnonymous]
-        [HttpPost]
+        //[AllowAnonymous]
+        //[HttpPost]
 
-        public IActionResult WriterAdd(AddProfileImage addProfileImage)
-        {
-            Writer writer = new Writer();
-            if (addProfileImage.WriterImage != null)
-            {
-                var extension = Path.GetExtension(addProfileImage.WriterImage.FileName);
-                var newimagename = Guid.NewGuid() + extension;
-                var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WriterImageFiles/", newimagename);
-                var stream = new FileStream(location, FileMode.Create);
-                addProfileImage.WriterImage.CopyTo(stream);
-                writer.WriterImage = newimagename;
-            }
-            writer.WriterMail = addProfileImage.WriterMail;
-            writer.WriterName = addProfileImage.WriterName;
-            writer.WriterPassword = addProfileImage.WriterPassword;
-            writer.WriterStatus = true;
-            writer.WriterAbout = addProfileImage.WriterAbout;
-            writerManager.Add(writer);
-            return RedirectToAction("WriterEditProfile", "Writer");
-        }
+        //public IActionResult WriterAdd(AddProfileImage addProfileImage)
+        //{
+        //    Writer writer = new Writer();
+        //    if (addProfileImage.WriterImage != null)
+        //    {
+        //        var extension = Path.GetExtension(addProfileImage.WriterImage.FileName);
+        //        var newimagename = Guid.NewGuid() + extension;
+        //        var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WriterImageFiles/", newimagename);
+        //        var stream = new FileStream(location, FileMode.Create);
+        //        addProfileImage.WriterImage.CopyTo(stream);
+        //        writer.WriterImage = newimagename;
+        //    }
+        //    writer.WriterMail = addProfileImage.WriterMail;
+        //    writer.WriterName = addProfileImage.WriterName;
+        //    writer.WriterPassword = addProfileImage.WriterPassword;
+        //    writer.WriterStatus = true;
+        //    writer.WriterAbout = addProfileImage.WriterAbout;
+        //    writerManager.Add(writer);
+        //    return RedirectToAction("Index", "Writer");
+        //}
 
 
         [HttpGet]

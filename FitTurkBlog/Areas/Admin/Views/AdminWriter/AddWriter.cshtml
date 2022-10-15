@@ -1,0 +1,28 @@
+﻿@model FitTurkBlog.Entities.Concrete.AppUser
+@{
+    ViewData["Title"] = "AddWriter";
+    Layout = "~/Views/Shared/Layouts/AdminLayout.cshtml";
+}
+
+<h1><strong>Yeni Yazar Girişi</strong></h1>
+<br />
+<br />
+
+@using (Html.BeginForm("AddWriter", "AdminWriter", FormMethod.Post))
+{
+    @Html.Label("Yazar Ad-Soyad")
+    @Html.TextBoxFor(x => x.NameSurname, new{ @class = "form-control"})
+    <br />
+    @Html.Label("Yazar Kullanıcı Adı")
+    @Html.TextBoxFor(x => x.UserName, new{ @class = "form-control"})
+    <br />
+    @Html.Label("Yazar E-Posta Adresi")
+    @Html.TextBoxFor(x => x.Email, new{ @class = "form-control"})
+    <br />
+    @Html.Label("Yazar Hakkında")
+    @Html.TextAreaFor(x => x.About,5,3, new{ @class = "form-control"})
+    <br />
+    <button class="btn btn-primary">Yazarı Kaydet</button>
+    <a href="/Admin/AdminWriter/Index/" class="btn btn-warning">İptal</a>
+}
+

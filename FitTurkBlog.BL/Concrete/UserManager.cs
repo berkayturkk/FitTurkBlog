@@ -1,5 +1,6 @@
 ﻿using FitTurkBlog.BL.Abstract;
 using FitTurkBlog.DAL.Abstract;
+using FitTurkBlog.DAL.Context;
 using FitTurkBlog.Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,6 @@ namespace FitTurkBlog.BL.Concrete
     public class UserManager : IUserService
     {
         IUserDAL _userDAL;
-
         public UserManager(IUserDAL userDAL)
         {
             _userDAL = userDAL;
@@ -20,12 +20,12 @@ namespace FitTurkBlog.BL.Concrete
 
         public void Add(AppUser t)
         {
-            throw new NotImplementedException();
+            _userDAL.Add(t);
         }
 
         public void Delete(AppUser t)
         {
-            throw new NotImplementedException();
+            _userDAL.Delete(t);
         }
 
         public List<AppUser> GetList()
@@ -41,7 +41,7 @@ namespace FitTurkBlog.BL.Concrete
 
         public void Update(AppUser t)
         {
-            throw new NotImplementedException();
+            _userDAL.Update(t);
         }
 
         public List<AppUser> GetListAllById(int id)

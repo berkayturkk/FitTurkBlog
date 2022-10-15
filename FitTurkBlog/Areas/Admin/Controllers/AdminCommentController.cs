@@ -15,7 +15,6 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
     public class AdminCommentController : Controller
     {
         CommentManager _commentManager = new CommentManager(new EFCommentRepository());
-        SqlDbContext _sqlDbContext = new SqlDbContext();
         public IActionResult Index(int page = 1)
         {
             var values = _commentManager.GetListAllComment().OrderByDescending(x => x.CommentID).ToPagedList(page, 4);

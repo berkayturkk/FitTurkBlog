@@ -10,5 +10,6 @@ namespace FitTurkBlog.DAL.Abstract
     public interface ICommentDAL : IGenericDAL<Comment>
     {
         List<Comment> GetListComment();
+        List<Comment> GetListCommentByWriter(int id);
     }
 }

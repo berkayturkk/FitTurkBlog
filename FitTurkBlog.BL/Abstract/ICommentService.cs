@@ -12,6 +12,7 @@ namespace FitTurkBlog.BL.Abstract
         //void CommentAdd(Comment comment);
         //void CommentUpdate(Comment comment);
         List<Comment> GetListAllComment();
+        List<Comment> GetListAllCommentByWriterWithBlog(int id);
         List<Comment> CommentGetList(int id);
 
     }
