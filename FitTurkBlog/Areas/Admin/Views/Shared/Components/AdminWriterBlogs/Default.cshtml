@@ -47,11 +47,11 @@
                                         <td>
                                             @if (item.BlogStatus)
                                             {
-                                                <a href="~/Admin/AdminWriter/ChangeStatusWriter/@item.BlogID" id="Durum_@item.BlogID" class="btn btn-secondary">Pasif Yap</a>
+                                                <a href="~/Admin/AdminBlog/ChangeStatusBlog/@item.BlogID" id="Durum_@item.BlogID" class="btn btn-secondary">Pasif Yap</a>
                                             }
                                             else
                                             {
-                                                <a href="~/Admin/AdminWriter/ChangeStatusWriter/@item.BlogID" id="Durum_@item.BlogID" class="btn btn-primary">Aktif Yap</a>
+                                                <a href="~/Admin/AdminBlog/ChangeStatusBlog/@item.BlogID" id="Durum_@item.BlogID" class="btn btn-primary">Aktif Yap</a>
                                             }
                                         </td>
                                         <td><a href="/Blog/BlogReadAll/@item.BlogID/" class="btn btn-info">Bloga Git</a></td>

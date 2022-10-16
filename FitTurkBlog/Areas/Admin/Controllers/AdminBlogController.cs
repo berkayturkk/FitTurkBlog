@@ -18,5 +18,21 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
             var values = _blogManager.GetBlogListWithCategoryWriter().Where(x => x.BlogStatus == true).OrderByDescending(x => x.BlogID).ToPagedList(page, 8);
             return View(values);
         }
+
+        public IActionResult ChangeStatusBlog(int id)
+        {
+            var value = _blogManager.TGetById(id);
+            if (value.BlogStatus)
+            {
+                value.BlogStatus = false;
+            }
+            else
+            {
+                value.BlogStatus = true;
+            }
+            _blogManager.Update(value);
+
+            return RedirectToAction("Index", "AdminWriter");
+        }
     }
 }
