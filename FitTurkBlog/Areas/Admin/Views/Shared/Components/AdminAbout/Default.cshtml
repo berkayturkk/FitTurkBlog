@@ -1,0 +1,18 @@
+﻿@model FitTurkBlog.Entities.Concrete.AppUser
+
+@{
+    Layout = null;
+}
+
+<li class="nav-header">
+    <div class="dropdown profile-element">
+        <img alt="image" class="rounded-circle" src="@Model.ImageUrl" width="75" height="75" />
+        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            <span class="block m-t-xs font-bold">@Model.NameSurname</span>
+            <span class="text-muted text-xs block"> Admin,Yazar</span>
+        </a>
+    </div>
+    <div class="logo-element">
+        IN+
+    </div>
+</li>
