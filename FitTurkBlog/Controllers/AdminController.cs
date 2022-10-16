@@ -16,5 +16,10 @@ namespace FitTurkBlog.UI.Controllers
             return PartialView();
         }
 
+        public PartialViewResult AdminHeaderNavbarPartial()
+        {
+            return PartialView();
+        }
+
     }
 }

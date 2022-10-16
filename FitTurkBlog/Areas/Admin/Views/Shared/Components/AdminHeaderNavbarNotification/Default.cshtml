@@ -1,0 +1,68 @@
+﻿@using FitTurkBlog.Entities.Concrete
+@model List<Notification>
+
+<li class="dropdown">
+
+    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+        <i class="fa fa-bell"></i>  <span class="label label-primary">@Model.Count</span>
+    </a>
+    <ul class="dropdown-menu dropdown-alerts">
+        <li>
+            @foreach (var item in Model)
+            {
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                        <div class="@item.NotificationTypeSymbolColor">
+                            <h5 class="preview-subject font-weight-normal mb-1 text-center">@item.NotificationType</h5>
+                        </div>
+                    </div>
+                    <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                        <p class="text-gray ellipsis mb-0">@item.NotificationDetails</p>
+                    </div>
+                    <small class="text-muted">
+                        @(((DateTime)item.NotificationDate).ToString(" dd-MMM-yyyy")) - @(((DateTime)item.NotificationDate).ToString(" HH:dd"))
+                        @{
+                            DateTime tarih1 = DateTime.Now;
+                            var tarih2 = item.NotificationDate;
+                            var fark = (tarih1 - tarih2).TotalSeconds;
+                            var dk = Math.Ceiling(fark / 60);
+                            var sa = Math.Ceiling(fark / 3600);
+                            var gun = Math.Ceiling(fark / 84600);
+                            var hafta = Math.Ceiling(fark / 604800);
+                        }
+                        @if (fark / 60 < 1)
+                        {
+                            <small class="float-right"><strong>@fark saniye önce</strong></small>
+                        }
+                        else if ((fark / 60 > 1 || fark / 60 == 1) && fark / 3600 < 1)
+                        {
+                            <small class="float-right"><strong>@dk dakika önce</strong></small>
+                        }
+                        else if ((fark / 3600 > 1 || fark / 3600 == 1) && fark / 86400 < 1)
+                        {
+                            <small class="float-right"><strong>@sa saat önce</strong></small>
+                        }
+                        else if ((fark / 84600 > 1 || fark / 84600 == 1) && fark / 604800 < 1)
+                        {
+                            <small class="float-right"><strong>@gun gün önce</strong></small>
+                        }
+                        else if ((fark / 604800 > 1 || fark / 604800 == 1))
+                        {
+                            <small class="float-right"><strong>@hafta hafta önce</strong></small>
+                        }
+                    </small>
+                </a>
+            }
+        </li>
+        <li class="dropdown-divider"></li>
+        <li>
+            <div class="text-center link-block">
+                <a href="/Admin/AdminNotification/AllNotification/" class="dropdown-item">
+                    <i class="fa fa-envelope"></i> <strong>Tüm Bildirimler</strong>
+                </a>
+            </div>
+        </li>
+    </ul>
+
+</li>

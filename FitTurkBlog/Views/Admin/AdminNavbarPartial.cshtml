@@ -8,9 +8,7 @@
             <li>
                 <a href="/Admin/AdminProfile/Index/"><i class="fa fa-user"></i> <span class="nav-label">Profilim</span>  </a>
             </li>
-            <li>
-                <a href="/Admin/AdminMessage/Inbox/"><i class="fa fa-envelope"></i> <span class="nav-label">Mesajlar </span><span class="label label-warning float-right">1</span></a>
-            </li>
+            @await Component.InvokeAsync("AdminSideNavbarMessage")
             <li>
                 <a href="/Admin/Category/Index/"><i class="fa fa-database"></i> <span class="nav-label">Kategoriler</span>  </a>
             </li>
@@ -26,7 +24,7 @@
             <li>
                 <a href="/Admin/AdminRole/Index/"><i class="fa fa-users"></i> <span class="nav-label">Roller</span>  </a>
             </li>
-           @await Component.InvokeAsync("AdminNotification")
+            @await Component.InvokeAsync("AdminNotification")
             <li>
                 <a href="/Admin/Blog/BlogTitleListExcel/"><i class="fa fa-file-excel-o"></i> <span class="nav-label">Raporlama</span>  </a>
             </li>
