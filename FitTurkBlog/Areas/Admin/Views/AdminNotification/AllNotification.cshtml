@@ -1,0 +1,96 @@
+﻿@using FitTurkBlog.Entities.Concrete
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common
+@model IPagedList<Notification>
+
+@{
+    ViewData["Title"] = "AllNotification";
+    Layout = "~/Views/Shared/Layouts/AdminLayout.cshtml";
+}
+
+<h1>&nbsp <strong>Bildirimler</strong></h1>
+<br />
+<div id="wrapper">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <h5>Bildirimler Tablosu</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <br />
+                        <a href="/Admin/AdminNotification/AddNotification/" class="btn btn-info">Yeni Bildirim Ekle</a>
+
+                        <!-- Paging -->
+                        <div class="pull-right">
+                            @Html.PagedListPager((IPagedList)Model, page => Url.Action("AllNotification",
+                            new
+                            {
+                            page
+
+                            }),
+                            new PagedListRenderOptions
+                            {
+                            LiElementClasses = new string[] { "page-item" },
+                            PageClasses = new string[] { "page-link" },
+                            Display = PagedListDisplayMode.IfNeeded
+
+                            })
+
+                            <br />
+                            <br />
+                        </div>
+
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Bildirim</th>
+                                    <th>Tarih</th>
+                                    <th>Saat</th>
+                                    <th>Durum</th>
+                                    <th>Sil</th>
+                                    <th>Düzenle</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.NotificationID</td>
+                                        <td>@item.NotificationDetails</td>
+                                        <td>@(((DateTime)item.NotificationDate).ToString(" dd-MMM-yyyy "))</td>
+                                        <td>@(((DateTime)item.NotificationDate).ToString(" HH:mm "))</td>
+                                        <td>
+                                            @if (item.NotificationStatus)
+                                            {
+                                                <a href="~/Admin/AdminNotification/ChangeStatusNotification/@item.NotificationID" id="Durum_@item.NotificationID" class="btn btn-secondary">Pasif Yap</a>
+                                            }
+                                            else
+                                            {
+                                                <a href="~/Admin/AdminNotification/ChangeStatusNotification/@item.NotificationID" id="Durum_@item.NotificationID" class="btn btn-primary">Aktif Yap</a>
+                                            }
+                                        </td>
+                                        <td><a href="/Admin/AdminNotification/DeleteNotification/@item.NotificationID" class="btn btn-danger">Bildirim Sil</a></td>
+                                        <td><a href="/Admin/AdminNotification/EditNotification/@item.NotificationID" class="btn btn-warning">Bildirim Düzenle</a></td>
+                                    </tr>
+                                }
+
+                            </tbody>
+
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

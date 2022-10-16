@@ -26,9 +26,7 @@
             <li>
                 <a href="/Admin/AdminRole/Index/"><i class="fa fa-users"></i> <span class="nav-label">Roller</span>  </a>
             </li>
-            <li>
-                <a href="metrics.html"><i class="fa fa-diamond"></i> <span class="nav-label">Bildirimler</span>  </a>
-            </li>
+           @await Component.InvokeAsync("AdminNotification")
             <li>
                 <a href="/Admin/Blog/BlogTitleListExcel/"><i class="fa fa-file-excel-o"></i> <span class="nav-label">Raporlama</span>  </a>
             </li>

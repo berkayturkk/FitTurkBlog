@@ -20,12 +20,12 @@ namespace FitTurkBlog.BL.Concrete
 
         public void Add(Notification t)
         {
-            throw new NotImplementedException();
+            _notificationDAL.Add(t);
         }
 
         public void Delete(Notification t)
         {
-            throw new NotImplementedException();
+            _notificationDAL.Delete(t);
         }
 
         public List<Notification> GetList()
@@ -35,12 +35,12 @@ namespace FitTurkBlog.BL.Concrete
 
         public Notification TGetById(int id)
         {
-            throw new NotImplementedException();
+            return _notificationDAL.GetById(id);
         }
 
         public void Update(Notification t)
         {
-            throw new NotImplementedException();
+            _notificationDAL.Update(t);
         }
     }
 }
