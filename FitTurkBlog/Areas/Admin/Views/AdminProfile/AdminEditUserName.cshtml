@@ -1,0 +1,40 @@
+﻿@model FitTurkBlog.UI.Areas.Admin.Models.AdminUpdateUserNameViewModel
+@{
+    ViewData["Title"] = "AdminEditUserName";
+    Layout = "~/Views/Shared/Layouts/AdminLayout.cshtml";
+}
+
+<div class="col-12 grid-margin stretch-card">
+    <br />
+    <a class="btn btn-info" href="/Admin/AdminProfile/AdminEditUserName/" style="margin-right:15px">Admin Kullanıcı Ayarları</a>
+    <a class="btn btn-secondary" href="/Admin/AdminProfile/AdminEditPassword/" style="margin-right:15px">Admin Şifre Ayarları</a>
+    <br />
+    <br />
+    <br />
+</div>
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Admin Kullanıcı Ayarları</h4>
+            <br />
+            <br />
+            <form class="forms-sample" method="post">
+                <div class="form-group">
+                    <label for="exampleInputName1">Kullanıcı Adı</label>
+                    <input type="text" asp-for="@Model.UpUserName" class="form-control">
+                </div>
+
+                <span asp-validation-for="@Model.UpUserName" class="text-danger"></span>
+
+                <div class="text-danger" style="font-size:14px;" asp-validation-summary="ModelOnly"></div>
+
+                <br />
+                <br />
+                <br />
+
+                <button type="submit" class="btn btn-warning mr-2">Güncelle</button>
+                <button class="btn btn-danger" asp-action="Index" asp-controller="Widget">İptal</button>
+            </form>
+        </div>
+    </div>
+</div>
