@@ -28,6 +28,7 @@ namespace FitTurkBlog.UI.Controllers
         [HttpPost]
         public IActionResult PartialAddComment(Comment comment)
         {
+            
             comment.CommentDate = DateTime.Parse(DateTime.Now.ToShortDateString());
             comment.CommentStatus = true;
             comment.BlogID = 21;

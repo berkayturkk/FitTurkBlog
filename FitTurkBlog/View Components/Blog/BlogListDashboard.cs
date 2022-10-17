@@ -2,6 +2,7 @@
 using FitTurkBlog.DAL.EntityFramework;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace FitTurkBlog.UI.View_Components.Blog
 {
@@ -13,7 +14,7 @@ namespace FitTurkBlog.UI.View_Components.Blog
         public IViewComponentResult Invoke()
         {
 
-            var values = blogManager.BlogGetLast10Blog();
+            var values = blogManager.BlogGetLast10Blog().Where(x => x.BlogStatus == true).OrderByDescending(x => x.BlogCreateDate).ToList();
             return View(values);
         }
     }
