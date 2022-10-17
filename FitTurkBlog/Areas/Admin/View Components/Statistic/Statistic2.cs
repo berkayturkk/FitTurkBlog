@@ -14,6 +14,7 @@ namespace FitTurkBlog.UI.Areas.Admin.View_Components.Statistic
         {
             ViewBag.vSonBlogTitle = sqlDbContext.Blogs.OrderByDescending(x => x.BlogID).Select(x => x.BlogTitle).Take(1).FirstOrDefault();
             ViewBag.vSonBlogContent = sqlDbContext.Blogs.OrderByDescending(x => x.BlogID).Select(x => x.BlogContent).Take(1).FirstOrDefault();
+            ViewBag.vEarning = (sqlDbContext.Blogs.Count()*10)+(sqlDbContext.Users.Count()*5)+(sqlDbContext.Comments.Count()*1)+(sqlDbContext.Messages2.Count()*2);
             return View();
         }
     }
