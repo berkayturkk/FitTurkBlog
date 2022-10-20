@@ -1,12 +1,14 @@
 ﻿@model FitTurkBlog.Entities.Concrete.Message2
+
 @{
-    ViewData["Title"] = "MessageDetails";
+    ViewData["Title"] = "InboxMessageDetails";
     Layout = "~/Views/Shared/Layouts/WriterLayout.cshtml";
 }
 
 <h1>Mesaj Detay Sayfası</h1>
 <br />
-<a href="/Message/MessageDetails/@Model.MessageID" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="left" title="Yenile"><i class="mdi mdi-refresh"></i> Yenile</a>
+<a href="/Message/InboxMessageDetails/@Model.MessageID" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="left" title="Yenile"><i class="mdi mdi-refresh"></i> Yenile</a>
+<a href="/Message/IsRead/@Model.MessageID/" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Okundu Olarak İşaretle"><i class="mdi mdi-eye"></i> </a>
 <a href="/Message/IsImportant/@Model.MessageID/" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Önemli Olarak İşaretle" id="btnImportant"><i class="mdi mdi-star"></i></a>
 <a href="/Message/MoveToTrash/@Model.MessageID/" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Çöp Kutusuna Taşı"><i class="mdi mdi-delete"></i></a>
 <br />
@@ -29,4 +31,3 @@
 <a href="/Message/InBox/" class="btn btn-success" style="margin-right:15px">Mesajlara Dön</a>
 <a href="/Message/SendMessage/" class="btn btn-info" style="margin-right:15px">Mesaja Cevap Ver</a>
 <a href="/Message/DeleteMessage/@Model.MessageID" onclick="return confirm('Mesajı silmek istediğine emin misin?');" class="btn btn-danger" style="margin-right:15px">Mesajı Sil</a>
-

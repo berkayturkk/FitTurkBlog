@@ -16,7 +16,7 @@
     @Html.TextBoxFor(x => x.MessageSubject, new{ @class = "form-control"})
     <br />
     @Html.Label("Mesaj İçeriği")
-    @Html.TextAreaFor(x => x.MessageDetails, new{ @class = "form-control"})
+    @Html.TextAreaFor(x => x.MessageDetails,15,3, new{ @class = "form-control"})
     <br />
     <br />
     <a href="/Message/InBox/" class="btn btn-success" style="margin-right:15px">Mesajlara Dön</a>

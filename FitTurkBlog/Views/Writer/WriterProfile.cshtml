@@ -1,17 +1,18 @@
 ﻿@model FitTurkBlog.Entities.Concrete.AppUser
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/Layouts/AdminLayout.cshtml";
+    ViewData["Title"] = "WriterProfile";
+    Layout = "~/Views/Shared/Layouts/WriterLayout.cshtml";
 }
 
 <h1><strong>Profilim</strong></h1>
 <br />
 <br />
-<div class="pull-left">
+<div class="float-left">
     <br />
     <img src="@Model.ImageUrl" width="250" disabled="disabled" />
 </div>
-<div class="col-lg-9 pull-right">
+<div class="col-lg-9 float-right">
+    <br />
     @Html.Label("Ad-Soyad")
     @Html.TextBoxFor(x => x.NameSurname, new{ @class = "form-control",@disabled="disabled"})
     <br />
@@ -22,10 +23,10 @@
     @Html.TextBoxFor(x => x.Email, new{ @class = "form-control",@disabled="disabled"})
     <br />
     @Html.Label("Hakkımda")
-    @Html.TextAreaFor(x => x.About,10,3, new{ @class = "form-control",@disabled="disabled"})
+    @Html.TextAreaFor(x => x.About,20,3, new{ @class = "form-control",@disabled="disabled"})
     <br />
     <br />
     <br />
-    <a href="/Admin/AdminProfile/EditProfile/@ViewBag.ai/" class="btn btn-warning">Profilimi Düzenle</a>
+    <a href="/Writer/WriterEditProfile/@ViewBag.wi/" class="btn btn-warning">Profilimi Düzenle</a>
 </div>
 

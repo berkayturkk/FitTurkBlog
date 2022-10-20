@@ -6,28 +6,89 @@
     Layout = "~/Views/Shared/Layouts/WriterLayout.cshtml";
 }
 
-<h1>Gelen Kutusu</h1>
+<h1>Gelen Mesajlar</h1>
+<br />
+<br />
+<form asp-action="Inbox" asp-controller="Message" method="get" class="mail-search  float-right ">
+    <div class="input-group">
+        <input type="text" name="key" id="key" placeholder="Postalarda arama yapın" class="form-control"  />
+        <div class="input-group-btn">
+            <input type="submit" value="Ara" class="btn btn-primary" />
+        </div>
+    </div>
+    <br />
+    <br />
+</form>
+<a href="/Message/InBox/" class="btn btn-primary float-left " data-toggle="tooltip" data-placement="left" title="Yenile"><i class="mdi mdi-refresh"></i> Yenile</a>
+<br />
+<br />
 <h3>@ViewBag.w</h3>
 <table class="table table-bordered">
-    <tr>
-        <th>#</th>
-        <th>Konu</th>
-        <th>Gönderen</th>
-        <th>Tarih</th>
-        <th>Mesajı Aç</th>
-        <th>Mesajı Sil</th>
-    </tr>
-    @foreach (var item in Model)
-    {
+    <thead>
         <tr>
-            <td>@item.MessageID</td>
-            <td>@item.MessageSubject</td>
-            <td>@item.MessageSenderUser.WriterName</td>
-            <td>@(((DateTime)item.MessageDate).ToString("dd-MMM-yyyy"))</td>
-            <td><a href="/Message/MessageDetails/@item.MessageID" class="btn btn-secondary">Mesajı Aç</a></td>
-            <td><a href="/Message/DeleteMessage/@item.MessageID" onclick="return confirm('Mesajı silmek istediğine emin misin?');" class="btn btn-danger">Mesajı Sil</a></td>
+            <th></th>
+            <th>Gönderen</th>
+            <th>Alıcı</th>
+            <th>Mesajın Konusu</th>
+            <th>Tarih</th>
+            <th>Saat</th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            @if (item.MessageStatus)
+            {
+                <tr class="unread">
+                    <td class="check-mail">
+                        <a href="/Message/IsImportant/@item.MessageID/" style="color:black; font-weight:bolder">
+
+                            @if (item.IsImportant == true)
+                            {
+                                <i class="mdi mdi-star"></i>
+                            }
+                            else if (item.IsImportant == false)
+                            {
+                                <i class="mdi mdi-star-outline"></i>
+                            }
+
+                        </a>
+                    </td>
+                    <td class="mail-ontact"><a href="/Message/InboxMessageDetails/@item.MessageID" style="color:black; font-weight:bolder">@item.MessageSenderUser.WriterName</a></td>
+                    <td class="mail-ontact"><a href="/Message/InboxMessageDetails/@item.MessageID" style="color:black; font-weight:bolder">@item.MessageReceiverUser.WriterName</a></td>
+                    <td class="mail-subject"><a href="/Message/InboxMessageDetails/@item.MessageID" style="color:black; font-weight:bolder">@item.MessageSubject</a></td>
+                    <td class="mail-date" style="color:black; font-weight:bolder">@(((DateTime)item.MessageDate).ToString("dd-MMM-yyyy"))</td>
+                    <td class="mail-date" style="color:black; font-weight:bolder">@(((DateTime)item.MessageDate).ToString("HH:mm"))</td>
+
+                </tr>
+            }
+            else
+            {
+                <tr class="read">
+                    <td class="check-mail">
+                        <a href="/Message/IsImportant/@item.MessageID/" style="color:gray; font-weight:lighter">
+
+                            @if (item.IsImportant == true)
+                            {
+                                <i class="mdi mdi-star"></i>
+                            }
+                            else if (item.IsImportant == false)
+                            {
+                                <i class="mdi mdi-star-outline"></i>
+                            }
+
+                        </a>
+                    </td>
+                    <td class="mail-ontact"><a href="/Message/InboxMessageDetails/@item.MessageID" style="color:gray; font-weight:lighter ">@item.MessageSenderUser.WriterName</a></td>
+                    <td class="mail-ontact"><a href="/Message/InboxMessageDetails/@item.MessageID" style="color:gray; font-weight:lighter">@item.MessageReceiverUser.WriterName</a></td>
+                    <td class="mail-subject"><a href="/Message/InboxMessageDetails/@item.MessageID" style="color:gray; font-weight:lighter">@item.MessageSubject</a></td>
+                    <td class="mail-date" style="color:gray; font-weight:lighter ">@(((DateTime)item.MessageDate).ToString("dd-MMM-yyyy"))</td>
+                    <td class="mail-date" style="color:gray; font-weight:lighter ">@(((DateTime)item.MessageDate).ToString("HH:mm"))</td>
+
+                </tr>
+            }
+        }
+    </tbody>
 </table>
 <br />
 <a href="/Message/SendMessage/" class="btn btn-dark">Yeni Mesaj Oluştur</a>

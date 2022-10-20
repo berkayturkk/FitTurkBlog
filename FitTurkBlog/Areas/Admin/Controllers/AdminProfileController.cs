@@ -34,7 +34,7 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
             var userName = User.Identity.Name;
             var userMail = sqlDbContext.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
             var writerID = sqlDbContext.Users.Where(x => x.Email == userMail).Select(y => y.Id).FirstOrDefault();
-            ViewBag.wi = writerID;
+            ViewBag.ai = writerID;
             var values = userManager.TGetById(writerID);
             return View(values);
         }
@@ -45,7 +45,6 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
             AddProfileImage profileImage = new AddProfileImage();
             var value = await _userManager.FindByIdAsync((id).ToString());
             profileImage.NameSurname = value.NameSurname;
-            profileImage.Username = value.UserName;
             profileImage.About = value.About;
             profileImage.Status = value.Status;
             profileImage.Email = value.Email;
@@ -53,7 +52,7 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditProfile(AddProfileImage profileImage)
+        public IActionResult EditProfile(AddProfileImage profileImage)
         {
             var mail = profileImage.Email;
             var user = sqlDbContext.Users.Where(x => x.Email == mail).FirstOrDefault();
@@ -69,7 +68,6 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
             }
 
             user.NameSurname = profileImage.NameSurname;
-            user.UserName = profileImage.Username;
             user.About = profileImage.About;
             user.Status = profileImage.Status;
             user.Email = profileImage.Email;

@@ -19,6 +19,7 @@ namespace FitTurkBlog.DAL.Abstract
         List<Message2> GetListTrashBoxWithMessageByKey(string key);
         List<Message2> GetListImportantBoxWithMessageByWriter();
         List<Message2> GetListImportantBoxWithMessageByKey(string key);
+        Message2 GetMessageByIdWithSenderAndReceiver(int id);
 
     }
 }

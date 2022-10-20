@@ -19,7 +19,7 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
         CommentManager _commentManager = new CommentManager(new EFCommentRepository());
         public IActionResult Index(int page = 1)
         {
-            var values = _commentManager.GetListAllComment().OrderByDescending(x => x.CommentID).ToPagedList(page, 4);
+            var values = _commentManager.GetListAllComment().OrderByDescending(x => x.CommentDate).ToPagedList(page, 8);
             return View(values);
         }
 

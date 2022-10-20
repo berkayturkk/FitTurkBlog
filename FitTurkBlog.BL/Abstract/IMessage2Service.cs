@@ -19,6 +19,7 @@ namespace FitTurkBlog.BL.Abstract
         List<Message2> GetTrashBoxListByKey(string key);
         List<Message2> GetImportantBoxListByWriter();
         List<Message2> GetImportantBoxListByKey(string key);
+        Message2 GetMessageByIdWithSenderAndReceiver(int id);
 
     }
 }

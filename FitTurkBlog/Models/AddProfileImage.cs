@@ -7,7 +7,6 @@ namespace FitTurkBlog.UI.Models
     public class AddProfileImage
     {
         public string NameSurname { get; set; }
-        public string Username { get; set; }
         public string Email { get; set; }
         public IFormFile ImageUrl { get; set; }
         public string About { get; set; }

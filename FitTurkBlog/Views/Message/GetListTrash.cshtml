@@ -1,14 +1,14 @@
 ﻿@using FitTurkBlog.Entities.Concrete
 @model List<Message2>
 @{
-    ViewData["Title"] = "SendBox";
+    ViewData["Title"] = "GetListTrash";
     Layout = "~/Views/Shared/Layouts/WriterLayout.cshtml";
 }
 
-<h1>Giden Kutusu</h1>
+<h1>Çöp Kutusu</h1>
 <br />
 <br />
-<form asp-action="Sendbox" asp-controller="Message" method="get" class="mail-search  float-right ">
+<form asp-action="GetListTrash" asp-controller="Message" method="get" class="mail-search  float-right ">
     <div class="input-group">
         <input type="text" name="key" id="key" placeholder="Postalarda arama yapın" class="form-control"  />
         <div class="input-group-btn">
@@ -18,7 +18,7 @@
     <br />
     <br />
 </form>
-<a href="/Message/SendBox/" class="btn btn-primary float-left " data-toggle="tooltip" data-placement="left" title="Yenile"><i class="mdi mdi-refresh"></i> Yenile</a>
+<a href="/Message/GetListTrash/" class="btn btn-primary float-left " data-toggle="tooltip" data-placement="left" title="Yenile"><i class="mdi mdi-refresh"></i> Yenile</a>
 <br />
 <br />
 <h3>@ViewBag.w</h3>
@@ -63,4 +63,3 @@
 </table>
 <br />
 <a href="/Message/SendMessage/" class="btn btn-dark">Yeni Mesaj Oluştur</a>
-

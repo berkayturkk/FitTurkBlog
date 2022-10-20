@@ -1,0 +1,22 @@
+﻿@using FitTurkBlog.Entities.Concrete
+@model List<Message2>
+@{
+    Layout = null;
+}
+
+<li class="nav-item">
+    <a class="nav-link" href="/Message/Inbox/">
+        <span class="menu-title">
+            Gelen Kutusu &nbsp &nbsp &nbsp
+            @if (Model.Count > 0)
+            {
+                <span style="color:coral; font-weight:bolder; margin-left:15px">(@Model.Count)</span>
+            }
+            else
+            {
+                <span style="color:coral; font-weight:bolder; margin-left:15px">(0)</span>
+            }
+        </span>
+        <i class="mdi mdi-inbox menu-icon"></i>
+    </a>
+</li>

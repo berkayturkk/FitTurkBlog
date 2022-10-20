@@ -1,7 +1,7 @@
 ﻿@using FitTurkBlog.Entities.Concrete
 @model List<Message2>
 @{
-    ViewData["Title"] = "SearchKey";
+    ViewData["Title"] = "AllMessage";
     Layout = "~/Views/Shared/Layouts/AdminLayout.cshtml";
 }
 
@@ -16,13 +16,13 @@
                             <div class="space-25"></div>
                             <h5>Klasörler</h5>
                             <ul class="folder-list m-b-md" style="padding: 0">
-                                   <li><a href="/Admin/AdminMessage/Inbox/"> <i class="fa fa-inbox "></i> Gelen Mesajlar <span class="label label-warning float-right">@ViewBag.gm</span> </a></li>
+                                <li><a href="/Admin/AdminMessage/Inbox/"> <i class="fa fa-inbox "></i> Gelen Mesajlar <span class="label label-warning float-right">@ViewBag.gm</span> </a></li>
                                 <li><a href="/Admin/AdminMessage/Sendbox/"> <i class="fa fa-paper-plane"></i> Giden Mesajlar</a></li>
                                 <li><a href="/Admin/AdminMessage/GetListImportant/"> <i class="fa fa-certificate"></i> Önemli Mesajlar</a></li>
-                                <li><a href="/Admin/AdminMessage/SearchKey/"> <i class="fa fa-envelope-o"></i> Tüm Mesajlar</a></li>
+                                <li><a href="/Admin/AdminMessage/AllMessage/"> <i class="fa fa-envelope-o"></i> Tüm Mesajlar</a></li>
                                 <li><a href="/Admin/AdminMessage/GetListTrash/"> <i class="fa fa-trash-o"></i> Çöp Kutusu</a></li>
                             </ul>
-                            
+
                             <div class="clearfix"></div>
                         </div>
                     </div>
@@ -32,7 +32,7 @@
 
                 <div class="mail-box-header">
 
-                    <form asp-action="SearchKey" asp-controller="AdminMessage" method="get" class="float-right mail-search">
+                    <form asp-action="AllMessage" asp-controller="AdminMessage" method="get" class="float-right mail-search">
                         <div class="input-group">
                             <input type="text" name="key" id="key" placeholder="Postalarda arama yapın" class="form-control form-control-sm" />
                             <div class="input-group-btn">
@@ -49,7 +49,7 @@
                             <button class="btn btn-white btn-sm"><i class="fa fa-arrow-right"></i></button>
 
                         </div>
-                        <a href="/Admin/AdminMessage/SearchKey/" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left" title="Yenile"><i class="fa fa-refresh"></i> Yenile</a>
+                        <a href="/Admin/AdminMessage/AllMessage/" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left" title="Yenile"><i class="fa fa-refresh"></i> Yenile</a>
                     </div>
                 </div>
                 <div class="mail-box">
@@ -68,7 +68,30 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                @if (item.MessageStatus)
+                                <tr class="read">
+                                    <td class="check-mail">
+                                        <a href="/Admin/AdminMessage/IsImportant/@item.MessageID/">
+
+                                            @if (item.IsImportant == true)
+                                            {
+                                                <i class="mdi mdi-star"></i>
+                                            }
+                                            else if (item.IsImportant == false)
+                                            {
+                                                <i class="mdi mdi-star-outline"></i>
+                                            }
+
+                                        </a>
+                                    </td>
+                                    <td class="mail-ontact"><a href="/Admin/AdminMessage/MessageDetails/@item.MessageID">@item.MessageSenderUser.WriterName</a></td>
+                                    <td class="mail-ontact"><a href="/Admin/AdminMessage/MessageDetails/@item.MessageID">@item.MessageReceiverUser.WriterName</a></td>
+                                    <td class="mail-subject"><a href="/Admin/AdminMessage/MessageDetails/@item.MessageID">@item.MessageSubject</a></td>
+                                    <td class="mail-date" >@(((DateTime)item.MessageDate).ToString("dd-MMM-yyyy"))</td>
+                                    <td class="mail-date" >@(((DateTime)item.MessageDate).ToString("HH:mm"))</td>
+
+                                </tr>
+
+                                if (item.MessageReceiverID == ViewBag.vWriterID && item.MessageStatus == true)
                                 {
                                     <tr class="unread">
                                         <td class="check-mail">
@@ -76,43 +99,18 @@
 
                                                 @if (item.IsImportant == true)
                                                 {
-                                                    <i class="fa fa-star"></i>
+                                                    <i class="mdi mdi-star"></i>
                                                 }
                                                 else if (item.IsImportant == false)
                                                 {
-                                                    <i class="fa fa-star-o"></i>
+                                                    <i class="mdi mdi-star-outline"></i>
                                                 }
 
                                             </a>
                                         </td>
-                                        <td class="mail-ontact"><a href="/Admin/AdminMessage/MessageDetail/@item.MessageID">@item.MessageSenderUser.WriterName</a></td>
-                                        <td class="mail-ontact"><a href="/Admin/AdminMessage/MessageDetail/@item.MessageID">@item.MessageReceiverUser.WriterName</a></td>
-                                        <td class="mail-subject"><a href="/Admin/AdminMessage/MessageDetail/@item.MessageID">@item.MessageSubject</a></td>
-                                        <td class="mail-date">@(((DateTime)item.MessageDate).ToString("dd-MMM-yyyy"))</td>
-                                        <td class="mail-date">@(((DateTime)item.MessageDate).ToString("HH:mm"))</td>
-
-                                    </tr>
-                                }
-                                else
-                                {
-                                    <tr class="read">
-                                        <td class="check-mail">
-                                            <a href="/Admin/AdminMessage/IsImportant/@item.MessageID/">
-
-                                                @if (item.IsImportant == true)
-                                                {
-                                                    <i class="fa fa-star"></i>
-                                                }
-                                                else if (item.IsImportant == false)
-                                                {
-                                                    <i class="fa fa-star-o"></i>
-                                                }
-
-                                            </a>
-                                        </td>
-                                        <td class="mail-ontact"><a href="/Admin/AdminMessage/MessageDetail/@item.MessageID">@item.MessageSenderUser.WriterName</a></td>
-                                        <td class="mail-ontact"><a href="/Admin/AdminMessage/MessageDetail/@item.MessageID">@item.MessageReceiverUser.WriterName</a></td>
-                                        <td class="mail-subject"><a href="/Admin/AdminMessage/MessageDetail/@item.MessageID">@item.MessageSubject</a></td>
+                                        <td class="mail-ontact"><a href="/Admin/AdminMessage/InboxMessageDetails/@item.MessageID">@item.MessageSenderUser.WriterName</a></td>
+                                        <td class="mail-ontact"><a href="/Admin/AdminMessage/InboxMessageDetails/@item.MessageID">@item.MessageReceiverUser.WriterName</a></td>
+                                        <td class="mail-subject"><a href="/Admin/AdminMessage/InboxMessageDetails/@item.MessageID">@item.MessageSubject</a></td>
                                         <td class="mail-date">@(((DateTime)item.MessageDate).ToString("dd-MMM-yyyy"))</td>
                                         <td class="mail-date">@(((DateTime)item.MessageDate).ToString("HH:mm"))</td>
 

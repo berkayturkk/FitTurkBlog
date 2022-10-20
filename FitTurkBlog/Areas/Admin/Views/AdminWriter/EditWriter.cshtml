@@ -19,7 +19,7 @@
         @Html.Label("Yazar Profil Resmi")
         <br />
         <div class="mb-3">
-            <input id="input-b2" name="ImageUrl" type="file" class="file form-control" data-show-preview="true">
+            <input id="input-b2" name="ImageUrl" type="file" class="file form-control" data-show-preview="true" accept="image/png, image/jpeg">
         </div>
         @Html.Label("Yazar E-Posta Adresi")
         @Html.TextBoxFor(x => x.Email, new{ @class = "form-control"})

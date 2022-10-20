@@ -16,7 +16,7 @@ namespace FitTurkBlog.UI.Areas.Admin.View_Components.AdminNavbar
 
         public IViewComponentResult Invoke()
         {
-            var values = _notificationManager.GetList().Where(x => x.NotificationStatus == true).OrderByDescending(x => x.NotificationID).ToList();
+            var values = _notificationManager.GetList().Where(x => x.NotificationStatus == true).OrderByDescending(x => x.NotificationDate).ToList();
             return View(values);
         }
     }

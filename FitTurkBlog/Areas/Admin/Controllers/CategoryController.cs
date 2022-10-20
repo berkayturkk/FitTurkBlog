@@ -20,7 +20,7 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
         SqlDbContext sqlDbContext = new SqlDbContext();
         public IActionResult Index(int page = 1)
         {
-            var values = categoryManager.GetList().ToPagedList(page,3);
+            var values = categoryManager.GetList().ToPagedList(page,8);
             return View(values);
         }
 

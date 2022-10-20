@@ -91,5 +91,13 @@ namespace FitTurkBlog.DAL.EntityFramework
                 return sqlDbContext.Messages2.Include(x => x.MessageSenderUser).Include(x => x.MessageReceiverUser).Where(x => (x.MessageSenderUser.WriterMail.Contains(key) || x.MessageReceiverUser.WriterMail.Contains(key) || x.MessageSubject.Contains(key) || x.MessageDetails.Contains(key)) && x.MessageSenderID == id && x.IsDeleted == false && x.IsImportant == false).ToList();
             }
         }
+
+        public Message2 GetMessageByIdWithSenderAndReceiver(int id)
+        {
+            using (var sqlDbContext = new SqlDbContext())
+            {
+                return sqlDbContext.Messages2.Include(x => x.MessageSenderUser).Include(x => x.MessageReceiverUser).Where(x => x.MessageID == id).FirstOrDefault();
+            }
+        }
     }
 }

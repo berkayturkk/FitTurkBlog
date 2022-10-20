@@ -26,6 +26,7 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
         SqlDbContext _sqlDbContext = new SqlDbContext();
         public IActionResult Inbox(string key)
         {
+
             var userName = User.Identity.Name;
             var userMail = _sqlDbContext.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
             var writerID = _sqlDbContext.Users.Where(x => x.Email == userMail).Select(y => y.Id).FirstOrDefault();
@@ -34,12 +35,12 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
 
             if (key != null)
             {
-                var values = _message2Manager.GetInBoxListByKey(writerID, key).OrderByDescending(x => x.MessageID).ToList();
+                var values = _message2Manager.GetInBoxListByKey(writerID, key).OrderByDescending(x => x.MessageDate).ToList();
                 return View(values);
             }
             else
             {
-                var values = _message2Manager.GetInBoxListByWriter(writerID).OrderByDescending(x => x.MessageID).ToList();
+                var values = _message2Manager.GetInBoxListByWriter(writerID).OrderByDescending(x => x.MessageDate).ToList();
                 return View(values);
             }
         }
@@ -53,12 +54,12 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
             ViewBag.gm = values2.Count();
             if (key != null)
             {
-                var values = _message2Manager.GetSendBoxListByKey(writerID, key).OrderByDescending(x => x.MessageID).ToList();
+                var values = _message2Manager.GetSendBoxListByKey(writerID, key).OrderByDescending(x => x.MessageDate).ToList();
                 return View(values);
             }
             else
             {
-                var values = _message2Manager.GetSendBoxListByWriter(writerID).OrderByDescending(x => x.MessageID).ToList();
+                var values = _message2Manager.GetSendBoxListByWriter(writerID).OrderByDescending(x => x.MessageDate).ToList();
                 return View(values);
             }
         }
@@ -93,10 +94,8 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
             var userMail = _sqlDbContext.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
             var writerID = _sqlDbContext.Users.Where(x => x.Email == userMail).Select(y => y.Id).FirstOrDefault();
             message2.MessageSenderID = writerID;
-            message2.MessageReceiverID = 5;
+            //message2.MessageReceiverID = 5;
             message2.MessageStatus = true;
-            message2.IsDeleted = false;
-            message2.IsImportant = false;
             message2.MessageDate = Convert.ToDateTime(DateTime.Now);
             if (message2.MessageSubject != null && message2.MessageDetails != null)
             {
@@ -106,16 +105,17 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
             return RedirectToAction("SendMessage", "AdminMessage");
         }
 
-        public IActionResult SearchKey(string key)
+        public IActionResult AllMessage(string key)
         {
             var userName = User.Identity.Name;
             var userMail = _sqlDbContext.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
             var writerID = _sqlDbContext.Users.Where(x => x.Email == userMail).Select(y => y.Id).FirstOrDefault();
+            ViewBag.vWriterID = writerID;
             var values2 = _message2Manager.GetInBoxListByWriter(writerID).Where(x => x.MessageStatus == true).ToList();
             ViewBag.gm = values2.Count();
             if (key != null)
             {
-                var values = _message2Manager.GetListAllByKey(key).OrderByDescending(x => x.MessageID).ToList();
+                var values = _message2Manager.GetListAllByKey(key).OrderByDescending(x => x.MessageDate).ToList();
                 return View(values);
             }
             else
@@ -172,6 +172,12 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
                 }
 
             }
+            else
+            {
+                messageValue.IsDeleted = false;
+                messageValue.MessageStatus = false;
+                _message2Manager.Update(messageValue);
+            }
             return RedirectToAction("GetListTrash", "AdminMessage");
         }
 
@@ -184,12 +190,12 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
             ViewBag.gm = values2.Count();
             if (key != null)
             {
-                var values = _message2Manager.GetTrashBoxListByKey(key).OrderByDescending(x => x.MessageID).ToList();
+                var values = _message2Manager.GetTrashBoxListByKey(key).OrderByDescending(x => x.MessageDate).ToList();
                 return View(values);
             }
             else
             {
-                var values = _message2Manager.GetTrashBoxListByWriter().OrderByDescending(x => x.MessageID).ToList();
+                var values = _message2Manager.GetTrashBoxListByWriter().OrderByDescending(x => x.MessageDate).ToList();
                 return View(values);
             }
         }
@@ -230,12 +236,12 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
             ViewBag.gm = values2.Count();
             if (key != null)
             {
-                var values = _message2Manager.GetImportantBoxListByKey(key).OrderByDescending(x => x.MessageID).ToList();
+                var values = _message2Manager.GetImportantBoxListByKey(key).OrderByDescending(x => x.MessageDate).ToList();
                 return View(values);
             }
             else
             {
-                var values = _message2Manager.GetImportantBoxListByWriter().OrderByDescending(x => x.MessageID).ToList();
+                var values = _message2Manager.GetImportantBoxListByWriter().OrderByDescending(x => x.MessageDate).ToList();
                 return View(values);
             }
         }
@@ -262,6 +268,7 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
             _message2Manager.Delete(messageValue);
             return RedirectToAction("Inbox", "AdminMessage");
         }
+
 
     }
 }

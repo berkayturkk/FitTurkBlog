@@ -92,5 +92,10 @@ namespace FitTurkBlog.BL.Concrete
         {
             return _message2DAL.GetListImportantBoxWithMessageByKey(key);
         }
+
+        public Message2 GetMessageByIdWithSenderAndReceiver(int id)
+        {
+            return _message2DAL.GetMessageByIdWithSenderAndReceiver(id);
+        }
     }
 }

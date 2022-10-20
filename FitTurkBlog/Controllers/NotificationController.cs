@@ -2,6 +2,7 @@
 using FitTurkBlog.DAL.EntityFramework;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace FitTurkBlog.UI.Controllers
 {
@@ -16,7 +17,7 @@ namespace FitTurkBlog.UI.Controllers
 
         public IActionResult AllNotification()
         {
-            var values = notificationManager.GetList();
+            var values = notificationManager.GetList().Where(x => x.NotificationStatus == true).OrderByDescending(x => x.NotificationDate).ToList();
             return View(values);
         }
     }

@@ -15,7 +15,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/Writer/WriterEditProfile/">
+            <a class="nav-link" href="/Writer/WriterProfile/">
                 <span class="menu-title">Profilim</span>
                 <i class="mdi mdi-contacts menu-icon"></i>
             </a>
@@ -32,12 +32,7 @@
                 <i class="mdi mdi-folder-plus menu-icon"></i>
             </a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/Message/Inbox/">
-                <span class="menu-title">Gelen Kutusu</span>
-                <i class="mdi mdi-email menu-icon"></i>
-            </a>
-        </li>
+        @await Component.InvokeAsync("WriterNavbarMessage")
         <li class="nav-item">
             <a class="nav-link" href="/Message/Sendbox/">
                 <span class="menu-title">Giden Kutusu</span>
@@ -45,11 +40,24 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/Notification/AllNotification/">
-                <span class="menu-title">Bildirimler</span>
-                <i class="mdi mdi-bell-ring-outline menu-icon"></i>
+            <a class="nav-link" href="/Message/GetListTrash/">
+                <span class="menu-title">Çöp Kutusu</span>
+                <i class="mdi mdi-delete menu-icon"></i>
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/Message/GetListImportant/">
+                <span class="menu-title">Önemli Mesajlar</span>
+                <i class="mdi mdi-star menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/Message/AllMessage/">
+                <span class="menu-title">Tüm Mesajlar</span>
+                <i class="mdi mdi-email menu-icon"></i>
+            </a>
+        </li>
+        @await Component.InvokeAsync("WriterNavbarNotification")
         <li class="nav-item">
             <a class="nav-link" href="/Home/Index/">
                 <span class="menu-title">Siteye Git</span>

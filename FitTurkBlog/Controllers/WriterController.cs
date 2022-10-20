@@ -22,26 +22,31 @@ namespace FitTurkBlog.UI.Controllers
 
         WriterManager writerManager = new WriterManager(new EFWriterRepository());
         UserManager userManager = new UserManager(new EFUserRepository());
-
+        SqlDbContext sqlDbContext = new SqlDbContext();
         public WriterController(UserManager<AppUser> userManager)
         {
             _userManager = userManager;
         }
 
-        [Authorize]
-        public IActionResult Index()
-        {
-            var userMail = User.Identity.Name;
-            ViewBag.um = userMail;
-            SqlDbContext sqlDbContext = new SqlDbContext();
-            var writerName = sqlDbContext.Writers.Where(x => x.WriterMail == userMail).Select(y => y.WriterName).FirstOrDefault();
-            ViewBag.wn = writerName;
-            return View();
-        }
+        //[Authorize]
+        //public IActionResult Index()
+        //{
+        //    var userMail = User.Identity.Name;
+        //    ViewBag.um = userMail;
+        //    SqlDbContext sqlDbContext = new SqlDbContext();
+        //    var writerName = sqlDbContext.Writers.Where(x => x.WriterMail == userMail).Select(y => y.WriterName).FirstOrDefault();
+        //    ViewBag.wn = writerName;
+        //    return View();
+        //}
 
         public IActionResult WriterProfile()
         {
-            return View();
+            var userName = User.Identity.Name;
+            var userMail = sqlDbContext.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
+            var writerID = sqlDbContext.Users.Where(x => x.Email == userMail).Select(y => y.Id).FirstOrDefault();
+            ViewBag.wi = writerID;
+            var values = userManager.TGetById(writerID);
+            return View(values);
         }
 
         public IActionResult WriterMail()
@@ -73,51 +78,49 @@ namespace FitTurkBlog.UI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> WriterEditProfile()
+        public async Task<IActionResult> WriterEditProfile(int id)
         {
-            UserUpdateViewModel userModel = new UserUpdateViewModel();
-            var values = await _userManager.FindByNameAsync(User.Identity.Name);
-            userModel.UpNameSurname = values.NameSurname;
-            userModel.UpMail = values.Email;
-            userModel.UpImageUrl = values.ImageUrl;
-            userModel.UpAbout = values.About;
-
-            return View(userModel);
+            AddProfileImage profileImage = new AddProfileImage();
+            var value = await _userManager.FindByIdAsync((id).ToString());
+            profileImage.NameSurname = value.NameSurname;
+            profileImage.About = value.About;
+            profileImage.Status = value.Status;
+            profileImage.Email = value.Email;
+           
+            return View(profileImage);
         }
 
         [HttpPost]
-        public async Task<IActionResult> WriterEditProfile(UserUpdateViewModel upUser)
+        public IActionResult WriterEditProfile(AddProfileImage profileImage)
         {
-            var values = await _userManager.FindByNameAsync(User.Identity.Name);
-
-            if (ModelState.IsValid)
+            var mail = profileImage.Email;
+            var user = sqlDbContext.Users.Where(x => x.Email == mail).FirstOrDefault();
+            if (profileImage.ImageUrl != null)
             {
-                values.NameSurname = upUser.UpNameSurname;
-                values.Email = upUser.UpMail;
-                values.ImageUrl = upUser.UpImageUrl;
-                values.About = upUser.UpAbout;
-                var result = await _userManager.UpdateAsync(values);
-
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("WriterEditProfile", "Writer");
-                }
-                else
-                {
-                    foreach (var item in result.Errors)
-                    {
-                        ModelState.AddModelError("", item.Description);
-                    }
-                }
+                var extension = Path.GetExtension(profileImage.ImageUrl.FileName);
+                var newImageName = Guid.NewGuid() + extension;
+                var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/FitTurkBlog/newImages/", newImageName);
+                var stream = new FileStream(location, FileMode.Create);
+                profileImage.ImageUrl.CopyTo(stream);
+                user.ImageUrl = "/FitTurkBlog/newImages/" + newImageName;
+                ViewBag.iu = "/FitTurkBlog/newImages/" + newImageName;
             }
 
-            return View();
+            user.NameSurname = profileImage.NameSurname;
+            user.About = profileImage.About;
+            user.Status = true;
+            user.Email = profileImage.Email;
+            userManager.Update(user);
+
+            return RedirectToAction("WriterProfile", "Writer");
         }
+
 
         [AllowAnonymous]
         [HttpGet]
         public IActionResult WriterAdd()
         {
+
             return View();
         }
 

@@ -1,16 +1,16 @@
 ﻿@using FitTurkBlog.Entities.Concrete
 @model List<Message2>
 @{
-    ViewData["Title"] = "SendBox";
+    ViewData["Title"] = "AllMessage";
     Layout = "~/Views/Shared/Layouts/WriterLayout.cshtml";
 }
 
-<h1>Giden Kutusu</h1>
+<h1>Tüm Mesajlar</h1>
 <br />
 <br />
-<form asp-action="Sendbox" asp-controller="Message" method="get" class="mail-search  float-right ">
+<form asp-action="AllMessage" asp-controller="Message" method="get" class="mail-search  float-right ">
     <div class="input-group">
-        <input type="text" name="key" id="key" placeholder="Postalarda arama yapın" class="form-control"  />
+        <input type="text" name="key" id="key" placeholder="Postalarda arama yapın" class="form-control" />
         <div class="input-group-btn">
             <input type="submit" value="Ara" class="btn btn-primary" />
         </div>
@@ -18,7 +18,7 @@
     <br />
     <br />
 </form>
-<a href="/Message/SendBox/" class="btn btn-primary float-left " data-toggle="tooltip" data-placement="left" title="Yenile"><i class="mdi mdi-refresh"></i> Yenile</a>
+<a href="/Message/AllMessage/" class="btn btn-primary float-left " data-toggle="tooltip" data-placement="left" title="Yenile"><i class="mdi mdi-refresh"></i> Yenile</a>
 <br />
 <br />
 <h3>@ViewBag.w</h3>
@@ -58,9 +58,37 @@
                 <td class="mail-date" style="color:gray; font-weight:lighter ">@(((DateTime)item.MessageDate).ToString("HH:mm"))</td>
 
             </tr>
+
+            if (item.MessageReceiverID == ViewBag.vWriterID && item.MessageStatus == true)
+            {
+                <tr class="unread">
+                    <td class="check-mail">
+                        <a href="/Message/IsImportant/@item.MessageID/" style="color:black; font-weight:bolder">
+
+                            @if (item.IsImportant == true)
+                            {
+                                <i class="mdi mdi-star"></i>
+                            }
+                            else if (item.IsImportant == false)
+                            {
+                                <i class="mdi mdi-star-outline"></i>
+                            }
+
+                        </a>
+                    </td>
+                    <td class="mail-ontact"><a href="/Message/InboxMessageDetails/@item.MessageID" style="color:black; font-weight:bolder">@item.MessageSenderUser.WriterName</a></td>
+                    <td class="mail-ontact"><a href="/Message/InboxMessageDetails/@item.MessageID" style="color:black; font-weight:bolder">@item.MessageReceiverUser.WriterName</a></td>
+                    <td class="mail-subject"><a href="/Message/InboxMessageDetails/@item.MessageID" style="color:black; font-weight:bolder">@item.MessageSubject</a></td>
+                    <td class="mail-date" style="color:black; font-weight:bolder">@(((DateTime)item.MessageDate).ToString("dd-MMM-yyyy"))</td>
+                    <td class="mail-date" style="color:black; font-weight:bolder">@(((DateTime)item.MessageDate).ToString("HH:mm"))</td>
+
+                </tr>
+            }
         }
     </tbody>
 </table>
 <br />
 <a href="/Message/SendMessage/" class="btn btn-dark">Yeni Mesaj Oluştur</a>
+
+
 

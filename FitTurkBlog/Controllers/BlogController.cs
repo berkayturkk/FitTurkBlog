@@ -3,12 +3,14 @@ using FitTurkBlog.BL.ValidationRules;
 using FitTurkBlog.DAL.Context;
 using FitTurkBlog.DAL.EntityFramework;
 using FitTurkBlog.Entities.Concrete;
+using FitTurkBlog.UI.Models;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using X.PagedList;
 
@@ -27,7 +29,7 @@ namespace FitTurkBlog.UI.Controllers
         // Bu metot ile ToPagedList ile sayfalama, OrderByDescending ile Bloglari yeniden eskiye gore BlogID lerine gore siralama islemleri yaptim.
         public IActionResult Index(int page = 1)
         {
-            var values = _blogManager.GetBlogListWithCategory().Where(x => x.BlogStatus == true).OrderByDescending(x => x.BlogID).ToPagedList(page, 6);
+            var values = _blogManager.GetBlogListWithCategory().Where(x => x.BlogStatus == true).OrderByDescending(x => x.BlogCreateDate).ToPagedList(page, 6);
             return View(values);
         }
 
@@ -39,17 +41,16 @@ namespace FitTurkBlog.UI.Controllers
             return View(values);
         }
 
-        public IActionResult BlogListByWriter()
+        public IActionResult BlogListByWriter(int page = 1)
         {
             var userName = User.Identity.Name;
             var userMail = sqlDbContext.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
             var writerID = sqlDbContext.Users.Where(x => x.Email == userMail).Select(y => y.Id).FirstOrDefault();
-            var values = _blogManager.GetListWithCategoryByWriterBm(writerID);
+            var values = _blogManager.GetListWithCategoryByWriterBm(writerID).Where(x => x.BlogStatus == true).OrderByDescending(x => x.BlogCreateDate).ToPagedList(page, 6);
             return View(values);
         }
 
-        [HttpGet]
-        public IActionResult BlogAdd()
+        public void CategorySelectList()
         {
             List<SelectListItem> categoryValue = (from x in categoryManager.GetList()
                                                   select new SelectListItem
@@ -73,32 +74,53 @@ namespace FitTurkBlog.UI.Controllers
             }.ToList();
             ViewBag.cv = categoryValue;
             ViewBag.sv = statusValue;
+        }
+
+        [HttpGet]
+        public IActionResult BlogAdd()
+        {
+            CategorySelectList();
             return View();
         }
 
         [HttpPost]
-        public IActionResult BlogAdd(Blog blog)
+        public IActionResult BlogAdd(AddBlogImage blogImageModel)
         {
             var userName = User.Identity.Name;
             var userMail = sqlDbContext.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
             var writerID = sqlDbContext.Users.Where(x => x.Email == userMail).Select(y => y.Id).FirstOrDefault();
-            BlogValidator blogValidationRules = new BlogValidator();
-            ValidationResult results = blogValidationRules.Validate(blog);
-            if (results.IsValid)
+
+            Blog blog = new Blog();
+
+            if (blogImageModel.BlogImage != null)
             {
-                blog.BlogCreateDate = DateTime.Parse(DateTime.Now.ToShortDateString());
-                blog.WriterID = writerID;
-                _blogManager.Add(blog);
-                return RedirectToAction("BlogListByWriter", "Blog");
+                var extension1 = Path.GetExtension(blogImageModel.BlogImage.FileName);
+                var newImageName1 = Guid.NewGuid() + extension1;
+                var location1 = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/FitTurkBlog/newImages/", newImageName1);
+                var stream1 = new FileStream(location1, FileMode.Create);
+                blogImageModel.BlogImage.CopyTo(stream1);
+                blog.BlogImage = "/FitTurkBlog/newImages/" + newImageName1;
+                ViewBag.vBlogImage = "/FitTurkBlog/newImages/" + newImageName1;
             }
-            else
+            if (blogImageModel.BlogThumbnailImage != null)
             {
-                foreach (var item in results.Errors)
-                {
-                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
-                }
+                var extension2 = Path.GetExtension(blogImageModel.BlogThumbnailImage.FileName);
+                var newImageName2 = Guid.NewGuid() + extension2;
+                var location2 = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/FitTurkBlog/newImages/", newImageName2);
+                var stream2 = new FileStream(location2, FileMode.Create);
+                blogImageModel.BlogThumbnailImage.CopyTo(stream2);
+                blog.BlogThumbnailImage = "/FitTurkBlog/newImages/" + newImageName2;
+                ViewBag.vBlogThumbnailImage = "/FitTurkBlog/newImages/" + newImageName2;
             }
-            return View();
+            CategorySelectList();
+            blog.CategoryID = blogImageModel.CategoryID;
+            blog.BlogTitle = blogImageModel.BlogTitle;
+            blog.BlogContent = blogImageModel.BlogContent;
+            blog.BlogStatus = true;
+            blog.BlogCreateDate = DateTime.Now;
+            blog.WriterID = writerID;
+            _blogManager.Add(blog);
+            return RedirectToAction("BlogListByWriter", "Blog");
         }
 
         public IActionResult DeleteBlog(int id)
@@ -112,6 +134,8 @@ namespace FitTurkBlog.UI.Controllers
         public IActionResult EditBlog(int id)
         {
             var blogValue = _blogManager.TGetById(id);
+            AddBlogImage blogImageModel = new AddBlogImage();
+            TempData["blogID"] = blogValue.BlogID;
             List<SelectListItem> categoryValue = (from x in categoryManager.GetList()
                                                   select new SelectListItem
                                                   {
@@ -132,23 +156,58 @@ namespace FitTurkBlog.UI.Controllers
                 }
 
             }.ToList();
+
+            blogImageModel.BlogID = blogValue.BlogID;
+            blogImageModel.WriterID = blogValue.WriterID;
+            blogImageModel.BlogTitle = blogValue.BlogTitle;
+            blogImageModel.BlogContent = blogValue.BlogContent;
+            blogImageModel.CategoryID = blogValue.CategoryID;
+            blogValue.BlogStatus = blogValue.BlogStatus;
+
             ViewBag.cv = categoryValue;
             ViewBag.sv = statusValue;
             return View(blogValue);
         }
 
         [HttpPost]
-        public IActionResult EditBlog(Blog blog)
+        public IActionResult EditBlog(AddBlogImage blogImageModel)
         {
             var userName = User.Identity.Name;
             var userMail = sqlDbContext.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
             var writerID = sqlDbContext.Users.Where(x => x.Email == userMail).Select(y => y.Id).FirstOrDefault();
+
+            var blog = sqlDbContext.Blogs.Where(x => x.BlogID == Convert.ToInt32(TempData["blogID"])).FirstOrDefault();
+
             BlogValidator blogValidationRules = new BlogValidator();
             ValidationResult results = blogValidationRules.Validate(blog);
             if (results.IsValid)
             {
-                blog.BlogCreateDate = DateTime.Parse(DateTime.Now.ToShortDateString());
+                if (blogImageModel.BlogImage != null)
+                {
+                    var extension1 = Path.GetExtension(blogImageModel.BlogImage.FileName);
+                    var newImageName1 = Guid.NewGuid() + extension1;
+                    var location1 = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/FitTurkBlog/newImages/", newImageName1);
+                    var stream1 = new FileStream(location1, FileMode.Create);
+                    blogImageModel.BlogImage.CopyTo(stream1);
+                    blog.BlogImage = "/FitTurkBlog/newImages/" + newImageName1;
+                    ViewBag.vBlogImage = "/FitTurkBlog/newImages/" + newImageName1;
+                }
+                else if(blogImageModel.BlogThumbnailImage != null)
+                {
+                    var extension2 = Path.GetExtension(blogImageModel.BlogThumbnailImage.FileName);
+                    var newImageName2 = Guid.NewGuid() + extension2;
+                    var location2 = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/FitTurkBlog/newImages/", newImageName2);
+                    var stream2 = new FileStream(location2, FileMode.Create);
+                    blogImageModel.BlogThumbnailImage.CopyTo(stream2);
+                    blog.BlogThumbnailImage = "/FitTurkBlog/newImages/" + newImageName2;
+                    ViewBag.vBlogThumbnailImage = "/FitTurkBlog/newImages/" + newImageName2;
+                }
+                blog.WriterID = blogImageModel.WriterID;
+                blog.BlogTitle = blogImageModel.BlogTitle;
+                blog.BlogContent = blogImageModel.BlogContent;
+                blog.BlogCreateDate = DateTime.Now;
                 blog.WriterID = writerID;
+                blog.BlogID = Convert.ToInt32(TempData["blogID"]);
                 _blogManager.Update(blog);
                 return RedirectToAction("BlogListByWriter", "Blog");
             }
@@ -161,6 +220,7 @@ namespace FitTurkBlog.UI.Controllers
             }
             return View();
         }
+
 
 
     }

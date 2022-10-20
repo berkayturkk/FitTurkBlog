@@ -26,12 +26,10 @@ namespace FitTurkBlog.UI.Controllers
         }
 
         [HttpPost]
-        public IActionResult PartialAddComment(Comment comment)
+        public IActionResult PartialAddComment(Comment comment,int id)
         {
-            
             comment.CommentDate = DateTime.Parse(DateTime.Now.ToShortDateString());
             comment.CommentStatus = true;
-            comment.BlogID = 21;
             _commentManager.CommentAdd(comment);
             return RedirectToAction("Index", "Blog");
         }

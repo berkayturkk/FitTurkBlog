@@ -126,7 +126,6 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
             AddProfileImage profileImage = new AddProfileImage();
             var value = await _userManager.FindByIdAsync((id).ToString());
             profileImage.NameSurname = value.NameSurname;
-            profileImage.Username = value.UserName;
             profileImage.About = value.About;
             profileImage.Status = value.Status;
             profileImage.Email = value.Email;
@@ -150,7 +149,6 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
             }
 
             user.NameSurname = profileImage.NameSurname;
-            user.UserName = profileImage.Username;
             user.About = profileImage.About;
             user.Status = profileImage.Status;
             user.Email = profileImage.Email;
