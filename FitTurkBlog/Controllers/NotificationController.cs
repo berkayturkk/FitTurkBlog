@@ -20,5 +20,11 @@ namespace FitTurkBlog.UI.Controllers
             var values = notificationManager.GetList().Where(x => x.NotificationStatus == true).OrderByDescending(x => x.NotificationDate).ToList();
             return View(values);
         }
+
+        public IActionResult NotificationDetails(int id)
+        {
+            var values = notificationManager.TGetById(id);
+            return View(values);
+        }
     }
 }

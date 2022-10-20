@@ -17,7 +17,7 @@ namespace FitTurkBlog.UI.View_Components.Writer
             var userName = User.Identity.Name;
             var userMail = _sqlDbContext.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
             var writerID = _sqlDbContext.Users.Where(x => x.Email == userMail).Select(y => y.Id).FirstOrDefault(); ;
-            var values = _message2Manager.GetInBoxListByWriter(writerID);
+            var values = _message2Manager.GetInBoxListByWriter(writerID).Where(x => x.MessageStatus == true).OrderByDescending(x => x.MessageDate).ToList();
             return View(values);
         }
     }

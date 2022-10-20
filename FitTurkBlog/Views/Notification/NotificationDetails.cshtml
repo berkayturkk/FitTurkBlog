@@ -1,0 +1,26 @@
+﻿@model FitTurkBlog.Entities.Concrete.Notification
+@{
+    ViewData["Title"] = "NotificationDetails";
+    Layout = "~/Views/Shared/Layouts/WriterLayout.cshtml";
+}
+
+<h1><strong>Bildirim Detayı</strong></h1>
+<br />
+<br />
+
+<div class="col-lg-12">
+    <br />
+    @Html.Label("Bildirim Tarihi")
+    @Html.TextBoxFor(x => x.NotificationDate, new{ @class = "form-control" , @disabled="disabled"})
+    <br />
+    @Html.Label("Bildirim Türü")
+    @Html.TextBoxFor(x => x.NotificationType, new{ @class = "form-control" , @disabled="disabled"})
+    <br />
+    @Html.Label("Bildirim İçeriği")
+    @Html.TextAreaFor(x => x.NotificationDetails,5,3, new{ @class = "form-control", @disabled="disabled"})
+    <br />
+    <br />
+    <a href="/Notification/AllNotification/" class="btn btn-info">Bildirimlere Git</a>
+</div>
+
+
