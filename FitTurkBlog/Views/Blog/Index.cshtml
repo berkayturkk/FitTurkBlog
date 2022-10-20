@@ -38,9 +38,9 @@
                                     </ul>
                                     <div class="blog-info-middle">
                                         <ul>
-                                            <li class="mx-2">
-                                                <a href="#"><i class="far fa-thumbs-up"></i> 201 Puan</a>
-                                            </li>
+
+                                           
+                                            @await Component.InvokeAsync("BlogScoreOnBlog",new{id=item.BlogID})
 
                                             @await Component.InvokeAsync("CommentCountOnBlog",new{id=item.BlogID})
 

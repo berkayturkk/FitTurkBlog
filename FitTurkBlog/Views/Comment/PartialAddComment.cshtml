@@ -3,6 +3,7 @@
     <h4>Yorum Yap</h4>
     <div class="comment-bottom">
         <form action="/Comment/PartialAddComment/" method="post">
+            <input type="hidden" name="BlogID" value="@ViewBag.i" />
             <input class="form-control" type="text" name="CommentUserName" placeholder="Ad-Soyad" required="">
             <input class="form-control" type="text" name="CommentTitle" placeholder="Yorum Başlığı" required="">
             <select class="form-control" name="BlogScore" required="" style="margin-bottom:10.8px">

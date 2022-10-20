@@ -14,6 +14,7 @@ namespace FitTurkBlog.UI.Controllers
     public class CommentController : Controller
     {
         CommentManager _commentManager = new CommentManager(new EFCommentRepository());
+        UserManager userManager = new UserManager(new EFUserRepository());
         public IActionResult Index()
         {
             return View();
@@ -28,8 +29,19 @@ namespace FitTurkBlog.UI.Controllers
         [HttpPost]
         public IActionResult PartialAddComment(Comment comment,int id)
         {
-            comment.CommentDate = DateTime.Parse(DateTime.Now.ToShortDateString());
+            var user = userManager.GetList().Where(x => x.NameSurname == comment.CommentUserName || x.UserName == comment.CommentUserName).FirstOrDefault();
+            comment.CommentDate = DateTime.Now;
             comment.CommentStatus = true;
+            
+            if(user != null)
+            {
+                comment.CommentImageUrl = user.ImageUrl;
+            }
+            else
+            {
+                comment.CommentImageUrl = "/FitTurkBlog/newImages/eedebfdc-b507-4a98-b5c3-2f9b37a1a32a.jpg";
+            }
+
             _commentManager.CommentAdd(comment);
             return RedirectToAction("Index", "Blog");
         }

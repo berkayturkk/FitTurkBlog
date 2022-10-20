@@ -22,14 +22,19 @@ namespace FitTurkBlog.UI.Controllers
     {
         BlogManager _blogManager = new BlogManager(new EFBlogRepository());
         CategoryManager categoryManager = new CategoryManager(new EFCategoryRepository());
+        CommentManager commentManager = new CommentManager(new EFCommentRepository());
         SqlDbContext sqlDbContext = new SqlDbContext();
 
 
         [AllowAnonymous]
         // Bu metot ile ToPagedList ile sayfalama, OrderByDescending ile Bloglari yeniden eskiye gore BlogID lerine gore siralama islemleri yaptim.
-        public IActionResult Index(int page = 1)
+        public IActionResult Index(int id,int page = 1)
         {
             var values = _blogManager.GetBlogListWithCategory().Where(x => x.BlogStatus == true).OrderByDescending(x => x.BlogCreateDate).ToPagedList(page, 6);
+            var blogScores = commentManager.CommentGetList(id).Select(x => x.BlogScore).ToList();
+            var totalBlogScore = ViewBag.vTotalBlogScore;
+
+            ViewBag.vTotalBlogScore = totalBlogScore;
             return View(values);
         }
 

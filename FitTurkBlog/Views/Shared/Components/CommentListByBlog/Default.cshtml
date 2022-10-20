@@ -12,9 +12,9 @@
     @foreach (var item in Model)
     {
         <div class="media">
-            <img src="~/FitTurkBlog/images/a1.jpg" alt="" class="img-fluid" />
+            <img src="@item.CommentImageUrl" alt="" class="img-fluid" style="width:75px;height:75px" />
             <div class="media-body">
-                <h5 class="mt-0">@item.CommentUserName</h5>
+                <h5 class="mt-0" style="font-size:14px">@item.CommentUserName</h5>
                 <p>@item.CommentContent</p>
             </div>
 

@@ -294,6 +294,9 @@ namespace FitTurkBlog.DAL.Migrations
                     b.Property<DateTime>("CommentDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("CommentImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("CommentStatus")
                         .HasColumnType("bit");
 
