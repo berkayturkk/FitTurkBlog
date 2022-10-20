@@ -13,12 +13,12 @@ namespace FitTurkBlog.BL.Abstract
         List<Message2> GetInBoxListByKey(int id,string key);
         List<Message2> GetSendBoxListByWriter(int id);
         List<Message2> GetSendBoxListByKey(int id,string key);
-        List<Message2> GetListAllByKey(string key);
-        List<Message2> GetListAllMessage();
-        List<Message2> GetTrashBoxListByWriter();
-        List<Message2> GetTrashBoxListByKey(string key);
-        List<Message2> GetImportantBoxListByWriter();
-        List<Message2> GetImportantBoxListByKey(string key);
+        List<Message2> GetListAllByKey(string key,int id);
+        List<Message2> GetListAllMessage(int id);
+        List<Message2> GetTrashBoxListByWriter(int id);
+        List<Message2> GetTrashBoxListByKey(string key, int id);
+        List<Message2> GetImportantBoxListByWriter(int id);
+        List<Message2> GetImportantBoxListByKey(string key, int id);
         Message2 GetMessageByIdWithSenderAndReceiver(int id);
 
     }

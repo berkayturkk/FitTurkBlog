@@ -14,5 +14,8 @@ namespace FitTurkBlog.Entities.Concrete
         public string ImageUrl { get; set; }
         public string About { get; set; }
         public bool Status { get; set; }
+        public List<Blog> WriterBlogs { get; set; }
+        public virtual ICollection<Message2> WriterSender { get; set; }
+        public virtual ICollection<Message2> WriterReceiver { get; set; }
     }
 }

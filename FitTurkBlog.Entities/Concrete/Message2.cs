@@ -17,8 +17,8 @@ namespace FitTurkBlog.Entities.Concrete
         public string MessageDetails { get; set; }
         public DateTime MessageDate { get; set; }
         public bool MessageStatus { get; set; }
-        public Writer MessageSenderUser { get; set; }
-        public Writer MessageReceiverUser { get; set; }
+        public AppUser MessageSenderUser { get; set; }
+        public AppUser MessageReceiverUser { get; set; }
         public bool IsImportant { get; set; }
         public bool IsDeleted { get; set; }
 

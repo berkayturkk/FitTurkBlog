@@ -54,24 +54,24 @@ namespace FitTurkBlog.BL.Concrete
 
         }
 
-        public List<Message2> GetTrashBoxListByWriter()
+        public List<Message2> GetTrashBoxListByWriter(int id)
         {
-            return _message2DAL.GetListTrashBoxWithMessageByWriter();
+            return _message2DAL.GetListTrashBoxWithMessageByWriter(id);
         }
 
-        public List<Message2> GetImportantBoxListByWriter()
+        public List<Message2> GetImportantBoxListByWriter(int id)
         {
-            return _message2DAL.GetListImportantBoxWithMessageByWriter();
+            return _message2DAL.GetListImportantBoxWithMessageByWriter(id);
         }
 
-        public List<Message2> GetListAllByKey(string key)
+        public List<Message2> GetListAllByKey(string key,int id)
         {
-            return _message2DAL.GetListByKey(key);
+            return _message2DAL.GetListByKey(key,id);
         }
 
-        public List<Message2> GetListAllMessage()
+        public List<Message2> GetListAllMessage(int id)
         {
-            return _message2DAL.GetListAllMessage();
+            return _message2DAL.GetListAllMessage(id);
         }
 
         public List<Message2> GetInBoxListByKey(int id, string key)
@@ -83,14 +83,14 @@ namespace FitTurkBlog.BL.Concrete
         {
             return _message2DAL.GetListSendBoxWithMessageByKey(id, key);
         }
-        public List<Message2> GetTrashBoxListByKey(string key)
+        public List<Message2> GetTrashBoxListByKey(string key, int id)
         {
-            return _message2DAL.GetListTrashBoxWithMessageByKey(key);
+            return _message2DAL.GetListTrashBoxWithMessageByKey(key,id);
         }
 
-        public List<Message2> GetImportantBoxListByKey(string key)
+        public List<Message2> GetImportantBoxListByKey(string key, int id)
         {
-            return _message2DAL.GetListImportantBoxWithMessageByKey(key);
+            return _message2DAL.GetListImportantBoxWithMessageByKey(key,id);
         }
 
         public Message2 GetMessageByIdWithSenderAndReceiver(int id)

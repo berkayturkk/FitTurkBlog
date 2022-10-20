@@ -30,49 +30,49 @@ namespace FitTurkBlog.DAL.EntityFramework
             }
         }
 
-        public List<Message2> GetListTrashBoxWithMessageByKey(string key)
+        public List<Message2> GetListTrashBoxWithMessageByKey(string key,int id)
         {
             using (var sqlDbContext = new SqlDbContext())
             {
-                return sqlDbContext.Messages2.Include(x => x.MessageSenderUser).Include(x => x.MessageReceiverUser).Where(x => (x.MessageSenderUser.WriterMail.Contains(key) || x.MessageReceiverUser.WriterMail.Contains(key) || x.MessageSubject.Contains(key) || x.MessageDetails.Contains(key)) && x.IsDeleted == true && x.IsImportant == false).ToList();
+                return sqlDbContext.Messages2.Include(x => x.MessageSenderUser).Include(x => x.MessageReceiverUser).Where(x => (x.MessageSenderUser.Email.Contains(key) || x.MessageReceiverUser.Email.Contains(key) || x.MessageSubject.Contains(key) || x.MessageDetails.Contains(key)) && (x.MessageReceiverID == id || x.MessageSenderID == id) && x.IsDeleted == true && x.IsImportant == false).ToList();
             }
         }
-        public List<Message2> GetListTrashBoxWithMessageByWriter()
+        public List<Message2> GetListTrashBoxWithMessageByWriter(int id)
         {
             using (var sqlDbContext = new SqlDbContext())
             {
-                return sqlDbContext.Messages2.Include(x => x.MessageSenderUser).Include(x => x.MessageReceiverUser).Where(x =>x.IsDeleted == true && x.IsImportant == false).ToList();
-            }
-        }
-
-        public List<Message2> GetListImportantBoxWithMessageByKey(string key)
-        {
-            using (var sqlDbContext = new SqlDbContext())
-            {
-                return sqlDbContext.Messages2.Include(x => x.MessageSenderUser).Include(x => x.MessageReceiverUser).Where(x => (x.MessageSenderUser.WriterMail.Contains(key) || x.MessageReceiverUser.WriterMail.Contains(key) || x.MessageSubject.Contains(key) || x.MessageDetails.Contains(key)) && x.IsImportant == true).ToList();
-            }
-        }
-        public List<Message2> GetListImportantBoxWithMessageByWriter()
-        {
-            using (var sqlDbContext = new SqlDbContext())
-            {
-                return sqlDbContext.Messages2.Include(x => x.MessageSenderUser).Include(x => x.MessageReceiverUser).Where(x =>x.IsImportant == true).ToList();
+                return sqlDbContext.Messages2.Include(x => x.MessageSenderUser).Include(x => x.MessageReceiverUser).Where(x =>x.IsDeleted == true && x.IsImportant == false && (x.MessageSenderID == id || x.MessageReceiverID == id)).ToList();
             }
         }
 
-        public List<Message2> GetListByKey(string key)
+        public List<Message2> GetListImportantBoxWithMessageByKey(string key,int id)
         {
             using (var sqlDbContext = new SqlDbContext())
             {
-                return sqlDbContext.Messages2.Include(x => x.MessageSenderUser).Include(x => x.MessageReceiverUser).Where(x => x.MessageSenderUser.WriterMail.Contains(key) || x.MessageReceiverUser.WriterMail.Contains(key) || x.MessageSubject.Contains(key) || x.MessageDetails.Contains(key)).ToList();
+                return sqlDbContext.Messages2.Include(x => x.MessageSenderUser).Include(x => x.MessageReceiverUser).Where(x => (x.MessageSenderUser.Email.Contains(key) || x.MessageReceiverUser.Email.Contains(key) || x.MessageSubject.Contains(key) || x.MessageDetails.Contains(key)) && (x.MessageReceiverID == id || x.MessageSenderID == id) && x.IsImportant == true).ToList();
+            }
+        }
+        public List<Message2> GetListImportantBoxWithMessageByWriter(int id)
+        {
+            using (var sqlDbContext = new SqlDbContext())
+            {
+                return sqlDbContext.Messages2.Include(x => x.MessageSenderUser).Include(x => x.MessageReceiverUser).Where(x =>x.IsImportant == true && (x.MessageSenderID == id || x.MessageReceiverID == id)).ToList();
             }
         }
 
-        public List<Message2> GetListAllMessage()
+        public List<Message2> GetListByKey(string key,int id)
         {
             using (var sqlDbContext = new SqlDbContext())
             {
-                return sqlDbContext.Messages2.Include(x => x.MessageSenderUser).Include(y => y.MessageReceiverUser).ToList();
+                return sqlDbContext.Messages2.Include(x => x.MessageSenderUser).Include(x => x.MessageReceiverUser).Where(x => (x.MessageReceiverID == id || x.MessageSenderID == id) && (x.MessageSenderUser.Email.Contains(key) || x.MessageReceiverUser.Email.Contains(key) || x.MessageSubject.Contains(key) || x.MessageDetails.Contains(key))).ToList();
+            }
+        }
+
+        public List<Message2> GetListAllMessage(int id)
+        {
+            using (var sqlDbContext = new SqlDbContext())
+            {
+                return sqlDbContext.Messages2.Include(x => x.MessageSenderUser).Include(y => y.MessageReceiverUser).Where(x => x.MessageSenderID == id || x.MessageReceiverID == id).ToList();
             }
         }
 
@@ -80,7 +80,7 @@ namespace FitTurkBlog.DAL.EntityFramework
         {
             using (var sqlDbContext = new SqlDbContext())
             {
-                return sqlDbContext.Messages2.Include(x => x.MessageSenderUser).Include(x => x.MessageReceiverUser).Where(x => (x.MessageSenderUser.WriterMail.Contains(key)  || x.MessageReceiverUser.WriterMail.Contains(key) || x.MessageSubject.Contains(key) || x.MessageDetails.Contains(key))&& x.MessageReceiverID == id && x.IsDeleted == false && x.IsImportant == false).ToList();
+                return sqlDbContext.Messages2.Include(x => x.MessageSenderUser).Include(x => x.MessageReceiverUser).Where(x => (x.MessageSenderUser.Email.Contains(key)  || x.MessageReceiverUser.Email.Contains(key) || x.MessageSubject.Contains(key) || x.MessageDetails.Contains(key))&& x.MessageReceiverID == id && x.IsDeleted == false && x.IsImportant == false).ToList();
             }
         }
 
@@ -88,7 +88,7 @@ namespace FitTurkBlog.DAL.EntityFramework
         {
             using (var sqlDbContext = new SqlDbContext())
             {
-                return sqlDbContext.Messages2.Include(x => x.MessageSenderUser).Include(x => x.MessageReceiverUser).Where(x => (x.MessageSenderUser.WriterMail.Contains(key) || x.MessageReceiverUser.WriterMail.Contains(key) || x.MessageSubject.Contains(key) || x.MessageDetails.Contains(key)) && x.MessageSenderID == id && x.IsDeleted == false && x.IsImportant == false).ToList();
+                return sqlDbContext.Messages2.Include(x => x.MessageSenderUser).Include(x => x.MessageReceiverUser).Where(x => (x.MessageSenderUser.Email.Contains(key) || x.MessageReceiverUser.Email.Contains(key) || x.MessageSubject.Contains(key) || x.MessageDetails.Contains(key)) && x.MessageSenderID == id && x.IsDeleted == false && x.IsImportant == false).ToList();
             }
         }
 

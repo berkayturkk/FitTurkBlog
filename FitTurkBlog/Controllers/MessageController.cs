@@ -138,12 +138,12 @@ namespace FitTurkBlog.UI.Controllers
             ViewBag.gm = values2.Count();
             if (key != null)
             {
-                var values = _message2Manager.GetImportantBoxListByKey(key).OrderByDescending(x => x.MessageDate).ToList();
+                var values = _message2Manager.GetImportantBoxListByKey(key,writerID).OrderByDescending(x => x.MessageDate).ToList();
                 return View(values);
             }
             else
             {
-                var values = _message2Manager.GetImportantBoxListByWriter().OrderByDescending(x => x.MessageDate).ToList();
+                var values = _message2Manager.GetImportantBoxListByWriter(writerID).OrderByDescending(x => x.MessageDate).ToList();
                 return View(values);
             }
         }
@@ -213,12 +213,12 @@ namespace FitTurkBlog.UI.Controllers
             ViewBag.gm = values2.Count();
             if (key != null)
             {
-                var values = _message2Manager.GetTrashBoxListByKey(key).OrderByDescending(x => x.MessageDate).ToList();
+                var values = _message2Manager.GetTrashBoxListByKey(key,writerID).OrderByDescending(x => x.MessageDate).ToList();
                 return View(values);
             }
             else
             {
-                var values = _message2Manager.GetTrashBoxListByWriter().OrderByDescending(x => x.MessageDate).ToList();
+                var values = _message2Manager.GetTrashBoxListByWriter(writerID).OrderByDescending(x => x.MessageDate).ToList();
                 return View(values);
             }
         }
@@ -232,12 +232,12 @@ namespace FitTurkBlog.UI.Controllers
             ViewBag.gm = values2.Count();
             if (key != null)
             {
-                var values = _message2Manager.GetListAllByKey(key).OrderByDescending(x => x.MessageDate).ToList();
+                var values = _message2Manager.GetListAllByKey(key, writerID).OrderByDescending(x => x.MessageDate).ToList();
                 return View(values);
             }
             else
             {
-                var values = _message2Manager.GetListAllMessage();
+                var values = _message2Manager.GetListAllMessage(writerID).OrderByDescending(x => x.MessageDate).ToList(); ;
                 return View(values);
             }
 

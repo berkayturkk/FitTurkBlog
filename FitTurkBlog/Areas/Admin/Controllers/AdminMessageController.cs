@@ -94,7 +94,6 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
             var userMail = _sqlDbContext.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
             var writerID = _sqlDbContext.Users.Where(x => x.Email == userMail).Select(y => y.Id).FirstOrDefault();
             message2.MessageSenderID = writerID;
-            //message2.MessageReceiverID = 5;
             message2.MessageStatus = true;
             message2.MessageDate = Convert.ToDateTime(DateTime.Now);
             if (message2.MessageSubject != null && message2.MessageDetails != null)
@@ -115,12 +114,12 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
             ViewBag.gm = values2.Count();
             if (key != null)
             {
-                var values = _message2Manager.GetListAllByKey(key).OrderByDescending(x => x.MessageDate).ToList();
+                var values = _message2Manager.GetListAllByKey(key, writerID).OrderByDescending(x => x.MessageDate).ToList();
                 return View(values);
             }
             else
             {
-                var values = _message2Manager.GetListAllMessage();
+                var values = _message2Manager.GetListAllMessage(writerID).OrderByDescending(x => x.MessageDate).ToList(); ;
                 return View(values);
             }
 
@@ -190,12 +189,12 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
             ViewBag.gm = values2.Count();
             if (key != null)
             {
-                var values = _message2Manager.GetTrashBoxListByKey(key).OrderByDescending(x => x.MessageDate).ToList();
+                var values = _message2Manager.GetTrashBoxListByKey(key,writerID).OrderByDescending(x => x.MessageDate).ToList();
                 return View(values);
             }
             else
             {
-                var values = _message2Manager.GetTrashBoxListByWriter().OrderByDescending(x => x.MessageDate).ToList();
+                var values = _message2Manager.GetTrashBoxListByWriter(writerID).OrderByDescending(x => x.MessageDate).ToList();
                 return View(values);
             }
         }
@@ -236,12 +235,12 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
             ViewBag.gm = values2.Count();
             if (key != null)
             {
-                var values = _message2Manager.GetImportantBoxListByKey(key).OrderByDescending(x => x.MessageDate).ToList();
+                var values = _message2Manager.GetImportantBoxListByKey(key,writerID).OrderByDescending(x => x.MessageDate).ToList();
                 return View(values);
             }
             else
             {
-                var values = _message2Manager.GetImportantBoxListByWriter().OrderByDescending(x => x.MessageDate).ToList();
+                var values = _message2Manager.GetImportantBoxListByWriter(writerID).OrderByDescending(x => x.MessageDate).ToList();
                 return View(values);
             }
         }

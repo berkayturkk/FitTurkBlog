@@ -13,10 +13,10 @@
                 @foreach (var item in Model)
                 {
                     <a class="dropdown-item float-left" href="profile.html">
-                        <img alt="image" class="rounded-circle" src="@item.MessageReceiverUser.WriterImage">
+                        <img alt="image" class="rounded-circle" src="@item.MessageReceiverUser.ImageUrl">
                     </a>
                     <div class="media-body">
-                        <strong>@item.MessageSenderUser.WriterName</strong> sana mesaj gönderdi. <br>
+                        <strong>@item.MessageSenderUser.NameSurname</strong> sana mesaj gönderdi. <br>
                         <small class="text-muted">
                             @(((DateTime)item.MessageDate).ToString(" dd-MMM-yyyy")) - @(((DateTime)item.MessageDate).ToString(" HH:dd"))
                             @{
