@@ -118,7 +118,7 @@ namespace FitTurkBlog.UI.Controllers
             blog.BlogContent = blogImageModel.BlogContent;
             blog.BlogStatus = true;
             blog.BlogCreateDate = DateTime.Now;
-            blog.WriterID = writerID;
+            blog.BlogWriterId = writerID;
             _blogManager.Add(blog);
             return RedirectToAction("BlogListByWriter", "Blog");
         }
@@ -158,7 +158,7 @@ namespace FitTurkBlog.UI.Controllers
             }.ToList();
 
             blogImageModel.BlogID = blogValue.BlogID;
-            blogImageModel.WriterID = blogValue.WriterID;
+            blogImageModel.WriterID = blogValue.BlogWriterId;
             blogImageModel.BlogTitle = blogValue.BlogTitle;
             blogImageModel.BlogContent = blogValue.BlogContent;
             blogImageModel.CategoryID = blogValue.CategoryID;
@@ -202,11 +202,11 @@ namespace FitTurkBlog.UI.Controllers
                     blog.BlogThumbnailImage = "/FitTurkBlog/newImages/" + newImageName2;
                     ViewBag.vBlogThumbnailImage = "/FitTurkBlog/newImages/" + newImageName2;
                 }
-                blog.WriterID = blogImageModel.WriterID;
+                blog.BlogWriterId = blogImageModel.WriterID;
                 blog.BlogTitle = blogImageModel.BlogTitle;
                 blog.BlogContent = blogImageModel.BlogContent;
                 blog.BlogCreateDate = DateTime.Now;
-                blog.WriterID = writerID;
+                blog.BlogWriterId = writerID;
                 blog.BlogID = Convert.ToInt32(TempData["blogID"]);
                 _blogManager.Update(blog);
                 return RedirectToAction("BlogListByWriter", "Blog");

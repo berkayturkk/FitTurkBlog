@@ -34,7 +34,7 @@ namespace FitTurkBlog.DAL.EntityFramework
         {
             using (var sqlDbContext = new SqlDbContext())
             {
-                return sqlDbContext.Blogs.Include(x => x.Category).Where(x => x.WriterID == id).ToList();
+                return sqlDbContext.Blogs.Include(x => x.Category).Where(x => x.BlogWriterId == id).ToList();
             }
         }
 

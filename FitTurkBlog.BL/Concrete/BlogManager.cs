@@ -35,7 +35,7 @@ namespace FitTurkBlog.BL.Concrete
 
         public List<Blog> GetBlogListByWriter(int id)
         {
-            return _blogDAL.GetListAll(x => x.WriterID == id);
+            return _blogDAL.GetListAll(x => x.BlogWriterId == id);
         }
 
         public List<Blog> GetBlogByID(int id)

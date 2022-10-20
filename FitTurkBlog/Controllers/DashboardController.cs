@@ -19,7 +19,7 @@ namespace FitTurkBlog.UI.Controllers
             var userMail = sqlDbContext.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
             var writerId = sqlDbContext.Users.Where(x => x.Email == userMail).Select(y => y.Id).FirstOrDefault();
             ViewBag.v1 = sqlDbContext.Blogs.Count().ToString();
-            ViewBag.v2 = sqlDbContext.Blogs.Where(x => x.WriterID == writerId).Count().ToString();
+            ViewBag.v2 = sqlDbContext.Blogs.Where(x => x.BlogWriterId == writerId).Count().ToString();
             ViewBag.v3 = sqlDbContext.Categories.Count().ToString();
             return View();
         }

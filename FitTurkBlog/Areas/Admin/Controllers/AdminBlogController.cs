@@ -15,7 +15,7 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
 
         public IActionResult Index(int page = 1)
         {
-            var values = _blogManager.GetBlogListWithCategoryWriter().Where(x => x.BlogStatus == true).OrderByDescending(x => x.BlogCreateDate).ToPagedList(page, 8);
+            var values = _blogManager.GetBlogListWithCategoryWriter().Where(x => x.BlogStatus == true && x.BlogWriter.Status == true && x.Category.CategoryStatus == true).OrderByDescending(x => x.BlogCreateDate).ToPagedList(page, 8);
             return View(values);
         }
 
