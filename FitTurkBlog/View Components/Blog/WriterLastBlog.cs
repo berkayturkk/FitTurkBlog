@@ -2,6 +2,7 @@
 using FitTurkBlog.DAL.EntityFramework;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace FitTurkBlog.UI.View_Components.Blog
 {
@@ -9,11 +10,12 @@ namespace FitTurkBlog.UI.View_Components.Blog
     public class WriterLastBlog : ViewComponent
     {
         BlogManager blogManager = new BlogManager(new EFBlogRepository());
+        UserManager userManager = new UserManager(new EFUserRepository());
 
-        public IViewComponentResult Invoke()
+        public  IViewComponentResult Invoke(int id)
         {
-            
-            var values = blogManager.GetBlogListByWriter(1);
+            var userID = blogManager.GetBlogListWithCategoryWriter().Where(x => x.BlogID == id).Select(x => x.BlogWriterId).FirstOrDefault();
+            var values = blogManager.GetBlogListByWriter(userID).Where(x => x.BlogStatus == true).OrderByDescending(x => x.BlogCreateDate).Take(5).ToList();
             return View(values);    
         }
     }

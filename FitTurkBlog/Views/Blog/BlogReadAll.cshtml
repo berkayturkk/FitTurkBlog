@@ -84,7 +84,7 @@
                     <br />
                     @await Html.PartialAsync("~/Views/NewsLetter/SubscribeMail.cshtml")
 
-                    @await Component.InvokeAsync("WriterLastBlog")
+                    @await Component.InvokeAsync("WriterLastBlog",new {id = ViewBag.i})
 
                     <div class="single-gd tech-btm">
                         <h4>Son Eklenen Yazı</h4>
