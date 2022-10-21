@@ -15,7 +15,7 @@ namespace FitTurkBlog.UI.View_Components.Blog
         public  IViewComponentResult Invoke(int id)
         {
             var userID = blogManager.GetBlogListWithCategoryWriter().Where(x => x.BlogID == id).Select(x => x.BlogWriterId).FirstOrDefault();
-            var values = blogManager.GetBlogListByWriter(userID).Where(x => x.BlogStatus == true).OrderByDescending(x => x.BlogCreateDate).Take(5).ToList();
+            var values = blogManager.GetBlogListByWriter(userID).Where(x => x.BlogStatus == true).OrderByDescending(x => x.BlogCreateDate).Take(10).ToList();
             return View(values);    
         }
     }

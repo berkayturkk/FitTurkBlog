@@ -14,11 +14,12 @@ namespace FitTurkBlog.UI.Controllers
         AboutManager aboutManager = new AboutManager(new EFAboutRepository());
         public IActionResult Index()
         {
-            SqlDbContext c = new SqlDbContext();
-            ViewBag.v1 = c.Blogs.Count().ToString();
-            ViewBag.v2 = c.Writers.Count().ToString();
-            ViewBag.v3 = c.Comments.Count().ToString();
-            ViewBag.v4 = c.Categories.Count().ToString();
+            SqlDbContext sqlDbContext = new SqlDbContext();
+
+            ViewBag.v1 = sqlDbContext.Blogs.Where(x => x.BlogStatus == true).Count().ToString();
+            ViewBag.v2 = sqlDbContext.Users.Where(x => x.Status == true).Count().ToString();
+            ViewBag.v3 = sqlDbContext.Comments.Where(x => x.CommentStatus == true).Count().ToString();
+            ViewBag.v4 = sqlDbContext.Categories.Where(x => x.CategoryStatus == true).Count().ToString();
             return View();
         }
 
