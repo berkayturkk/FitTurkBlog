@@ -1,9 +1,9 @@
-﻿@using FitTurkBlog.Entities.Concrete
-@model List<Blog>
+﻿@using FitTurkBlog.UI.Models
+@model List<BestBlogViewModel>
 
 <div class="container py-lg-5 py-md-4">
     <div class="heading text-center mx-auto">
-        <h3 class="title-big title-big-center mb-md-5 mb-4">EN YENİ BLOG YAZILARI</h3>
+        <h3 class="title-big title-big-center mb-md-5 mb-4">EN ÇOK PUAN ALAN BLOG YAZILARI</h3>
     </div>
     <div class="row">
         @foreach (var item in Model)
@@ -15,7 +15,7 @@
                             <img class="card-img-bottom d-block" src="@item.BlogImage" alt="Card image cap">
                         </a>
                         <ul class="location-top">
-                            <li class="new">@item.Category.CategoryName</li>
+                            <li class="new">@item.CategoryName</li>
                         </ul>
                         <div class="blog-info-middle">
                             <ul>
@@ -46,10 +46,10 @@
                         }
                         <div class="author align-items-center mt-3 mb-1">
                             <div class="img-circle">
-                                <img src="@item.BlogWriter.ImageUrl" class="mr-3 img-fluid" alt="...">
+                                <img src="@item.WriterImageUrl" class="mr-3 img-fluid" alt="...">
                             </div>
                             <div class="author-info">
-                                <a href="#author">@item.BlogWriter.NameSurname</a> <br> <span class="meta-value">@(((DateTime)item.BlogCreateDate).ToString("dd-MMM-yyyy"))</span>
+                                <a href="#author">@item.WriterName</a> <br> <span class="meta-value">@(((DateTime)item.BlogCreateDate).ToString("dd-MMM-yyyy"))</span>
                             </div>
                             <div class="container">
                                 <div class="banner-info-bg">

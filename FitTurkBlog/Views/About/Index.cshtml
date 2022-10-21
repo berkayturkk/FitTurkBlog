@@ -1,6 +1,4 @@
-﻿
-
-@{
+﻿@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/Layouts/UserLayout.cshtml";
 }
@@ -31,7 +29,7 @@
                     <h3>
                         Biz Kimiz & Mizyonumuz & Vizyonumuz
                     </h3>
-                     @await Component.InvokeAsync("AboutDetails")
+                    @await Component.InvokeAsync("AboutDetails")
                     <a href="/Blog/Index/" class="btn-style btn-primary btn mt-lg-5 mt-4">Blog Yazıları</a>
                 </div>
             </div>
@@ -73,8 +71,8 @@
             <div class="teams1-content">
 
                 <div class="row">
-                    
-                    
+
+
                 </div>
             </div>
         </div>
@@ -84,6 +82,10 @@
 <section class="w3l-blog-block py-5">
 
     @await Component.InvokeAsync("BlogLast3PostOnAbout")
+
+    @await Component.InvokeAsync("BestBlog3PostOnAbout")
+
+    @await Component.InvokeAsync("MostCommentedBlog3PostOnAbout")
 
 </section>
 
