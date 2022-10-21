@@ -41,8 +41,13 @@ namespace FitTurkBlog.UI.Controllers
         [AllowAnonymous]
         public IActionResult BlogReadAll(int id)
         {
+            var commentCount = commentManager.CommentGetList(id);
+            ViewBag.vCommentCount = commentCount;
+
+
+
             ViewBag.i = id;
-            var values = _blogManager.GetBlogByID(id);
+            var values = _blogManager.GetListWithCategoryWriterByBlogID(id);
             return View(values);
         }
 

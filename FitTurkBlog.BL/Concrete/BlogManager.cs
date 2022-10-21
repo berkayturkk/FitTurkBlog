@@ -82,5 +82,9 @@ namespace FitTurkBlog.BL.Concrete
             return _blogDAL.GetById(id);
         }
 
+        public Blog GetListWithCategoryWriterByBlogID(int id)
+        {
+            return _blogDAL.GetListWithCategoryWriterByBlogID(id);
+        }
     }
 }

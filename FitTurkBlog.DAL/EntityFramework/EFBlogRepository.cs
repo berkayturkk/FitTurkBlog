@@ -38,5 +38,13 @@ namespace FitTurkBlog.DAL.EntityFramework
             }
         }
 
+        public Blog GetListWithCategoryWriterByBlogID(int id)
+        {
+            using (var sqlDbContext = new SqlDbContext())
+            {
+                return sqlDbContext.Blogs.Include(x => x.Category).Include(x => x.BlogWriter).FirstOrDefault(x => x.BlogID == id);
+            }
+        }
+
     }
 }

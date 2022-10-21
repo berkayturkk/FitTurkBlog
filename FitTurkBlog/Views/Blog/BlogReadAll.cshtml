@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FitTurkBlog.Entities.Concrete.Blog>
+﻿@model FitTurkBlog.Entities.Concrete.Blog
 
 
 @{
@@ -21,60 +21,51 @@
         <div class="row">
             <!--left-->
             <div class="col-lg-8 left-blog-info-w3layouts-agileits text-left">
-                @foreach (var item in Model)
-                {
-                    <div class="blog-grid-top">
-                        <div class="b-grid-top">
-                            <div class="blog_info_left_grid">
-                                <a href="single.html">
-                                    <img src="@item.BlogImage" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                            <div class="blog-info-middle">
-                                <ul>
-                                    <li>
-                                        <a href="#">
-                                            <i class="far fa-calendar-alt"></i>@(((DateTime)item.BlogCreateDate).ToString(" dd-MMM-yyyy"))
-                                        </a>
-                                    </li>
-                                    <li class="mx-2">
-                                        <a href="#">
-                                            <i class="far fa-thumbs-up"></i> 0 Beğeni
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="far fa-comment"></i> 0 Yorum
-                                        </a>
-                                    </li>
-
-                                </ul>
-                            </div>
-                        </div>
-
-                        <h3>
-                            <a href="single.html">@item.BlogTitle</a>
-                        </h3>
-                        <p>@item.BlogContent</p>
-                        <div class="container">
-                            <div class="banner-info-bg">
-                                <a class="btn btn-style btn-primary mt-md-5 mt-4" href="/Blog/Index/">Blog Listesi</a>
-                            </div>
-                        </div>
-                        <div class="media mt-3">
-                            <a class="d-flex pr-3" href="#">
-                                <img src="~/FitTurkBlog/images/a3.jpg" alt="" class="img-fluid" />
+                <div class="blog-grid-top">
+                    <div class="b-grid-top">
+                        <div class="blog_info_left_grid">
+                            <a href="single.html">
+                                <img src="@Model.BlogImage" class="img-fluid" alt="">
                             </a>
-                            <div class="media-body">
-                                <h5 class="mt-0">Richard Spark</h5>
-                                <p>
-                                    Lorem Ipsum convallis diam consequat magna vulputate malesuada. id dignissim sapien velit id felis ac cursus eros.
-                                    Cras a ornare elit.
-                                </p>
-                            </div>
+                        </div>
+                        <div class="blog-info-middle">
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        <i class="far fa-calendar-alt"></i>@(((DateTime)Model.BlogCreateDate).ToString(" dd-MMM-yyyy"))
+                                    </a>
+                                </li>
+
+                                @await Component.InvokeAsync("BlogScoreOnBlog",new{id=Model.BlogID})
+
+                                @await Component.InvokeAsync("CommentCountOnBlog",new{id=Model.BlogID})
+
+                            </ul>
                         </div>
                     </div>
-                }
+
+                    <h3>
+                        <a href="single.html">@Model.BlogTitle</a>
+                    </h3>
+                    <p>@Model.BlogContent</p>
+                    <div class="container">
+                        <div class="banner-info-bg">
+                            <a class="btn btn-style btn-primary mt-md-5 mt-4" href="/Blog/Index/">Blog Listesi</a>
+                        </div>
+                    </div>
+                    <div class="media mt-3">
+                        <a class="d-flex pr-3" href="#">
+                            <img src="@Model.BlogWriter.ImageUrl" alt="" class="img-fluid" />
+                        </a>
+                        <div class="media-body">
+                            <h5 class="mt-0">@Model.BlogWriter.NameSurname</h5>
+                            <br />
+                            <p>
+                                @Model.BlogWriter.About.Substring(0,@Model.BlogWriter.About.Substring(0,200).LastIndexOf(" "))...
+                            </p>
+                        </div>
+                    </div>
+                </div>
 
                 @await Component.InvokeAsync("CommentListByBlog",new {id = ViewBag.i})
                 @*@await Html.PartialAsync("~/Views/Comment/CommentListByBlog.cshtml")*@
@@ -120,12 +111,3 @@
     </div>
 </section>
 <!--//main-->
-
-
-
-
-
-
-                            
-                    
-                    
