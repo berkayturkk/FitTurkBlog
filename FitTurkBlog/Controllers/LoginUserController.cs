@@ -44,7 +44,7 @@ namespace FitTurkBlog.UI.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Dashboard");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
@@ -107,7 +107,6 @@ namespace FitTurkBlog.UI.Controllers
             }
             return View();
         }
-
 
     }
 }
