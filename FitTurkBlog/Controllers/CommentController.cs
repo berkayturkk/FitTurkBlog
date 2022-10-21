@@ -7,14 +7,16 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace FitTurkBlog.UI.Controllers
 {
     [AllowAnonymous]
     public class CommentController : Controller
     {
+        UserManager _userManager = new UserManager(new EFUserRepository());
         CommentManager _commentManager = new CommentManager(new EFCommentRepository());
-        UserManager userManager = new UserManager(new EFUserRepository());
+
         public IActionResult Index()
         {
             return View();
@@ -29,7 +31,7 @@ namespace FitTurkBlog.UI.Controllers
         [HttpPost]
         public IActionResult PartialAddComment(Comment comment,int id)
         {
-            var user = userManager.GetList().Where(x => x.NameSurname == comment.CommentUserName || x.UserName == comment.CommentUserName).FirstOrDefault();
+            var user = _userManager.GetList().FirstOrDefault(x => x.UserName == User.Identity.Name);
             comment.CommentDate = DateTime.Now;
             comment.CommentStatus = true;
             
