@@ -86,23 +86,7 @@
 
                     @await Component.InvokeAsync("WriterLastBlog",new {id = ViewBag.i})
 
-                    <div class="single-gd tech-btm">
-                        <h4>Son Eklenen Yazı</h4>
-                        <div class="blog-grids">
-                            <div class="blog-grid-left">
-                                <a href="single.html">
-                                    <img src="~/FitTurkBlog/images/g7.jpg" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                            <div class="blog-grid-right">
-
-                                <h5>
-                                    <a href="single.html">Pellentesque dui, non felis. Maecenas male</a>
-                                </h5>
-                            </div>
-                            <div class="clearfix"> </div>
-                        </div>
-                    </div>
+                    @await Component.InvokeAsync("LastAddedBlog")
                 </div>
 
             </aside>

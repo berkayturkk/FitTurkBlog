@@ -1,0 +1,19 @@
+﻿@model FitTurkBlog.Entities.Concrete.Blog
+
+<div class="single-gd tech-btm">
+    <h4>Son Eklenen Yazı</h4>
+    <div class="blog-grids">
+        <div class="blog-grid-left">
+            <a  href="/Blog/BlogReadAll/@Model.BlogID/">
+                <img src="@Model.BlogImage" class="img-fluid" alt="">
+            </a>
+        </div>
+        <div class="blog-grid-right">
+
+            <h5>
+                <a href="/Blog/BlogReadAll/@Model.BlogID/">@Model.BlogTitle</a>
+            </h5>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
