@@ -17,10 +17,18 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
     public class AdminCommentController : Controller
     {
         CommentManager _commentManager = new CommentManager(new EFCommentRepository());
-        public IActionResult Index(int page = 1)
+        public IActionResult Index(string key,int page = 1)
         {
-            var values = _commentManager.GetListAllComment().OrderByDescending(x => x.CommentDate).ToPagedList(page, 8);
-            return View(values);
+            if(key != null)
+            {
+                var values = _commentManager.GetListCommentByKey(key).OrderByDescending(x => x.CommentDate).ToPagedList(page, 10);
+                return View(values);
+            }
+            else
+            {
+                var values = _commentManager.GetListAllComment().OrderByDescending(x => x.CommentDate).ToPagedList(page, 10);
+                return View(values);
+            }
         }
 
         public IActionResult DeleteComment(int id)

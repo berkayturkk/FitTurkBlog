@@ -11,5 +11,6 @@ namespace FitTurkBlog.DAL.Abstract
     {
         List<Comment> GetListComment();
         List<Comment> GetListCommentByWriter(int id);
+        List<Comment> GetListCommentByKey(string key);
     }
 }

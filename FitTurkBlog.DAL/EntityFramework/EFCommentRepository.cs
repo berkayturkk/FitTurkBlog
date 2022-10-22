@@ -30,5 +30,12 @@ namespace FitTurkBlog.DAL.EntityFramework
                 return sqlDbContext.Comments.Include(x => x.Blog).Where(x => x.CommentUserName == username).ToList();
             }
         }
+        public List<Comment> GetListCommentByKey(string key)
+        {
+            using (var sqlDbContext = new SqlDbContext())
+            {
+                return sqlDbContext.Comments.Include(x => x.Blog).Where(x => x.CommentTitle.Contains(key) || x.CommentUserName.Contains(key) || x.Blog.BlogTitle.Contains(key)).ToList();
+            }
+        }
     }
 }

@@ -52,5 +52,10 @@ namespace FitTurkBlog.BL.Concrete
         {
             return _commentDAL.GetListCommentByWriter(id);
         }
+
+        public List<Comment> GetListCommentByKey(string key)
+        {
+            return _commentDAL.GetListCommentByKey(key);
+        }
     }
 }
