@@ -9,5 +9,6 @@ namespace FitTurkBlog.DAL.Abstract
 {
     public interface IUserDAL : IGenericDAL<AppUser>
     {
+        List<AppUser> GetListWriterByKey(string key);
     }
 }

@@ -48,5 +48,10 @@ namespace FitTurkBlog.BL.Concrete
         {
             return _userDAL.GetListAll(x => x.Id == id);
         }
+
+        public List<AppUser> GetListWriterByKey(string key)
+        {
+            return _userDAL.GetListWriterByKey(key);
+        }
     }
 }

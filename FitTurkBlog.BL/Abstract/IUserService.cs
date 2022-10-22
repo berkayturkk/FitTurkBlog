@@ -9,5 +9,6 @@ namespace FitTurkBlog.BL.Abstract
 {
     public interface IUserService : IGenericService<AppUser>
     {
+        List<AppUser> GetListWriterByKey(string key);
     }
 }

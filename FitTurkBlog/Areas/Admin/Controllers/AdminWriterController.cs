@@ -37,10 +37,18 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index(int page = 1)
+        public IActionResult Index(string key,int page = 1)
         {
-            var values = userManager.GetList().OrderByDescending(x => x.Id).ToPagedList(page, 2);
-            return View(values);
+            if(key != null)
+            {
+                var values = userManager.GetListWriterByKey(key).OrderByDescending(x => x.Id).ToPagedList(page, 10);
+                return View(values);
+            }
+            else
+            {
+                var values = userManager.GetList().OrderByDescending(x => x.Id).ToPagedList(page, 10);
+                return View(values);
+            }
         }
 
         public IActionResult ChangeStatusWriter(int id)
