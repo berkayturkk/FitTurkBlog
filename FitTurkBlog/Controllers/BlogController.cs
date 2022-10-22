@@ -51,13 +51,22 @@ namespace FitTurkBlog.UI.Controllers
             return View(values);
         }
 
-        public IActionResult BlogListByWriter(int page = 1)
+        public IActionResult BlogListByWriter(string key,int page = 1)
         {
             var userName = User.Identity.Name;
             var userMail = sqlDbContext.Users.Where(x => x.UserName == userName).Select(y => y.Email).FirstOrDefault();
             var writerID = sqlDbContext.Users.Where(x => x.Email == userMail).Select(y => y.Id).FirstOrDefault();
-            var values = _blogManager.GetListWithCategoryByWriterBm(writerID).Where(x => x.BlogStatus == true).OrderByDescending(x => x.BlogCreateDate).ToPagedList(page, 6);
-            return View(values);
+            //var values = _blogManager.GetListWithCategoryByWriterBm(writerID).Where(x => x.BlogStatus == true).OrderByDescending(x => x.BlogCreateDate).ToPagedList(page, 6);
+            if(key != null)
+            {
+                var values = _blogManager.GetListWithCategoryWriterByKey(writerID, key).OrderByDescending(x => x.BlogCreateDate).ToPagedList(page, 10);
+                return View(values);
+            }
+            else
+            {
+                var values = _blogManager.GetListWithCategoryByWriterBm(writerID).OrderByDescending(x => x.BlogCreateDate).ToPagedList(page, 10);
+                return View(values);
+            }
         }
 
         public void CategorySelectList()

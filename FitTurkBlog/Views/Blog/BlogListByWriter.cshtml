@@ -12,6 +12,17 @@
 
 <h1>Bloglarım</h1>
 <br />
+<br />
+<form asp-action="BlogListByWriter" asp-controller="Blog" method="get" class="mail-search  float-right ">
+    <div class="input-group">
+        <input type="text" name="key" id="key" placeholder="Bloglarda arama yapın" class="form-control"  />
+        <div class="input-group-btn">
+            <input type="submit" value="Ara" class="btn btn-primary" />
+        </div>
+    </div>
+    <br />
+    <br />
+</form>
 <table class="table table-bordered">
     <tr>
         <th>#</th>

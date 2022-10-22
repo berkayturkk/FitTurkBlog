@@ -13,6 +13,7 @@ namespace FitTurkBlog.BL.Abstract
         List<Blog> GetBlogListWithCategoryWriter();
         List<Blog> GetBlogListByWriter(int id);
         Blog GetListWithCategoryWriterByBlogID(int id);
+        List<Blog> GetListWithCategoryWriterByKey(int id, string key);
 
     }
 }
