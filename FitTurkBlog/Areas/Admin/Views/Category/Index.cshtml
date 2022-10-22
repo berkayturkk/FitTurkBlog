@@ -1,15 +1,18 @@
-﻿@using X.PagedList
+﻿@using FitTurkBlog.Entities.Concrete
+@using X.PagedList
 @using X.PagedList.Mvc.Core
-@model IPagedList<FitTurkBlog.Entities.Concrete.Category>
+@using X.PagedList.Web.Common
+@model IPagedList<Category>
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/Layouts/AdminLayout.cshtml";
 }
 
-<h1>Kategori Listesi</h1>
+<h1><strong>Kategori Listesi</strong></h1>
 <br />
 <br />
+<a href="/Admin/Category/AddCategory/" class="btn btn-primary">Yeni Kategori Ekle</a>
 <form asp-action="Index" asp-controller="Category" method="get" class="mail-search  float-right " style="width:20%">
     <div class="input-group">
         <input type="text" name="key" id="key" placeholder="Kategorilerde arama yapın" class="form-control" />
@@ -52,9 +55,22 @@
     }
 </table>
 <br />
-<a href="/Admin/Category/AddCategory/" class="btn btn-info">Yeni Kategori Ekle</a>
 <br />
-<br />
-<br />
-@Html.PagedListPager((IPagedList)Model,page =>Url.Action("Index",new{page}))
+<!-- Paging -->
+
+<div class="pull-left">
+    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index",
+    new
+    {
+    page
+
+    }),
+    new PagedListRenderOptions
+    {
+    LiElementClasses = new string[] { "page-item" },
+    PageClasses = new string[] { "page-link" },
+    Display = PagedListDisplayMode.IfNeeded
+
+    })
+</div>
 
