@@ -3,6 +3,7 @@ using FitTurkBlog.DAL.EntityFramework;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using X.PagedList;
 
 namespace FitTurkBlog.UI.Controllers
 {
@@ -15,10 +16,18 @@ namespace FitTurkBlog.UI.Controllers
             return View();
         }
 
-        public IActionResult AllNotification()
+        public IActionResult AllNotification(string key,int page = 1)
         {
-            var values = notificationManager.GetList().Where(x => x.NotificationStatus == true).OrderByDescending(x => x.NotificationDate).ToList();
-            return View(values);
+            if(key != null)
+            {
+                var values = notificationManager.GetListNotificationByKey(key).Where(x => x.NotificationStatus == true).OrderByDescending(x => x.NotificationDate).ToPagedList(page, 10);
+                return View(values);
+            }
+            else
+            {
+                var values = notificationManager.GetList().Where(x => x.NotificationStatus == true).OrderByDescending(x => x.NotificationDate).ToPagedList(page, 10);
+                return View(values);
+            }
         }
 
         public IActionResult NotificationDetails(int id)

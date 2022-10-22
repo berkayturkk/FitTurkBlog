@@ -9,5 +9,6 @@ namespace FitTurkBlog.BL.Abstract
 {
     public interface INotificationService : IGenericService<Notification>
     {
+        List<Notification> GetListNotificationByKey(string key);
     }
 }

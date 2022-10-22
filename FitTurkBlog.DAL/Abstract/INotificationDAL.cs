@@ -9,5 +9,6 @@ namespace FitTurkBlog.DAL.Abstract
 {
     public interface INotificationDAL : IGenericDAL<Notification>
     {
+        List<Notification> GetListNotificationByKey(string key);
     }
 }

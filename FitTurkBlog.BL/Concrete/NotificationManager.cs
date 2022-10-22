@@ -33,6 +33,11 @@ namespace FitTurkBlog.BL.Concrete
             return _notificationDAL.ListAll();
         }
 
+        public List<Notification> GetListNotificationByKey(string key)
+        {
+            return _notificationDAL.GetListNotificationByKey(key);
+        }
+
         public Notification TGetById(int id)
         {
             return _notificationDAL.GetById(id);

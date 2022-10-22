@@ -1,5 +1,8 @@
 ﻿@using FitTurkBlog.Entities.Concrete
-@model List<Notification>
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common
+@model IPagedList<Notification>
 
 @{
     ViewData["Title"] = "AllNotification";
@@ -9,6 +12,16 @@
 <h1>Bildirimler</h1>
 <br />
 <br />
+<form asp-action="AllNotification" asp-controller="Notification" method="get" class="mail-search  float-right " style="margin-right:7%">
+    <div class="input-group">
+        <input type="text" name="key" id="key" placeholder="Bildirimlerde arama yapın" class="form-control"  />
+        <div class="input-group-btn">
+            <input type="submit" value="Ara" class="btn btn-primary" />
+        </div>
+    </div>
+    <br />
+    <br />
+</form>
 <table class="table table-bordered">
     <tr>
         <th>#</th>
@@ -22,8 +35,30 @@
            <td>@item.NotificationID</td>
            <td>@item.NotificationDetails</td>
            <td>@item.NotificationDate.ToShortDateString()</td>
-           <td><a href="/Notification/NotificationDetails/@item.NotificationID" class="btn btn-primary">Detay</a></td>
+           <td><a href="/Notification/NotificationDetails/@item.NotificationID" class="btn btn-info">Detay</a></td>
        </tr>
    }
 </table>
+
+<br />
+<br />
+<br />
+
+<!-- Paging -->
+
+<div class="pull-left">
+    @Html.PagedListPager((IPagedList)Model, page => Url.Action("AllNotification",
+    new
+    {
+    page
+
+    }),
+    new PagedListRenderOptions
+    {
+    LiElementClasses = new string[] { "page-item" },
+    PageClasses = new string[] { "page-link" },
+    Display = PagedListDisplayMode.IfNeeded
+
+    })
+</div>
 
