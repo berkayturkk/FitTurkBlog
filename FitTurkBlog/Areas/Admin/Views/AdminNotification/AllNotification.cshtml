@@ -26,28 +26,17 @@
                     </div>
                     <div class="ibox-content">
                         <br />
-                        <a href="/Admin/AdminNotification/AddNotification/" class="btn btn-info">Yeni Bildirim Ekle</a>
-
-                        <!-- Paging -->
-                        <div class="pull-right">
-                            @Html.PagedListPager((IPagedList)Model, page => Url.Action("AllNotification",
-                            new
-                            {
-                            page
-
-                            }),
-                            new PagedListRenderOptions
-                            {
-                            LiElementClasses = new string[] { "page-item" },
-                            PageClasses = new string[] { "page-link" },
-                            Display = PagedListDisplayMode.IfNeeded
-
-                            })
-
+                        <a href="/Admin/AdminNotification/AddNotification/" class="btn btn-primary">Yeni Bildirim Ekle</a>
+                        <form asp-action="AllNotification" asp-controller="AdminNotification" method="get" class="mail-search float-right" style="width:25%">
+                            <div class="input-group">
+                                <input type="text" name="key" id="key" placeholder="Bildirimlerde arama yapın" class="form-control" />
+                                <div class="input-group-btn">
+                                    <input type="submit" value="Ara" class="btn btn-primary" />
+                                </div>
+                            </div>
                             <br />
                             <br />
-                        </div>
-
+                        </form>
                         <table class="table table-hover">
                             <thead>
                                 <tr>
@@ -82,11 +71,26 @@
                                         <td><a href="/Admin/AdminNotification/EditNotification/@item.NotificationID" class="btn btn-warning">Bildirim Düzenle</a></td>
                                     </tr>
                                 }
-
                             </tbody>
-
-
                         </table>
+                        <br>
+                        <br>
+                        <!-- Paging -->
+                        <div class="pull-right" style="margin-top:-25px">
+                            @Html.PagedListPager((IPagedList)Model, page => Url.Action("AllNotification",
+                            new
+                            {
+                            page
+
+                            }),
+                            new PagedListRenderOptions
+                            {
+                            LiElementClasses = new string[] { "page-item" },
+                            PageClasses = new string[] { "page-link" },
+                            Display = PagedListDisplayMode.IfNeeded
+
+                            })
+                        </div>
                     </div>
                 </div>
             </div>

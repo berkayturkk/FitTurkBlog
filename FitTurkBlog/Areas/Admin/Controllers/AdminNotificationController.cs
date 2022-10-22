@@ -21,10 +21,18 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
             return View();
         }
 
-        public IActionResult AllNotification(int page = 1)
+        public IActionResult AllNotification(string key,int page = 1)
         {
-            var values = notificationManager.GetList().OrderByDescending(x => x.NotificationID).ToPagedList(page, 2);
-            return View(values);
+            if(key != null)
+            {
+                var values = notificationManager.GetListNotificationByKey(key).OrderByDescending(x => x.NotificationDate).ToPagedList(page, 10);
+                return View(values);
+            }
+            else
+            {
+                var values = notificationManager.GetList().OrderByDescending(x => x.NotificationDate).ToPagedList(page, 10);
+                return View(values);
+            }
         }
 
         public IActionResult ChangeStatusNotification(int id)
