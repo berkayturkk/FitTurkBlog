@@ -18,10 +18,18 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
     {
         CategoryManager categoryManager = new CategoryManager(new EFCategoryRepository());
         SqlDbContext sqlDbContext = new SqlDbContext();
-        public IActionResult Index(int page = 1)
+        public IActionResult Index(string key,int page = 1)
         {
-            var values = categoryManager.GetList().ToPagedList(page,8);
-            return View(values);
+            if(key != null)
+            {
+                var values = categoryManager.GetListCategoryByKey(key).ToPagedList(page, 10);
+                return View(values);
+            }
+            else
+            {
+                var values = categoryManager.GetList().ToPagedList(page, 10);
+                return View(values);
+            }
         }
 
         [HttpGet]

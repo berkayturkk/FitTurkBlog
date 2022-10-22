@@ -9,5 +9,6 @@ namespace FitTurkBlog.BL.Abstract
 {
     public interface ICategoryService:IGenericService<Category>
     {
+        List<Category> GetListCategoryByKey(string key);
     }
 }

@@ -43,5 +43,10 @@ namespace FitTurkBlog.BL.Concrete
         {
             _categoryDAL.Update(t); 
         }
+
+        public List<Category> GetListCategoryByKey(string key)
+        {
+            return _categoryDAL.GetListCategoryByKey(key);
+        }
     }
 }

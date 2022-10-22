@@ -9,5 +9,6 @@ namespace FitTurkBlog.DAL.Abstract
 {
     public interface ICategoryDAL : IGenericDAL<Category>
     {
+        List<Category> GetListCategoryByKey(string key);
     }
 }
