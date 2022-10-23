@@ -19,7 +19,8 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.IO;
-
+using ClosedXML.Excel;
+using FitTurkBlog.UI.Areas.Admin.Models;
 
 namespace FitTurkBlog.UI.Areas.Admin.Controllers
 {
@@ -165,6 +166,47 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
             return RedirectToAction("Index", "AdminWriter");
         }
 
-    
+        public IActionResult ExportDynamicExcelWriterList()
+        {
+            using (var workBook = new XLWorkbook())
+            {
+                var workSheet = workBook.Worksheets.Add("Yazar Listesi");
+                // Cell(Satır,Sütun)
+                workSheet.Cell(1, 1).Value = "Yazar ID";
+                workSheet.Cell(1, 2).Value = "Yazar Adı";
+                workSheet.Cell(1, 3).Value = "Yazar Kullanıcı Adı";
+
+                int KategoriRowCount = 3;
+                foreach (var item in WriterList())
+                {
+                    workSheet.Cell(KategoriRowCount, 1).Value = item.WriterID;
+                    workSheet.Cell(KategoriRowCount, 2).Value = item.WriterName;
+                    workSheet.Cell(KategoriRowCount, 3).Value = item.WriterUsername;
+                    KategoriRowCount++;
+                }
+                using (var stream = new MemoryStream())
+                {
+                    workBook.SaveAs(stream);
+                    var content = stream.ToArray();
+                    return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "WriterList.xlsx");
+                }
+            }
+        }
+        public List<WriterViewModel> WriterList()
+        {
+            List<WriterViewModel> writerViewModels = new List<WriterViewModel>();
+            using (var sqlDbContext = new SqlDbContext())
+            {
+                writerViewModels = sqlDbContext.Users.Select(x => new WriterViewModel
+                {
+                    WriterID = x.Id,
+                    WriterName = x.NameSurname,
+                    WriterUsername = x.UserName
+                }).ToList();
+            }
+            return writerViewModels;
+        }
+
+
     }
 }

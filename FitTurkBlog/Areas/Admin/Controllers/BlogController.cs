@@ -74,7 +74,7 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
                 {
                     workBook.SaveAs(stream);
                     var content = stream.ToArray();
-                    return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Calisma1.xlsx");
+                    return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "BlogList.xlsx");
                 }
             }
         }

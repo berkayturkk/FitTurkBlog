@@ -1,12 +1,16 @@
-﻿using FitTurkBlog.BL.Concrete;
+﻿using ClosedXML.Excel;
+using FitTurkBlog.BL.Concrete;
 using FitTurkBlog.BL.ValidationRules;
 using FitTurkBlog.DAL.Context;
 using FitTurkBlog.DAL.EntityFramework;
 using FitTurkBlog.Entities.Concrete;
+using FitTurkBlog.UI.Areas.Admin.Models;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using X.PagedList;
 
@@ -96,6 +100,44 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
             categoryManager.Update(value);
 
             return RedirectToAction("Index");
+        }
+
+        public IActionResult ExportDynamicExcelCategoryList()
+        {
+            using (var workBook = new XLWorkbook())
+            {
+                var workSheet = workBook.Worksheets.Add("Kategori Listesi");
+                // Cell(Satır,Sütun)
+                workSheet.Cell(1, 1).Value = "Kategori ID";
+                workSheet.Cell(1, 2).Value = "Kategori Adı";
+
+                int KategoriRowCount = 2;
+                foreach (var item in CategoryTitleList())
+                {
+                    workSheet.Cell(KategoriRowCount, 1).Value = item.CategoryID;
+                    workSheet.Cell(KategoriRowCount, 2).Value = item.CategoryName;
+                    KategoriRowCount++;
+                }
+                using (var stream = new MemoryStream())
+                {
+                    workBook.SaveAs(stream);
+                    var content = stream.ToArray();
+                    return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "CategoryList.xlsx");
+                }
+            }
+        }
+        public List<CategoryViewModel> CategoryTitleList()
+        {
+            List<CategoryViewModel> categoryViewModels = new List<CategoryViewModel>();
+            using (var sqlDbContext = new SqlDbContext())
+            {
+                categoryViewModels = sqlDbContext.Categories.Select(x => new CategoryViewModel
+                {
+                    CategoryID = x.CategoryID,
+                    CategoryName = x.CategoryName
+                }).ToList();
+            }
+            return categoryViewModels;
         }
     }
 }
