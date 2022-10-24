@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace FitTurkBlog.UI.Controllers
@@ -16,6 +18,7 @@ namespace FitTurkBlog.UI.Controllers
         private readonly UserManager<AppUser> _userManager;
 
         Message2Manager messageManager = new Message2Manager(new EFMessage2Repository());
+        NotificationManager notificationManager = new NotificationManager(new EFNotificationRepository());
 
         public RegisterUserController(UserManager<AppUser> userManager)
         {
@@ -51,17 +54,32 @@ namespace FitTurkBlog.UI.Controllers
                     {
                         var sender = await _userManager.FindByNameAsync(p.UserName);
 
-                        Message2 message = new Message2
+                        Notification notification = new Notification
                         {
-                            MessageSenderID = sender.Id,
-                            MessageReceiverID = 1,
-                            MessageSubject = "Yeni Kayıt",
-                            MessageDetails = "Merhaba, adım " + user.NameSurname + " FitTurkBlog sitenize yeni kayıt oldum. Herhangi bir rol atamam olmadığı için blog yazamıyorum. Rolümü yazar olarak güncellemenizi rica ediyorum. Şimdiden teşekkür ederim. İyi günler.",
-                            MessageDate = DateTime.Now,
-                            MessageStatus = true
+                            NotificationDate = DateTime.Now,
+                            NotificationStatus = true,
+                            NotificationType = "Yeni Kayıt",
+                            NotificationTypeSymbol = "mdi mdi-account-plus",
+                            NotificationTypeSymbolColor = "preview-icon bg-success",
+                            NotificationDetails = sender.NameSurname + " FitTurkBlog sitemize kayıt oldu. Rol ataması gerçekleştirilecek !"
                         };
 
-                        messageManager.Add(message);
+                        notificationManager.Add(notification);
+
+                        SmtpClient client = new SmtpClient();
+                        client.Credentials = new NetworkCredential("fitturkblog@gmail.com", "mehblijlpxajxrrl");
+                        client.Port = 587;
+                        client.Host = "smtp.gmail.com";
+                        client.EnableSsl = true;
+
+                        MailMessage mail = new MailMessage();
+                        mail.To.Add(sender.Email);
+                        mail.From = new MailAddress("fitturkblog@gmail.com", "FITTURKBLOG");
+                        mail.IsBodyHtml = true;
+                        mail.Subject = "Kayıt Olma";
+                        mail.Body += "<h3>Merhaba " + sender.NameSurname + ",</h3>" + "<p>FitTurkBlog sitesine kayıt talebiniz ekibimiz tarafına ulaşmıştır.</p>" + "<p>Ekibimiz en kısa sürede hesabınızı aktifleştirip size mail yoluyla bilgilendirecektir.</p><p>FitTurkBlog sitesinde sizleri de görmekten mutluluk duyduk. Hoşgeldiniz.</p><p>FitTürkBlog Ekibi</p>";
+
+                        client.Send(mail);
 
                         return RedirectToAction("Index", "LoginUser");
                     }

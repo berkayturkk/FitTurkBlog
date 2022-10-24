@@ -14,7 +14,7 @@ namespace FitTurkBlog.UI.View_Components.Notification
         public IViewComponentResult Invoke()
         {
 
-            var values = notificationManager.GetList();
+            var values = notificationManager.GetList().Where(x => x.NotificationStatus == true && x.NotificationType != "Yeni Kayıt").ToList();
             return View(values);
         }
     }

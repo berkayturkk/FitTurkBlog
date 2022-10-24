@@ -20,12 +20,12 @@ namespace FitTurkBlog.UI.Controllers
         {
             if(key != null)
             {
-                var values = notificationManager.GetListNotificationByKey(key).Where(x => x.NotificationStatus == true).OrderByDescending(x => x.NotificationDate).ToPagedList(page, 10);
+                var values = notificationManager.GetListNotificationByKey(key).Where(x => x.NotificationStatus == true && x.NotificationType != "Yeni Kayıt").OrderByDescending(x => x.NotificationDate).ToPagedList(page, 10);
                 return View(values);
             }
             else
             {
-                var values = notificationManager.GetList().Where(x => x.NotificationStatus == true).OrderByDescending(x => x.NotificationDate).ToPagedList(page, 10);
+                var values = notificationManager.GetList().Where(x => x.NotificationStatus == true && x.NotificationType != "Yeni Kayıt").OrderByDescending(x => x.NotificationDate).ToPagedList(page, 10);
                 return View(values);
             }
         }

@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace FitTurkBlog.UI.Areas.Admin.Controllers
@@ -137,6 +139,21 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
             {
                 if(item.Exists)
                 {
+                    SmtpClient client = new SmtpClient();
+                    client.Credentials = new NetworkCredential("fitturkblog@gmail.com", "mehblijlpxajxrrl");
+                    client.Port = 587;
+                    client.Host = "smtp.gmail.com";
+                    client.EnableSsl = true;
+
+                    MailMessage mail = new MailMessage();
+                    mail.To.Add(user.Email);
+                    mail.From = new MailAddress("fitturkblog@gmail.com", "FITTURKBLOG");
+                    mail.IsBodyHtml = true;
+                    mail.Subject = "Hesap Aktifleştirme";
+                    mail.Body += "<h3>Merhaba " + user.NameSurname + ",</h3>" + "<p>Kayıt olma talebinizi gerçekleştirdik. Artık hesabınıza kullanıcı adı ve şifreniz ile giriş sağlayabilirsiniz.</p><p>Aramıza hoşgeldiniz.</p><p>FitTurkBlog Ekibi</p>";
+
+                    client.Send(mail);
+
                     await _userManager.AddToRoleAsync(user, item.RoleName);
                 }
                 else

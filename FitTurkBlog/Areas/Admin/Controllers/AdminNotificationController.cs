@@ -21,9 +21,9 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
             return View();
         }
 
-        public IActionResult AllNotification(string key,int page = 1)
+        public IActionResult AllNotification(string key, int page = 1)
         {
-            if(key != null)
+            if (key != null)
             {
                 var values = notificationManager.GetListNotificationByKey(key).OrderByDescending(x => x.NotificationDate).ToPagedList(page, 10);
                 return View(values);
@@ -75,6 +75,11 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
                 {
                     Text = "mdi mdi-bookmark-plus-outline",
                     Value = "mdi mdi-bookmark-plus-outline"
+                },
+                new SelectListItem
+                {
+                    Text = "mdi mdi-account-plus",
+                    Value = "mdi mdi-account-plus"
                 }
 
             }.ToList();
@@ -157,6 +162,11 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
                 {
                     Text = "mdi mdi-bookmark-plus-outline",
                     Value = "mdi mdi-bookmark-plus-outline"
+                },
+                new SelectListItem
+                {
+                    Text = "mdi mdi-account-plus",
+                    Value = "mdi mdi-account-plus"
                 }
 
             }.ToList();

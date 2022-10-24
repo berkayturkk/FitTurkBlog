@@ -2,6 +2,7 @@
 using FitTurkBlog.DAL.EntityFramework;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace FitTurkBlog.UI.View_Components.Writer
 {
@@ -13,7 +14,7 @@ namespace FitTurkBlog.UI.View_Components.Writer
         public IViewComponentResult Invoke()
         {
 
-            var values = notificationManager.GetList();
+            var values = notificationManager.GetList().Where(x => x.NotificationStatus == true && x.NotificationType != "Yeni Kayıt").OrderByDescending(x => x.NotificationDate).Take(5).ToList();
             return View(values);
         }
     }
