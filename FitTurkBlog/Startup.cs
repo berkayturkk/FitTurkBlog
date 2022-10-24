@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
@@ -57,9 +58,19 @@ namespace FitTurkBlog
                 CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(x =>
                 {
-                    x.LoginPath = "/Login/Index";
+                    x.LoginPath = "/LoginUser/Index";
                 }
             );
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(100);
+                options.AccessDeniedPath = new PathString("/LoginUser/AccessDenied");
+                options.LoginPath = "/LoginUser/Index/";
+                options.SlidingExpiration = true; 
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

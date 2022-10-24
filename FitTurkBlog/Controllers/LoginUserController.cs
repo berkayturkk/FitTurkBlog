@@ -108,6 +108,11 @@ namespace FitTurkBlog.UI.Controllers
             return View();
         }
 
+        public IActionResult AccessDenied()
+        {
+            return PartialView();
+        }
+
     }
 }
 
