@@ -40,7 +40,7 @@ namespace FitTurkBlog.UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(p.UserName, p.Password, false, true);
+                var result = await _signInManager.PasswordSignInAsync(p.UserName, p.Password, p.IsRememberMe, true);
 
                 if (result.Succeeded)
                 {

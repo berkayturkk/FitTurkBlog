@@ -12,5 +12,7 @@ namespace FitTurkBlog.UI.Models
         [Display(Name = "Şifre")]
         [Required(ErrorMessage = "Lütfen şifre giriniz !")]
         public string Password { get; set; }
+
+        public virtual bool IsRememberMe { get; set; }
     }
 }
