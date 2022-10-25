@@ -83,9 +83,9 @@
 
                                         </a>
                                     </td>
-                                    <td class="mail-ontact"><a href="/Admin/AdminMessage/MessageDetails/@item.MessageID">@item.MessageSenderUser.NameSurname</a></td>
-                                    <td class="mail-ontact"><a href="/Admin/AdminMessage/MessageDetails/@item.MessageID">@item.MessageReceiverUser.NameSurname</a></td>
-                                    <td class="mail-subject"><a href="/Admin/AdminMessage/MessageDetails/@item.MessageID">@item.MessageSubject</a></td>
+                                    <td class="mail-ontact"><a href="/Admin/AdminMessage/MessageDetail/@item.MessageID">@item.MessageSenderUser.NameSurname</a></td>
+                                    <td class="mail-ontact"><a href="/Admin/AdminMessage/MessageDetail/@item.MessageID">@item.MessageReceiverUser.NameSurname</a></td>
+                                    <td class="mail-subject"><a href="/Admin/AdminMessage/MessageDetail/@item.MessageID">@item.MessageSubject</a></td>
                                     <td class="mail-date" >@(((DateTime)item.MessageDate).ToString("dd-MMM-yyyy"))</td>
                                     <td class="mail-date" >@(((DateTime)item.MessageDate).ToString("HH:mm"))</td>
 
@@ -108,9 +108,9 @@
 
                                             </a>
                                         </td>
-                                        <td class="mail-ontact"><a href="/Admin/AdminMessage/InboxMessageDetails/@item.MessageID">@item.MessageSenderUser.NameSurname</a></td>
-                                        <td class="mail-ontact"><a href="/Admin/AdminMessage/InboxMessageDetails/@item.MessageID">@item.MessageReceiverUser.NameSurname</a></td>
-                                        <td class="mail-subject"><a href="/Admin/AdminMessage/InboxMessageDetails/@item.MessageID">@item.MessageSubject</a></td>
+                                        <td class="mail-ontact"><a href="/Admin/AdminMessage/InboxMessageDetail/@item.MessageID">@item.MessageSenderUser.NameSurname</a></td>
+                                        <td class="mail-ontact"><a href="/Admin/AdminMessage/InboxMessageDetail/@item.MessageID">@item.MessageReceiverUser.NameSurname</a></td>
+                                        <td class="mail-subject"><a href="/Admin/AdminMessage/InboxMessageDetail/@item.MessageID">@item.MessageSubject</a></td>
                                         <td class="mail-date">@(((DateTime)item.MessageDate).ToString("dd-MMM-yyyy"))</td>
                                         <td class="mail-date">@(((DateTime)item.MessageDate).ToString("HH:mm"))</td>
 
