@@ -50,11 +50,11 @@ namespace FitTurkBlog.BL.Concrete
         }
         public List<Blog> BlogGetLast3BlogWithCategory()
         {
-            return _blogDAL.GetListWithCategory().OrderByDescending(x => x.BlogID).Take(3).ToList();
+            return _blogDAL.GetListWithCategoryWriter().OrderByDescending(x => x.BlogCreateDate).Take(3).ToList();
         }
         public List<Blog> BlogGetLast10Blog()
         {
-            return _blogDAL.GetListWithCategory().OrderByDescending(x => x.BlogID).Take(10).ToList();
+            return _blogDAL.GetListWithCategoryWriter().OrderByDescending(x => x.BlogCreateDate).Take(10).ToList();
         }
 
         public void Add(Blog t)

@@ -7,20 +7,19 @@
         <div class="col-lg-4 col-md-6 item">
             <div class="card">
                 <div class="card-header p-0 position-relative">
-                    <a href="#blog-single">
-                        <img class="card-img-bottom d-block" src="@item.BlogImage" alt="Card image cap">
+                    <a href="/Blog/BlogReadAll/@item.BlogID/">
+                        <img class="card-img-bottom d-block" src="@item.BlogImage" alt="Card image cap" style="width:370px;height:250px">
                     </a>
                     <ul class="location-top">
                         <li class="new">@item.Category.CategoryName</li>
                     </ul>
                     <div class="blog-info-middle">
                         <ul>
-                            <li class="mx-2">
-                                <a href="#"><i class="far fa-thumbs-up"></i> 201 Likes</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="far fa-comment"></i> 15 Comments</a>
-                            </li>
+
+
+                            @await Component.InvokeAsync("BlogScoreOnBlog",new{id=item.BlogID})
+
+                            @await Component.InvokeAsync("CommentCountOnBlog",new{id=item.BlogID})
 
                         </ul>
                     </div>
@@ -43,12 +42,13 @@
                     {
                         <p>@item.BlogContent.Substring(0,@item.BlogContent.Substring(0,150).LastIndexOf(" "))...</p>
                     }
+
                     <div class="author align-items-center mt-3 mb-1">
                         <div class="img-circle">
-                            <img src="~/FitTurkBlog/images/team2.jpg" class="mr-3 img-fluid" alt="...">
+                            <img src="@item.BlogWriter.ImageUrl" class="mr-3 img-fluid" alt="...">
                         </div>
                         <div class="author-info">
-                            <a href="#author">Berkay TÜRK</a> <br> <span class="meta-value">@(((DateTime)item.BlogCreateDate).ToString("dd-MMM-yyyy"))</span>
+                            <a href="#author">@item.BlogWriter.NameSurname</a> <br> <span class="meta-value">@(((DateTime)item.BlogCreateDate).ToString("dd-MMM-yyyy"))</span>
                         </div>
                         <div class="container">
                             <div class="banner-info-bg">
@@ -56,6 +56,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
             <br>
