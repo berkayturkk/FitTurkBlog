@@ -1,5 +1,6 @@
 ﻿using FitTurkBlog.Entities.Concrete;
 using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
 namespace FitTurkBlog.UI.Models
 {

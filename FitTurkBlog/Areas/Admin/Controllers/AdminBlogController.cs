@@ -34,5 +34,12 @@ namespace FitTurkBlog.UI.Areas.Admin.Controllers
 
             return RedirectToAction("Index", "AdminWriter");
         }
+
+        public IActionResult DeleteBlog(int id)
+        {
+            var blogValue = _blogManager.TGetById(id);
+            _blogManager.Delete(blogValue);
+            return RedirectToAction("AdminWriter");
+        }
     }
 }

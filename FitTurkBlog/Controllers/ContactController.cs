@@ -4,6 +4,8 @@ using FitTurkBlog.DAL.EntityFramework;
 using FitTurkBlog.Entities.Concrete;
 using System;
 using Microsoft.AspNetCore.Authorization;
+using System.Net.Mail;
+using System.Net;
 
 namespace FitTurkBlog.UI.Controllers
 {
@@ -21,7 +23,7 @@ namespace FitTurkBlog.UI.Controllers
         [HttpPost]
         public IActionResult Index(Contact contact)
         {
-            contact.ContactDate = DateTime.Parse(DateTime.Now.ToShortDateString());
+            contact.ContactDate = DateTime.Now;
             contact.ContactStatus = true;
             contactManager.ContactAdd(contact);
             return RedirectToAction("Index", "Contact");

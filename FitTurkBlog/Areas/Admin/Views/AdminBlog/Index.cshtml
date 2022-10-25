@@ -19,7 +19,7 @@
                     <div class="ibox">
                         <div class="ibox-content product-box">
                             <div>
-                                <img src="@item.BlogImage" style="width: 100%;" />
+                                <img src="@item.BlogImage" style="width: 282px; height: 175px" />
                             </div>
                             <div class="product-desc">
                                 <span class="product-price">
@@ -34,19 +34,11 @@
                                 <div class="small m-t-xs">
                                     @if (@item.BlogTitle.Length <= 29)
                                     {
-                                        <p>@item.BlogContent.Substring(0,@item.BlogContent.Substring(0,200).LastIndexOf(" "))...</p>
-                                    }
-                                    else @if (@item.BlogTitle.Length < 32 && @item.BlogTitle.Length > 29)
-                                    {
-                                        <p>@item.BlogContent.Substring(0,@item.BlogContent.Substring(0,175).LastIndexOf(" "))...</p>
-                                    }
-                                    else @if (@item.BlogTitle.Length >= 32 && @item.BlogTitle.Length < 35)
-                                    {
-                                        <p>@item.BlogContent.Substring(0,@item.BlogContent.Substring(0,150).LastIndexOf(" "))...</p>
+                                        <p style="margin-bottom:25px">@item.BlogContent.Substring(0,@item.BlogContent.Substring(0,250).LastIndexOf(" "))...</p>
                                     }
                                     else
                                     {
-                                        <p>@item.BlogContent.Substring(0,@item.BlogContent.Substring(0,125).LastIndexOf(" "))...</p>
+                                        <p>@item.BlogContent.Substring(0,@item.BlogContent.Substring(0,200).LastIndexOf(" "))...</p>
                                     }
                                 </div>
                                 <div class="m-t text-righ">
