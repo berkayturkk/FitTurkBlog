@@ -13,7 +13,7 @@ namespace FitTurkBlog.DAL.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("workstation id=FitTurkBlog.mssql.somee.com;packet size=4096;user id=berkayturk_SQLLogin_1;pwd=cg76mtsdpz;data source=FitTurkBlog.mssql.somee.com;persist security info=False;initial catalog=FitTurkBlog");
+            optionsBuilder.UseSqlServer(@"Data Source = DESKTOP-R443NGM; Initial Catalog = FitTurkBlog; Integrated Security = True");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
