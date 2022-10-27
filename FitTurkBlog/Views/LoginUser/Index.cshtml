@@ -20,6 +20,7 @@
         <div class="row inner-sec">
             <div class="login p-5 bg-light mx-auto mw-100">
                 <form class="m-t" role="form" asp-action="Index">
+                    <label class="text-danger">@TempData["Giriş Yapılamadı"]</label>
                     <div class="form-row">
                         <div class="col-md-12 mb-3">
                             <label>Kullanıcı Adı</label>
@@ -32,7 +33,7 @@
                             <input type="password" class="form-control" placeholder="" asp-for="@Model.Password" required="">
                         </div>
                     </div>
-         
+
                     <div class="form-check mb-2">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1" asp-for="@Model.IsRememberMe">
                         <label class="form-check-label" for="exampleCheck1">Beni Hatırla</label>

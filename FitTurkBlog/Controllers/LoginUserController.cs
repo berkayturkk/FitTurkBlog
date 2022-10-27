@@ -48,6 +48,7 @@ namespace FitTurkBlog.UI.Controllers
                 }
                 else
                 {
+                    TempData["Giriş Yapılamadı"] = "Kullanıcı adı ya da şifre yanlış !";
                     return RedirectToAction("Index", "LoginUser");
                 }
             }
