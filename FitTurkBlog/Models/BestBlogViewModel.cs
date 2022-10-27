@@ -10,6 +10,7 @@ namespace FitTurkBlog.UI.Models
         public string BlogImage { get; set; }  
         public DateTime BlogCreateDate { get; set; }
         public int TotalBlogScore { get; set; }
+        public int WriterID { get; set; }
         public string WriterName { get; set; }
         public string WriterImageUrl { get; set; }
         public string CategoryName { get; set; }

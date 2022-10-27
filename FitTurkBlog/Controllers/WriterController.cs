@@ -182,7 +182,7 @@ namespace FitTurkBlog.UI.Controllers
         [AllowAnonymous]
         public IActionResult WriterAbout(int id)
         {
-            var writer = userManager.TGetById(1);
+            var writer = userManager.TGetById(id);
             return View(writer);
         }
     }

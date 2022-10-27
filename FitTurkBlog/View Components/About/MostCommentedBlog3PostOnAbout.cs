@@ -31,6 +31,7 @@ namespace FitTurkBlog.UI.View_Components.About
                     BlogContent = blog.BlogContent,
                     BlogImage = blog.BlogImage,
                     BlogCreateDate = blog.BlogCreateDate,
+                    WriterID = blog.BlogWriterId,
                     WriterName = blog.BlogWriter.NameSurname,
                     WriterImageUrl = blog.BlogWriter.ImageUrl,
                     CategoryName = blog.Category.CategoryName,

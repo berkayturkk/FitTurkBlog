@@ -58,7 +58,7 @@
                             <img src="@Model.BlogWriter.ImageUrl" alt="" class="img-fluid" />
                         </a>
                         <div class="media-body">
-                            <h5 class="mt-0">@Model.BlogWriter.NameSurname</h5>
+                            <a href="/Writer/WriterAbout/@Model.BlogWriterId"><h5 class="mt-0">@Model.BlogWriter.NameSurname</h5></a>
                             <br />
                             <p>
                                 @Model.BlogWriter.About.Substring(0,@Model.BlogWriter.About.Substring(0,200).LastIndexOf(" "))...
