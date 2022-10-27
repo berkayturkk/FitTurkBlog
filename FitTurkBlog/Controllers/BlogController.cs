@@ -43,11 +43,10 @@ namespace FitTurkBlog.UI.Controllers
         {
             var commentCount = commentManager.CommentGetList(id);
             ViewBag.vCommentCount = commentCount;
-
-
-
             ViewBag.i = id;
             var values = _blogManager.GetListWithCategoryWriterByBlogID(id);
+            TempData["writerID"] = values.BlogWriterId;
+
             return View(values);
         }
 
@@ -238,6 +237,13 @@ namespace FitTurkBlog.UI.Controllers
                 }
             }
             return View();
+        }
+
+        [AllowAnonymous]
+        public IActionResult WriterOtherBlogs(int page = 1)
+        {
+            var blogs = _blogManager.GetListWithCategoryByWriterBm(Convert.ToInt32(TempData["writerID"])).Where(x => x.BlogStatus == true).OrderByDescending(x => x.BlogCreateDate).ToPagedList(page,6);
+            return View(blogs);
         }
 
 
