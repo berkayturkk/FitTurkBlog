@@ -28,17 +28,6 @@ namespace FitTurkBlog.UI.Controllers
             _userManager = userManager;
         }
 
-        //[Authorize]
-        //public IActionResult Index()
-        //{
-        //    var userMail = User.Identity.Name;
-        //    ViewBag.um = userMail;
-        //    SqlDbContext sqlDbContext = new SqlDbContext();
-        //    var writerName = sqlDbContext.Writers.Where(x => x.WriterMail == userMail).Select(y => y.WriterName).FirstOrDefault();
-        //    ViewBag.wn = writerName;
-        //    return View();
-        //}
-
         public IActionResult WriterProfile()
         {
             var userName = User.Identity.Name;
@@ -124,31 +113,6 @@ namespace FitTurkBlog.UI.Controllers
             return View();
         }
 
-        //[AllowAnonymous]
-        //[HttpPost]
-
-        //public IActionResult WriterAdd(AddProfileImage addProfileImage)
-        //{
-        //    Writer writer = new Writer();
-        //    if (addProfileImage.WriterImage != null)
-        //    {
-        //        var extension = Path.GetExtension(addProfileImage.WriterImage.FileName);
-        //        var newimagename = Guid.NewGuid() + extension;
-        //        var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/WriterImageFiles/", newimagename);
-        //        var stream = new FileStream(location, FileMode.Create);
-        //        addProfileImage.WriterImage.CopyTo(stream);
-        //        writer.WriterImage = newimagename;
-        //    }
-        //    writer.WriterMail = addProfileImage.WriterMail;
-        //    writer.WriterName = addProfileImage.WriterName;
-        //    writer.WriterPassword = addProfileImage.WriterPassword;
-        //    writer.WriterStatus = true;
-        //    writer.WriterAbout = addProfileImage.WriterAbout;
-        //    writerManager.Add(writer);
-        //    return RedirectToAction("Index", "Writer");
-        //}
-
-
         [HttpGet]
         public async Task<IActionResult> WriterEditUserName()
         {
@@ -213,6 +177,13 @@ namespace FitTurkBlog.UI.Controllers
 
             return View();
 
+        }
+
+        [AllowAnonymous]
+        public IActionResult WriterAbout(int id)
+        {
+            var writer = userManager.TGetById(1);
+            return View(writer);
         }
     }
 }

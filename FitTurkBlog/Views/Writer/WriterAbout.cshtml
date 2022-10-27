@@ -1,0 +1,43 @@
+﻿@model FitTurkBlog.Entities.Concrete.AppUser
+@{
+    ViewData["Title"] = "WriterAbout";
+    Layout = "~/Views/Shared/Layouts/UserLayout.cshtml";
+}
+
+
+<section class="w3l-breadcrumb">
+    <div class="breadcrumb-bg breadcrumb-bg-classes py-5">
+        <div class="container py-lg-5 py-md-3">
+            <h3 class="title-big text-center">Yazar Hakkında</h3>
+            <p class="mt-3">Yazarı Tanıyın</p>
+        </div>
+    </div>
+</section>
+
+
+<section class="main-content-w3layouts-agileits">
+    <div class="container" style="height:900px">
+        <div class="float-left">
+            <br />
+            <img src="@Model.ImageUrl" width="250" disabled="disabled" />
+        </div>
+        <div class="col-lg-9 float-right">
+            <br />
+            @Html.Label("Ad-Soyad")
+            @Html.TextBoxFor(x => x.NameSurname, new{ @class = "form-control text-secondary",@disabled="disabled"})
+            <br />
+            @Html.Label("Kullanıcı Adı")
+            @Html.TextBoxFor(x => x.UserName, new{ @class = "form-control text-secondary",@disabled="disabled"})
+            <br />
+            @Html.Label("E-Posta Adresi")
+            @Html.TextBoxFor(x => x.Email, new{ @class = "form-control text-secondary",@disabled="disabled"})
+            <br />
+            @Html.Label("Hakkımda")
+            @Html.TextAreaFor(x => x.About,20,3, new{ @class = "form-control text-secondary",@disabled="disabled"})
+            <br />
+            <br />
+            <br />
+            <a href="/Blog/WriterOtherBlogs/@Model.Id" class="btn btn-warning">Bloglarına git</a>
+        </div>
+    </div>
+</section>

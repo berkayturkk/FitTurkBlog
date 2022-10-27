@@ -240,9 +240,9 @@ namespace FitTurkBlog.UI.Controllers
         }
 
         [AllowAnonymous]
-        public IActionResult WriterOtherBlogs(int page = 1)
+        public IActionResult WriterOtherBlogs(int id,int page = 1)
         {
-            var blogs = _blogManager.GetListWithCategoryByWriterBm(Convert.ToInt32(TempData["writerID"])).Where(x => x.BlogStatus == true).OrderByDescending(x => x.BlogCreateDate).ToPagedList(page,6);
+            var blogs = _blogManager.GetListWithCategoryByWriterBm(id).Where(x => x.BlogStatus == true).OrderByDescending(x => x.BlogCreateDate).ToPagedList(page,6);
             return View(blogs);
         }
 
